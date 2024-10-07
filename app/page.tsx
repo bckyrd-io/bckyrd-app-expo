@@ -28,7 +28,7 @@ export default function Home() {
         <div className="w-[94%] mx-auto">
             {/* Section with heading and buttons */}
             <section className="flex flex-col w-full mb-[30vh]">
-                <h1 className="text-6xl sm:text-7xl font-extrabold mt-10 leading-tight tracking-tight">
+                <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mt-10 leading-tight tracking-tight">
                     Leverage The Next Industrial Revolution To Extract Your Setup Potential
                 </h1>
 

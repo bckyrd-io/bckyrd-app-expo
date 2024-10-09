@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Bckyrd : Electronics Enthusiast ⌗Backyard",
+    title: "Bckyrd __Electronics Enthusiast",
     description: "Leverage Next Industrial Revolution, For Your Setup To Build ",
 };
 

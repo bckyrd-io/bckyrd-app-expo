@@ -48,11 +48,21 @@ export default function Home() {
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 3;
+    const itemsPerPage = 4;
+
 
     useEffect(() => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        }
+    }, []);
+    
+    useEffect(() => {
         document.documentElement.classList.toggle("dark", theme === "dark");
+        localStorage.setItem('theme', theme);
     }, [theme]);
+    
 
     const toggleTheme = () => {
         setTheme(theme === "dark" ? "light" : "dark");
@@ -201,7 +211,7 @@ export default function Home() {
             {/* Social Media Section */}
             <section className="flex flex-col items-start mb-10 w-[90%] mx-auto lg:w-[50%]">
                 <p className="mb-5 text-left">
-                    We were Mosolo, now we are Lomoso! Link with us on these platforms
+                    We Were Mosolo Now we are Lomoso Link With Us On These Platforms
                 </p>
                 <div className="flex justify-start space-x-4">
                     <Link href="https://www.youtube.com/channel/UCNfw3tdcG_4Jhz5KTJqF4mw" className="text-primary">

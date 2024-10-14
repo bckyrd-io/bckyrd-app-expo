@@ -44,7 +44,7 @@ export default function Home() {
     return (
         <>
             {/* Section with heading and buttons */}
-            <section className="flex flex-col mb-40 w-[90%] mx-auto lg:w-[50%]">
+            <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
                 <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify  ">
                     Backyard App Extracts Your Setup Potential
                 </h1>
@@ -66,13 +66,13 @@ export default function Home() {
             </section>
 
             {/* Section with image and description */}
-            <section className="flex flex-col w-full mb-40 w-[100%] mx-auto">
+            <section className="flex flex-col w-full mb-60 w-[100%] mx-auto">
                 <div className="relative w-full h-auto">
                     {!isVideoPlaying ? (
                         // Thumbnail display before playing the video
                         <div onClick={handlePlayVideo} className="cursor-pointer">
                             <Image
-                                className=" w-full h-500"
+                                className=" w-full h-[100vh]"
                                 src="/download.png"
                                 alt="local photo"
                                 width={180}
@@ -106,7 +106,7 @@ export default function Home() {
             </section>
 
             {/* Section with Card components */}
-            <section className="flex flex-col mb-40 w-[90%] mx-auto lg:w-[50%]">
+            <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
                 <Link href={"/app"}>
                     <Card className="flex justify-between items-center p-4 ">
                         <div>

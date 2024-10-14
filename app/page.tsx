@@ -202,7 +202,7 @@ export default function Home() {
             {/* Social Media Section */}
             <section className="flex flex-col items-start mb-10 w-[90%] mx-auto lg:w-[50%]">
                 <p className="mb-5 text-left">
-                    We're Mosolo, now we're Lomoso! Ask us anything on these platforms!
+                    We're Mosolo, now we're Lomoso! Ask us anything on these platforms
                 </p>
                 <div className="flex justify-start space-x-4">
                     <Link href="https://www.youtube.com/channel/UCNfw3tdcG_4Jhz5KTJqF4mw" className="text-primary">

@@ -8,7 +8,9 @@ import { Button } from "@/components/ui/button"; // ShadCN Button component
 import { Card, CardHeader, CardContent } from "@/components/ui/card"; // ShadCN Card components
 import {
     IconMoon, IconSun, IconBrandTwitch, IconBrandInstagram, IconBrandGithub, IconBrandLinkedin,
-    IconBrandYoutube, IconBrandTiktok, IconBrandThreads, IconChevronRight
+    IconBrandYoutube, IconBrandTiktok, IconBrandThreads, IconChevronRight,
+    IconPlayerPlay,
+    IconBrandYoutubeFilled
 } from "@tabler/icons-react";
 
 export default function Home() {
@@ -42,17 +44,20 @@ export default function Home() {
     return (
         <>
             {/* Section with heading and buttons */}
-            <section className="flex flex-col w-full mb-60 w-[90%] mx-auto lg:w-[50%]">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 leading-tight tracking-tight text-justify  ">
-                    Leverage The Next Industrial Revolution To Extract Your Setup Potential
+            <section className="flex flex-col mb-40 w-[90%] mx-auto lg:w-[50%]">
+                <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify  ">
+                    Backyard App Extracts Your Setup Potential
                 </h1>
+                <p id="explore">
+                    Leverages The Next Industrial Revolution For Electronics Enthusiast
+                </p>
 
-                <div className="flex justify-left space-x-4 mt-20">
+                <div className="flex justify-left space-x-4 mt-5">
                     <Button variant="default" id="start" size="lg">
                         Get Started
                     </Button>
                     <Button variant="outline" size="lg" onClick={handleScrollToSection}>
-                        Learn More
+                        Explore
                     </Button>
                     <Button variant="outline" id="theme" size="lg" onClick={toggleTheme}>
                         {theme === "light" ? <IconMoon className="" /> : <IconSun className="" />}
@@ -61,13 +66,13 @@ export default function Home() {
             </section>
 
             {/* Section with image and description */}
-            <section className="flex flex-col w-full mb-60 w-[100%] mx-auto">
+            <section className="flex flex-col w-full mb-40 w-[100%] mx-auto">
                 <div className="relative w-full h-auto">
                     {!isVideoPlaying ? (
                         // Thumbnail display before playing the video
                         <div onClick={handlePlayVideo} className="cursor-pointer">
                             <Image
-                                className=" w-full h-700"
+                                className=" w-full h-500"
                                 src="/download.png"
                                 alt="local photo"
                                 width={180}
@@ -75,8 +80,8 @@ export default function Home() {
                                 priority
                             />
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <button className="bg-black bg-opacity-50 text-white p-4 rounded-full">
-                                    ▶ Play Video
+                                <button className="flex bg-[black] text-white p-4 rounded-full">
+                                    Watch Video <IconBrandYoutubeFilled className="ml-2" />
                                 </button>
                             </div>
                         </div>
@@ -93,16 +98,15 @@ export default function Home() {
                         ></iframe>
                     )}
                 </div>
-                <p className="mt-20  w-[90%] mx-auto lg:w-[50%]" id="learn">
-                    ⌗Bckyrd, the thriving world of electronics enthusiasts. Our shared obsession? Fiddling with diodes, resistors, capacitors, and metals. Unshackling the. You build—we fuel ...
-                    <Link href="#" id="threads" className="text-primary"> build </Link>
-                    ⌗Bckyrd, the thriving world of electronics enthusiasts. Our shared obsession? Fiddling with diodes, resistors, capacitors, and metals. Unshackling the. You build—we fuel ...
-                    <Link href="#" id="threads" className="text-primary"> Read</Link>
+                <p className="mt-10  w-[90%] mx-auto lg:w-[50%]" id="learn">
+                    we got our shared obsession to electronics., we love build cool tech as you electronics<Link href="#" id="threads" className="text-primary"> enthusiast</Link>
+                    we are building what will fuel your setup <Link href="#" id="threads" className="text-primary"> Build</Link> check them out below. and check out on our social links below if anything<Link href="#" id="threads" className="text-primary"> build </Link>
+
                 </p>
             </section>
 
             {/* Section with Card components */}
-            <section className="flex flex-col w-full mb-60 w-[90%] mx-auto lg:w-[50%]">
+            <section className="flex flex-col mb-40 w-[90%] mx-auto lg:w-[50%]">
                 <Link href={"/app"}>
                     <Card className="flex justify-between items-center p-4 ">
                         <div>
@@ -120,13 +124,13 @@ export default function Home() {
                 </Link>
 
                 <Link href={"/energy"}>
-                    <Card className="flex justify-between items-center p-4 mt-20">
+                    <Card className="flex justify-between items-center p-4 mt-10">
                         <div>
                             <CardHeader>
                                 <h2 className="text-xl font-semibold">Bckyrd Energy Mod</h2>
                             </CardHeader>
                             <CardContent>
-                                <p>Learn more about our energy-efficient modifications for your projects.</p>
+                                <p>Learn more about our energy-efficient modifications for your setup.</p>
                             </CardContent>
                         </div>
                         <div className="text-gray-500">
@@ -137,26 +141,20 @@ export default function Home() {
             </section>
 
             {/* Section with social links */}
-            <section className="flex justify-start space-x-4 w-full mb-10 w-[90%] mx-auto lg:w-[50%]">
-                <Link href="#" id="github" className="text-primary">
-                    <IconBrandGithub className="mr-4" />
-                </Link>
-                <Link href="#" id="youtube" className="text-primary">
+            <section className="flex justify-start space-x-4 mb-10 w-[90%] mx-auto lg:w-[50%]">
+                <Link href="https://www.youtube.com/channel/UCNfw3tdcG_4Jhz5KTJqF4mw" id="youtube" className="text-primary">
                     <IconBrandYoutube className="mr-4" />
                 </Link>
-                <Link href="#" id="tiktok" className="text-primary">
+                <Link href="https://www.tiktok.com/bckyrd-io" id="tiktok" className="text-primary">
                     <IconBrandTiktok className="mr-4" />
                 </Link>
-                <Link href="#" id="twitch" className="text-primary">
+                <Link href="https://www.twitch.com/bckyrd-io" id="twitch" className="text-primary">
                     <IconBrandTwitch className="mr-4" />
                 </Link>
-                <Link href="#" id="instagram" className="text-primary">
-                    <IconBrandInstagram className="mr-4" />
-                </Link>
-                <Link href="#" id="threads" className="text-primary">
+                <Link href="https://www.threads.net/bckyrd-io" id="threads" className="text-primary">
                     <IconBrandThreads className="mr-4" />
                 </Link>
-                <Link href="#" id="linkedin" className="text-primary">
+                <Link href="https://mw.linkedin.com/company/bckyrdio" id="linkedin" className="text-primary">
                     <IconBrandLinkedin className="mr-4" />
                 </Link>
             </section>

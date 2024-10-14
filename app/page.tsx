@@ -57,12 +57,12 @@ export default function Home() {
             setTheme(savedTheme);
         }
     }, []);
-    
+
     useEffect(() => {
         document.documentElement.classList.toggle("dark", theme === "dark");
         localStorage.setItem("theme", theme);
     }, [theme]);
-    
+
 
     const toggleTheme = () => {
         setTheme(theme === "dark" ? "light" : "dark");
@@ -99,11 +99,12 @@ export default function Home() {
                 <p id="explore">
                     Electronics enthusiasts which leverages the next industrial revolution.
                 </p>
-
                 <div className="flex justify-left space-x-4 mt-5">
-                    <Button variant="default" id="login">
-                        Get Started
-                    </Button>
+                    <Link href="/AuthPage">
+                        <Button variant="default" id="login">
+                            Get Started
+                        </Button>
+                    </Link>
                     <Button variant="outline" onClick={handleScrollToSection}>
                         Learn More
                     </Button>
@@ -160,10 +161,10 @@ export default function Home() {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)} // Ensure this is handled correctly
                     className="mb-4" // Adjust margin for better spacing
-                    // Add any other props you might need
+                // Add any other props you might need
                 />
 
-                
+
                 {/* Updates List */}
                 {currentUpdates.map((update, index) => (
                     <Link key={index} href={update.link}>

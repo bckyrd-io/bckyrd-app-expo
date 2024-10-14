@@ -1,33 +1,63 @@
-// Marking the component as a Client Component
 "use client";
 
-import { useState, useEffect } from "react"; // Import useState and useEffect
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button"; // ShadCN Button component
-import { Card, CardHeader, CardContent } from "@/components/ui/card"; // ShadCN Card components
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import {
-    IconMoon, IconSun, IconBrandTwitch, IconBrandInstagram, IconBrandGithub, IconBrandLinkedin,
-    IconBrandYoutube, IconBrandTiktok, IconBrandThreads, IconChevronRight,
-    IconPlayerPlay,
-    IconBrandYoutubeFilled
+    IconMoon,
+    IconSun,
+    IconBrandTwitch,
+    IconBrandInstagram,
+    IconBrandGithub,
+    IconBrandLinkedin,
+    IconBrandYoutube,
+    IconBrandTiktok,
+    IconBrandThreads,
+    IconChevronRight,
+    IconBrandYoutubeFilled,
 } from "@tabler/icons-react";
+import { Input } from "@/components/ui/input";
+import {
+    Pagination,
+    PaginationContent,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+    PaginationEllipsis,
+} from "@/components/ui/pagination"; // Adjust your import
+
+const updatesData = [
+    { title: "Backyard App", description: "Explore our app tailored for electronics enthusiasts.", link: "/app" },
+    { title: "Energy Mod", description: "Discover our energy-efficient solutions for your setup.", link: "/energy" },
+    { title: "New Features Release", description: "We've added new features to enhance user experience.", link: "/features" },
+    { title: "Community Feedback", description: "Learn about how community input shapes our updates.", link: "/feedback" },
+    { title: "Collaboration with Creators", description: "Exciting new collaborations are underway!", link: "/collaborations" },
+    { title: "Hardware Update", description: "Updates on our latest hardware projects.", link: "/hardware" },
+    { title: "Upcoming Events", description: "Join us for our upcoming events and webinars.", link: "/events" },
+    { title: "Product Launch", description: "Get ready for our new product launch next month!", link: "/launch" },
+    { title: "Beta Testing Program", description: "Sign up for our beta testing program to try new features early.", link: "/beta" },
+    { title: "User Tutorials", description: "Check out our new tutorials to help you get started.", link: "/tutorials" },
+    { title: "Bug Fixes and Improvements", description: "Learn about our latest bug fixes and performance improvements.", link: "/updates" },
+    { title: "Roadmap 2024", description: "Get a sneak peek at our roadmap for the upcoming year.", link: "/roadmap" },
+];
 
 export default function Home() {
-    const [theme, setTheme] = useState("dark"); // Default theme set to dark
+    const [theme, setTheme] = useState("dark");
+    const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 3;
 
-    // Apply the theme whenever it changes
     useEffect(() => {
         document.documentElement.classList.toggle("dark", theme === "dark");
     }, [theme]);
 
-    // Function to toggle between dark and light themes
     const toggleTheme = () => {
         setTheme(theme === "dark" ? "light" : "dark");
     };
-
-
-    const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
     const handlePlayVideo = () => {
         setIsVideoPlaying(true);
@@ -40,43 +70,50 @@ export default function Home() {
         }
     };
 
+    // Filter updates based on search term
+    const filteredUpdates = updatesData.filter(update =>
+        update.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // Calculate pagination
+    const totalPages = Math.ceil(filteredUpdates.length / itemsPerPage);
+    const indexOfLastUpdate = currentPage * itemsPerPage;
+    const indexOfFirstUpdate = indexOfLastUpdate - itemsPerPage;
+    const currentUpdates = filteredUpdates.slice(indexOfFirstUpdate, indexOfLastUpdate);
 
     return (
         <>
-            {/* Section with heading and buttons */}
             <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
-                <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify  ">
-                    Backyard App Extracts Your Setup Potential
+                <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify">
+                    Backyard App Unlocks Your Setup Potential
                 </h1>
                 <p id="explore">
-                    Leverages The Next Industrial Revolution For Electronics Enthusiast
+                    Electronics enthusiasts which leverages the next industrial revolution.
                 </p>
 
                 <div className="flex justify-left space-x-4 mt-5">
-                    <Button variant="default" id="start" size="lg">
+                    <Button variant="default" id="login">
                         Get Started
                     </Button>
-                    <Button variant="outline" size="lg" onClick={handleScrollToSection}>
-                        Explore
+                    <Button variant="outline" onClick={handleScrollToSection}>
+                        Learn More
                     </Button>
-                    <Button variant="outline" id="theme" size="lg" onClick={toggleTheme}>
-                        {theme === "light" ? <IconMoon className="" /> : <IconSun className="" />}
+                    <Button variant="outline" id="theme" onClick={toggleTheme}>
+                        {theme === "light" ? <IconMoon /> : <IconSun />}
                     </Button>
                 </div>
             </section>
 
-            {/* Section with image and description */}
             <section className="flex flex-col w-full mb-60 w-[100%] mx-auto">
                 <div className="relative w-full h-auto">
                     {!isVideoPlaying ? (
-                        // Thumbnail display before playing the video
                         <div onClick={handlePlayVideo} className="cursor-pointer">
                             <Image
-                                className=" w-full h-[100vh]"
-                                src="/download.png"
+                                className="object-cover w-full h-[50vh] lg:h-[100vh]"
+                                src="/open.webp"
                                 alt="local photo"
-                                width={180}
-                                height={700}
+                                width={1920}
+                                height={1080}
                                 priority
                             />
                             <div className="absolute inset-0 flex items-center justify-center">
@@ -86,7 +123,6 @@ export default function Home() {
                             </div>
                         </div>
                     ) : (
-                        // Embedded YouTube video after clicking
                         <iframe
                             width="100%"
                             height="700"
@@ -98,66 +134,101 @@ export default function Home() {
                         ></iframe>
                     )}
                 </div>
-                <p className="mt-10  w-[90%] mx-auto lg:w-[50%]" id="learn">
-                    we got our shared obsession to electronics., we love build cool tech as you electronics<Link href="#" id="threads" className="text-primary"> enthusiast</Link>
-                    we are building what will fuel your setup <Link href="#" id="threads" className="text-primary"> Build</Link> check them out below. and check out on our social links below if anything<Link href="#" id="threads" className="text-primary"> build </Link>
 
+                <p className="mt-10 w-[90%] mx-auto lg:w-[50%]" id="learn">
+                    We share a passion for tech. Whether you're a budding tech creator or an established pro,{" "}
+                    <Link href="#" className="text-primary">join us</Link> in building groundbreaking project that enhance your setup.
+                    Explore our latest features and <Link href="#" className="text-primary">discover</Link> how we can elevate your gear setup experience.
                 </p>
             </section>
 
-            {/* Section with Card components */}
+            {/* Updates Component */}
             <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
-                <Link href={"/app"}>
-                    <Card className="flex justify-between items-center p-4 ">
-                        <div>
-                            <CardHeader>
-                                <h2 className="text-xl font-semibold">Bckyrd App</h2>
-                            </CardHeader>
-                            <CardContent>
-                                <p>Explore our app built for electronics enthusiasts.</p>
-                            </CardContent>
-                        </div>
-                        <div className="text-gray-500">
-                            <IconChevronRight size={24} /> {/* Chevron right arrow */}
-                        </div>
-                    </Card>
-                </Link>
+                {/* Search Input */}
+                <Input
+                    type="text"
+                    placeholder="Search updates..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="mb-0"
+                />
 
-                <Link href={"/energy"}>
-                    <Card className="flex justify-between items-center p-4 mt-10">
-                        <div>
-                            <CardHeader>
-                                <h2 className="text-xl font-semibold">Bckyrd Energy Mod</h2>
-                            </CardHeader>
-                            <CardContent>
-                                <p>Learn more about our energy-efficient modifications for your setup.</p>
-                            </CardContent>
-                        </div>
-                        <div className="text-gray-500">
-                            <IconChevronRight size={24} /> {/* Chevron right arrow */}
-                        </div>
-                    </Card>
-                </Link>
+                {/* Updates List */}
+                {currentUpdates.map((update, index) => (
+                    <Link key={index} href={update.link}>
+                        <Card className="flex justify-between items-center p-4 mt-10">
+                            <div>
+                                <CardHeader>
+                                    <h2 className="text-xl font-semibold">{update.title}</h2>
+                                </CardHeader>
+                                <CardContent>
+                                    <p>{update.description}</p>
+                                </CardContent>
+                            </div>
+                            <div className="text-gray-500">
+                                <IconChevronRight size={24} />
+                            </div>
+                        </Card>
+                    </Link>
+                ))}
+
+                <Pagination className="mt-5 justify-start">
+                    <PaginationContent className="">
+                        {/* Previous Button */}
+                        {currentPage > 1 && (
+                            <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />
+                        )}
+
+                        {/* Page Links */}
+                        {Array.from({ length: totalPages }, (_, index) => (
+                            <PaginationItem key={index}>
+                                <PaginationLink
+                                    isActive={index + 1 === currentPage}
+                                    onClick={() => setCurrentPage(index + 1)}
+                                >
+                                    {index + 1}
+                                </PaginationLink>
+                            </PaginationItem>
+                        ))}
+
+                        {/* Next Button */}
+                        {currentPage < totalPages && (
+                            <PaginationNext onClick={() => setCurrentPage(currentPage + 1)} />
+                        )}
+                    </PaginationContent>
+                </Pagination>
             </section>
 
-            {/* Section with social links */}
-            <section className="flex justify-start space-x-4 mb-10 w-[90%] mx-auto lg:w-[50%]">
-                <Link href="https://www.youtube.com/channel/UCNfw3tdcG_4Jhz5KTJqF4mw" id="youtube" className="text-primary">
-                    <IconBrandYoutube className="mr-4" />
-                </Link>
-                <Link href="https://www.tiktok.com/bckyrd-io" id="tiktok" className="text-primary">
-                    <IconBrandTiktok className="mr-4" />
-                </Link>
-                <Link href="https://www.twitch.com/bckyrd-io" id="twitch" className="text-primary">
-                    <IconBrandTwitch className="mr-4" />
-                </Link>
-                <Link href="https://www.threads.net/bckyrd-io" id="threads" className="text-primary">
-                    <IconBrandThreads className="mr-4" />
-                </Link>
-                <Link href="https://mw.linkedin.com/company/bckyrdio" id="linkedin" className="text-primary">
-                    <IconBrandLinkedin className="mr-4" />
-                </Link>
+            {/* Social Media Section */}
+            <section className="flex flex-col items-start mb-10 w-[90%] mx-auto lg:w-[50%]">
+                <p className="mb-5 text-left">
+                    We're Mosolo, now we're Lomoso! Ask us anything on these platforms!
+                </p>
+                <div className="flex justify-start space-x-4">
+                    <Link href="https://www.youtube.com/channel/UCNfw3tdcG_4Jhz5KTJqF4mw" className="text-primary">
+                        <IconBrandYoutube className="mr-4" />
+                    </Link>
+                    <Link href="https://www.tiktok.com/bckyrd-io" className="text-primary">
+                        <IconBrandTiktok className="mr-4" />
+                    </Link>
+                    <Link href="https://www.instagram.com/bckyrd_io/" className="text-primary">
+                        <IconBrandInstagram className="mr-4" />
+                    </Link>
+                    <Link href="https://github.com/bckyrd-io" className="text-primary">
+                        <IconBrandGithub className="mr-4" />
+                    </Link>
+                    <Link href="https://www.linkedin.com/company/bckyrd-io/" className="text-primary">
+                        <IconBrandLinkedin className="mr-4" />
+                    </Link>
+                    <Link href="https://www.threads.net/@bckyrd_io" className="text-primary">
+                        <IconBrandThreads className="mr-4" />
+                    </Link>
+                    <Link href="https://www.twitch.tv/bckyrd" className="text-primary">
+                        <IconBrandTwitch className="mr-4" />
+                    </Link>
+                </div>
             </section>
+
         </>
     );
 }

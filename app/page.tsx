@@ -52,7 +52,7 @@ export default function Home() {
 
 
     useEffect(() => {
-        const savedTheme = localStorage.getItem('theme');
+        const savedTheme = localStorage.getItem("theme");
         if (savedTheme) {
             setTheme(savedTheme);
         }
@@ -60,7 +60,7 @@ export default function Home() {
     
     useEffect(() => {
         document.documentElement.classList.toggle("dark", theme === "dark");
-        localStorage.setItem('theme', theme);
+        localStorage.setItem("theme", theme);
     }, [theme]);
     
 
@@ -145,7 +145,7 @@ export default function Home() {
                 </div>
 
                 <p className="mt-10 w-[90%] mx-auto lg:w-[50%]" id="learn">
-                    We share a passion for tech. Whether you're a budding tech creator or an established pro,{" "}
+                    We share a passion for tech. Whether you are a budding tech creator or an established pro,{" "}
                     <Link href="#" className="text-primary">join us</Link> in building groundbreaking project that enhance your setup.
                     Explore our latest features and <Link href="#" className="text-primary">discover</Link> how we can elevate your gear setup experience.
                 </p>
@@ -155,13 +155,15 @@ export default function Home() {
             <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
                 {/* Search Input */}
                 <Input
-                    type="text"
+                    type="text" // Explicitly set type as text
                     placeholder="Search updates..."
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="mb-0"
+                    onChange={(e) => setSearchTerm(e.target.value)} // Ensure this is handled correctly
+                    className="mb-4" // Adjust margin for better spacing
+                    // Add any other props you might need
                 />
 
+                
                 {/* Updates List */}
                 {currentUpdates.map((update, index) => (
                     <Link key={index} href={update.link}>
@@ -181,6 +183,7 @@ export default function Home() {
                     </Link>
                 ))}
 
+                {/* Pagination Component */}
                 <Pagination className="mt-5 justify-start">
                     <PaginationContent className="">
                         {/* Previous Button */}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,10 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react"; // Import signOut
+import { useState } from "react";
+
 
 const gearData = [
     {
@@ -53,13 +57,17 @@ const gearData = [
     },
 ];
 
+
 const UserPage = () => {
+    const { data: session } = useSession();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
     const totalPages = Math.ceil(gearData.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentGear = gearData.slice(indexOfFirstItem, indexOfLastItem);
+
+
 
     return (
         <div className="flex flex-col items-center justify-center h-auto w-full bg-white text-black">
@@ -69,7 +77,7 @@ const UserPage = () => {
                 <div className="flex justify-between items-center mb-0">
                     <h2 className="text-xl font-semibold">Gear List</h2>
                     <Button asChild className="flex items-center space-x-1">
-                        <Link href="/add-gear">
+                        <Link href="/gear-add">
                             <span>Add New Gear</span>
                         </Link>
                     </Button>
@@ -128,11 +136,17 @@ const UserPage = () => {
             <section className="flex flex-col w-[90%] mx-auto lg:w-[50%] mb-8">
                 <div className="flex justify-between items-center mb-3">
                     <h2 className="text-xl font-semibold">Energy State</h2>
-                    <Button asChild className="flex items-center space-x-1">
-                        <Link href="/">
+                    {session ? (
+                        <Button onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })} className="flex items-center space-x-1">
                             <span>Logout</span>
-                        </Link>
-                    </Button>
+                        </Button>
+                    ) : (
+                        <Button asChild className="flex items-center space-x-1">
+                            <Link href="/">
+                                <span>Back</span>
+                            </Link>
+                        </Button>
+                    )}
                 </div>
                 {/* Chart component can be added here */}
             </section>

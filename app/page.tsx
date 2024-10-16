@@ -94,13 +94,13 @@ export default function Home() {
         <>
             <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
                 <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify">
-                    Backyard App Unlocks Your Setup Potential
+                    Backyard App Unlocks Your Productivity Setup Potential
                 </h1>
                 <p id="explore">
                     Electronics enthusiasts which leverages the next industrial revolution.
                 </p>
                 <div className="flex justify-left space-x-4 mt-5">
-                    <Link href="/AuthPage">
+                    <Link href="/auth">
                         <Button variant="default" id="login">
                             Get Started
                         </Button>

@@ -44,7 +44,7 @@ const updatesData = [
 ];
 
 export default function Home() {
-    const [theme, setTheme] = useState("dark");
+    const [theme, setTheme] = useState("light");
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
@@ -102,7 +102,7 @@ export default function Home() {
                 <div className="flex justify-left space-x-4 mt-5">
                     <Link href="/auth">
                         <Button variant="default" id="login">
-                            Get Started
+                            ⌗ Get Started
                         </Button>
                     </Link>
                     <Button variant="outline" onClick={handleScrollToSection}>

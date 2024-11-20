@@ -14,9 +14,17 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useSession } from "next-auth/react";
-import { signOut } from "next-auth/react"; // Import signOut
+// import { useSession } from "next-auth/react";
 import { useState } from "react";
+import {
+    Menubar,
+    MenubarContent,
+    MenubarItem,
+    MenubarMenu,
+    MenubarShortcut,
+    MenubarTrigger,
+} from "@/components/ui/menubar"
+
 
 
 const gearData = [
@@ -59,7 +67,7 @@ const gearData = [
 
 
 const UserPage = () => {
-    const { data: session } = useSession();
+    // const { data: session } = useSession();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
     const totalPages = Math.ceil(gearData.length / itemsPerPage);
@@ -70,10 +78,37 @@ const UserPage = () => {
 
 
     return (
-        <div className="flex flex-col items-center justify-center h-auto w-full bg-white text-black">
-            {/* Gear Management Section */}
-            <section className="flex flex-col w-[90%] mx-auto lg:w-[50%] mb-60 mt-10">
+        <div className="flex flex-col items-center h-auto w-full bg-white text-black">
 
+            {/* Gear Management Section */}
+            <section className="flex flex-col w-[90%] mx-auto lg:w-[50%] mb-10 mt-10">
+                <div className="flex justify-left space-x-4 mb-10">
+                    <Menubar>
+                        <MenubarMenu>
+                            <MenubarTrigger className="text-primary"> ⌗ Menu</MenubarTrigger>
+                            <MenubarContent>
+                                <MenubarItem>
+                                    Settings <MenubarShortcut>⌘S</MenubarShortcut>
+                                </MenubarItem>
+                                <Link href="/auth">
+                                    <MenubarItem>
+                                        SignOut <MenubarShortcut>⌘L</MenubarShortcut>
+                                    </MenubarItem>
+                                </Link>
+
+
+                            </MenubarContent>
+                        </MenubarMenu>
+                    </Menubar>
+                    {/* 
+                    <Link href="/auth">
+                        <Button variant="outline" className="text-primary" id="login">
+                           
+                        </Button>
+                    </Link> */}
+
+                </div>
+                {/* Chart component can be added here */}
                 <div className="flex justify-between items-center mb-0">
                     <h2 className="text-xl font-semibold">Gear List</h2>
                     <Button asChild className="flex items-center space-x-1">
@@ -132,24 +167,7 @@ const UserPage = () => {
                 </Pagination>
             </section>
 
-            {/* Chart Section */}
-            <section className="flex flex-col w-[90%] mx-auto lg:w-[50%] mb-8">
-                <div className="flex justify-between items-center mb-3">
-                    <h2 className="text-xl font-semibold">Energy State</h2>
-                    {session ? (
-                        <Button onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })} className="flex items-center space-x-1">
-                            <span>Logout</span>
-                        </Button>
-                    ) : (
-                        <Button asChild className="flex items-center space-x-1">
-                            <Link href="/">
-                                <span>Back</span>
-                            </Link>
-                        </Button>
-                    )}
-                </div>
-                {/* Chart component can be added here */}
-            </section>
+
         </div>
     );
 };

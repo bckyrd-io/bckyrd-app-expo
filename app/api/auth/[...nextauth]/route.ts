@@ -12,7 +12,7 @@ const handler = NextAuth({
 	callbacks: {
 		async redirect({ }) {
 			// Always redirect to /user after successful login
-			return '/user';
+			return '/home';
 		},
 	},
 })

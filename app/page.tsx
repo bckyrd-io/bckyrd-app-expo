@@ -27,6 +27,8 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"; // Adjust your import
+import { Badge } from "@/components/ui/badge";
+
 
 const updatesData = [
     { title: "Backyard App", description: "Explore our app tailored for electronics enthusiasts.", link: "/app" },
@@ -94,7 +96,7 @@ export default function Home() {
         <>
             <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
                 <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify">
-                    Backyard App Unlocks Your Productivity Setup Potential 
+                    Backyard App Unlocks Your Productivity Setup Potential
                 </h1>
                 <p id="explore">
                     Electronics enthusiasts which leverages the next industrial revolutions.
@@ -137,6 +139,9 @@ export default function Home() {
                     We share a passion for tech. Whether you are a budding tech creator or an established pro,{" "}
                     <Link href="#" className="text-primary">join us</Link> in building groundbreaking project that enhance your setup.
                     Explore our latest features and <Link href="#" className="text-primary">discover</Link> how we can elevate your gear setup experience.
+                    We share a passion for tech. Whether you are a budding tech creator or an established pro,{" "}
+                    <Link href="#" className="text-primary">join us</Link> in building groundbreaking project that enhance your setup.
+                    Explore our latest features and <Link href="#" className="text-primary">discover</Link> how we can elevate your gear setup experience.
                 </p>
             </section>
 
@@ -156,19 +161,29 @@ export default function Home() {
                 {/* Updates List */}
                 {currentUpdates.map((update, index) => (
                     <Link key={index} href={update.link}>
-                        <Card className="flex justify-between items-center p-4 mt-10">
-                            <div>
-                                <CardHeader>
-                                    <h2 className="text-xl font-semibold">{update.title}</h2>
-                                </CardHeader>
-                                <CardContent>
-                                    <p>{update.description}</p>
-                                </CardContent>
+
+                        <Card key={index} className="flex flex-col items-start mt-10">
+                            <CardHeader>
+                                <h1 className="text-2xl font-bold text-center">{update.title}</h1>
+                            </CardHeader>
+
+                            <div className="w-full">
+                                <Image
+                                    src="/drone.webp"
+                                    alt={update.title}
+                                    width={1080}
+                                    height={768}
+                                    className=" cursor-pointer w-full h-auto"
+                                />
                             </div>
-                            <div className="text-gray-500">
-                                <IconChevronRight size={24} />
-                            </div>
+                            <CardContent className="mt-5">
+                                <p>{update.description}</p>
+                                <Badge variant="default" className="mt-5">ready</Badge>
+                            </CardContent>
                         </Card>
+
+
+
                     </Link>
                 ))}
 

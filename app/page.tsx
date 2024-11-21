@@ -94,10 +94,10 @@ export default function Home() {
         <>
             <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
                 <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify">
-                    Backyard App Unlocks Your Productivity Setup Potential
+                    Backyard App Unlocks Your Productivity Setup Potential 
                 </h1>
                 <p id="explore">
-                    Electronics enthusiasts which leverages the next industrial revolution.
+                    Electronics enthusiasts which leverages the next industrial revolutions.
                 </p>
                 <div className="flex justify-left space-x-4 mt-5">
                     <Link href="/auth">
@@ -116,36 +116,24 @@ export default function Home() {
 
             <section className="flex flex-col w-full mb-60 w-[100%] mx-auto">
                 <div className="relative w-full h-auto">
-                    {!isVideoPlaying ? (
-                        <div onClick={handlePlayVideo} className="cursor-pointer">
-                            <Image
-                                className="object-cover w-full h-[50vh] lg:h-[100vh]"
-                                src="/open.webp"
-                                alt="local photo"
-                                width={1920}
-                                height={1080}
-                                priority
-                            />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <button className="flex bg-[black] text-white p-4 rounded-full">
-                                    Watch Video <IconBrandYoutubeFilled className="ml-2" />
-                                </button>
-                            </div>
+                    <div className="cursor-pointer">
+                        <Image
+                            className="object-cover w-full h-[50vh] lg:h-[100vh]"
+                            src="/Studio-YT.jpg"
+                            alt="local photo"
+                            width={1920}
+                            height={1080}
+                            priority
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <button className="flex bg-[black] text-white p-4 rounded-full">
+                                Watch Video <IconBrandYoutubeFilled className="ml-2" />
+                            </button>
                         </div>
-                    ) : (
-                        <iframe
-                            width="100%"
-                            height="700"
-                            src="https://www.youtube.com/embed/OzPuztbWoIY?autoplay=1"
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        ></iframe>
-                    )}
+                    </div>
                 </div>
 
-                <p className="mt-10 w-[90%] mx-auto lg:w-[50%]" id="learn">
+                <p className="pt-10 w-[90%] mx-auto lg:w-[50%]" id="learn">
                     We share a passion for tech. Whether you are a budding tech creator or an established pro,{" "}
                     <Link href="#" className="text-primary">join us</Link> in building groundbreaking project that enhance your setup.
                     Explore our latest features and <Link href="#" className="text-primary">discover</Link> how we can elevate your gear setup experience.

@@ -79,7 +79,7 @@ export default function Home() {
                 </div>
                 <p className="pt-10 w-[90%] mx-auto lg:w-[50%]" id="learn">
                     We share a passion for tech. Whether you are a budding tech creator or an established pro,{" "}
-                    <Link href="#" className="text-primary">join us</Link> in building groundbreaking projects that enhance your setup.
+                    <Link href="#" className="text-primary">join us</Link> in building groundbreaking projects that enhance your environment setup to build the future.
                 </p>
             </section>
 

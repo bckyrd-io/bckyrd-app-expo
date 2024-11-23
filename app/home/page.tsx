@@ -66,7 +66,7 @@ const gearData = [
 ];
 
 
-const UserPage = () => {
+const HomePage = () => {
     // const { data: session } = useSession();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
@@ -172,4 +172,4 @@ const UserPage = () => {
     );
 };
 
-export default UserPage;
+export default HomePage;

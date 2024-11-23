@@ -5,59 +5,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import {
-    IconMoon,
-    IconSun,
-    IconBrandTwitch,
-    IconBrandInstagram,
-    IconBrandGithub,
-    IconBrandLinkedin,
-    IconBrandYoutube,
-    IconBrandTiktok,
-    IconBrandThreads,
-    IconChevronRight,
-    IconBrandYoutubeFilled,
-} from "@tabler/icons-react";
+import { IconSun, IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconBrandYoutubeFilled } from "@tabler/icons-react";
 import { Input } from "@/components/ui/input";
-import {
-    Pagination,
-    PaginationContent,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination"; // Adjust your import
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Badge } from "@/components/ui/badge";
 
-
 const updatesData = [
-    { title: "Backyard App", description: "Explore our app tailored for electronics enthusiasts.", link: "/app" },
-    { title: "Energy Mod", description: "Discover our energy-efficient solutions for your setup.", link: "/energy" },
-    { title: "New Features Release", description: "We've added new features to enhance user experience.", link: "/features" },
-    { title: "Community Feedback", description: "Learn about how community input shapes our updates.", link: "/feedback" },
-    { title: "Collaboration with Creators", description: "Exciting new collaborations are underway!", link: "/collaborations" },
-    { title: "Hardware Update", description: "Updates on our latest hardware projects.", link: "/hardware" },
-    { title: "Upcoming Events", description: "Join us for our upcoming events and webinars.", link: "/events" },
-    { title: "Product Launch", description: "Get ready for our new product launch next month!", link: "/launch" },
-    { title: "Beta Testing Program", description: "Sign up for our beta testing program to try new features early.", link: "/beta" },
-    { title: "User Tutorials", description: "Check out our new tutorials to help you get started.", link: "/tutorials" },
-    { title: "Bug Fixes and Improvements", description: "Learn about our latest bug fixes and performance improvements.", link: "/updates" },
-    { title: "Roadmap 2024", description: "Get a sneak peek at our roadmap for the upcoming year.", link: "/roadmap" },
+    { id: "1", title: "Backyard App", description: "Explore our app tailored for electronics enthusiasts.", image: "/photo.jpg" },
+    { id: "2", title: "Energy Mod", description: "Discover our energy-efficient solutions for your setup.", image: "/photo.jpg" },
+    { id: "3", title: "New Features Release", description: "We've added new features to enhance user experience.", image: "/photo.jpg" },
+    { id: "4", title: "Community Feedback", description: "Learn about how community input shapes our updates.", image: "/photo.jpg" },
+    // Add more updates as needed
 ];
 
 export default function Home() {
-    const [theme, setTheme] = useState("light");
-    const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+    const [theme, setTheme] = useState("dark");
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 4;
-
+    const itemsPerPage = 3;
 
     useEffect(() => {
         const savedTheme = localStorage.getItem("theme");
-        if (savedTheme) {
-            setTheme(savedTheme);
-        }
+        if (savedTheme) setTheme(savedTheme);
     }, []);
 
     useEffect(() => {
@@ -65,137 +34,88 @@ export default function Home() {
         localStorage.setItem("theme", theme);
     }, [theme]);
 
-
-    const toggleTheme = () => {
-        setTheme(theme === "dark" ? "light" : "dark");
-    };
-
-    const handlePlayVideo = () => {
-        setIsVideoPlaying(true);
-    };
-
     const handleScrollToSection = () => {
         const element = document.getElementById("learn");
-        if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-        }
+        if (element) element.scrollIntoView({ behavior: "smooth" });
     };
 
-    // Filter updates based on search term
-    const filteredUpdates = updatesData.filter(update =>
+    const filteredUpdates = updatesData.filter((update) =>
         update.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Calculate pagination
     const totalPages = Math.ceil(filteredUpdates.length / itemsPerPage);
-    const indexOfLastUpdate = currentPage * itemsPerPage;
-    const indexOfFirstUpdate = indexOfLastUpdate - itemsPerPage;
-    const currentUpdates = filteredUpdates.slice(indexOfFirstUpdate, indexOfLastUpdate);
+    const currentUpdates = filteredUpdates.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     return (
         <>
+            {/* Hero Section */}
             <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
                 <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify">
                     Backyard App Unlocks Your Productivity Setup Potential
                 </h1>
-                <p id="explore">
-                    Electronics enthusiasts which leverages the next industrial revolutions.
-                </p>
+                <p>Electronics enthusiasts which leverages the next industrial revolutions.</p>
                 <div className="flex justify-left space-x-4 mt-5">
                     <Link href="/auth">
-                        <Button variant="default" id="login">
-                            ⌗ Get Started
-                        </Button>
+                        <Button variant="default">⌗ Get Started</Button>
                     </Link>
                     <Button variant="outline" onClick={handleScrollToSection}>
                         Learn More
                     </Button>
-                    <Button variant="outline" id="theme" onClick={toggleTheme}>
-                        {theme === "light" ? <IconMoon /> : <IconSun />}
+                    <Button variant="outline">
+                        <IconSun />
                     </Button>
                 </div>
             </section>
 
-            <section className="flex flex-col w-full mb-60 w-[100%] mx-auto">
-                <div className="relative w-full h-auto">
-                    <div className="cursor-pointer">
-                        <Image
-                            className="object-cover w-full h-[50vh] lg:h-[100vh]"
-                            src="/Studio-YT.jpg"
-                            alt="local photo"
-                            width={1920}
-                            height={1080}
-                            priority
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <button className="flex bg-[black] text-white p-4 rounded-full">
-                                Watch Video <IconBrandYoutubeFilled className="ml-2" />
-                            </button>
-                        </div>
+            {/* Video Section */}
+            <section className="flex flex-col w-full mb-60">
+                <div className="relative">
+                    <Image src="/Studio-YT.jpg" alt="Studio" width={1920} height={1080} className="object-cover w-full h-[50vh] lg:h-[100vh]" priority />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <button className="flex bg-black text-white p-4 rounded-full">
+                            Watch Video <IconBrandYoutubeFilled className="ml-2" />
+                        </button>
                     </div>
                 </div>
-
                 <p className="pt-10 w-[90%] mx-auto lg:w-[50%]" id="learn">
                     We share a passion for tech. Whether you are a budding tech creator or an established pro,{" "}
-                    <Link href="#" className="text-primary">join us</Link> in building groundbreaking project that enhance your setup.
-                    Explore our latest features and <Link href="#" className="text-primary">discover</Link> how we can elevate your gear setup experience.
-                    We share a passion for tech. Whether you are a budding tech creator or an established pro,{" "}
-                    <Link href="#" className="text-primary">join us</Link> in building groundbreaking project that enhance your setup.
-                    Explore our latest features and <Link href="#" className="text-primary">discover</Link> how we can elevate your gear setup experience.
+                    <Link href="#" className="text-primary">join us</Link> in building groundbreaking projects that enhance your setup.
                 </p>
             </section>
 
-            {/* Updates Component */}
+            {/* Updates Section */}
             <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
-                {/* Search Input */}
                 <Input
-                    type="text" // Explicitly set type as text
+                    type="text"
                     placeholder="Search updates..."
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)} // Ensure this is handled correctly
-                    className="mb-4" // Adjust margin for better spacing
-                // Add any other props you might need
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="mb-4"
                 />
 
-
-                {/* Updates List */}
-                {currentUpdates.map((update, index) => (
-                    <Link key={index} href={update.link}>
-
-                        <Card key={index} className="flex flex-col items-start mt-10">
+                {currentUpdates.map((update) => (
+                    <Link key={update.id} href={`/update/${update.id}`}>
+                        <Card className="flex flex-col items-start mt-10">
                             <CardHeader>
-                                <h1 className="text-2xl font-bold text-center">{update.title}</h1>
+                                <h1 className="text-2xl font-bold">{update.title}</h1>
                             </CardHeader>
-
                             <div className="w-full">
-                                <Image
-                                    src="/drone.webp"
-                                    alt={update.title}
-                                    width={1080}
-                                    height={768}
-                                    className=" cursor-pointer w-full h-auto"
-                                />
+                                <Image src={update.image} alt={update.title} width={1080} height={768} className="w-full h-auto" />
                             </div>
                             <CardContent className="mt-5">
                                 <p>{update.description}</p>
                                 <Badge variant="default" className="mt-5">ready</Badge>
                             </CardContent>
                         </Card>
-
-
-
                     </Link>
                 ))}
 
-                {/* Pagination Component */}
+                {/* Pagination */}
                 <Pagination className="mt-5 justify-start">
-                    <PaginationContent className="">
-                        {/* Previous Button */}
+                    <PaginationContent>
                         {currentPage > 1 && (
                             <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />
                         )}
-
-                        {/* Page Links */}
                         {Array.from({ length: totalPages }, (_, index) => (
                             <PaginationItem key={index}>
                                 <PaginationLink
@@ -206,8 +126,6 @@ export default function Home() {
                                 </PaginationLink>
                             </PaginationItem>
                         ))}
-
-                        {/* Next Button */}
                         {currentPage < totalPages && (
                             <PaginationNext onClick={() => setCurrentPage(currentPage + 1)} />
                         )}
@@ -220,34 +138,13 @@ export default function Home() {
                 <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify">
                     Lets Work Together
                 </h1>
-                <p className="mb-5 text-left">
-                    We Were Mosolo Now we are Lomoso Link With Us On These Platforms
-                </p>
-                <div className="flex justify-start space-x-4">
-                    <Link href="https://www.youtube.com/channel/UCNfw3tdcG_4Jhz5KTJqF4mw" className="text-primary">
-                        <IconBrandYoutube className="mr-4" />
-                    </Link>
-                    <Link href="https://www.tiktok.com/bckyrd-io" className="text-primary">
-                        <IconBrandTiktok className="mr-4" />
-                    </Link>
-                    <Link href="https://www.instagram.com/bckyrd_io/" className="text-primary">
-                        <IconBrandInstagram className="mr-4" />
-                    </Link>
-                    <Link href="https://github.com/bckyrd-io" className="text-primary">
-                        <IconBrandGithub className="mr-4" />
-                    </Link>
-                    <Link href="https://www.linkedin.com/company/bckyrd-io/" className="text-primary">
-                        <IconBrandLinkedin className="mr-4" />
-                    </Link>
-                    <Link href="https://www.threads.net/@bckyrd_io" className="text-primary">
-                        <IconBrandThreads className="mr-4" />
-                    </Link>
-                    <Link href="https://www.twitch.tv/bckyrd" className="text-primary">
-                        <IconBrandTwitch className="mr-4" />
-                    </Link>
+                <p className="mb-5">We were Mosolo Now we are Lomoso, Connect with us on these platforms.</p>
+                <div className="flex space-x-4">
+                    <Link href="https://www.youtube.com/" className="text-primary"><IconBrandYoutube /></Link>
+                    <Link href="https://www.tiktok.com/" className="text-primary"><IconBrandTiktok /></Link>
+                    <Link href="https://www.twitch.tv/" className="text-primary"><IconBrandTwitch /></Link>
                 </div>
             </section>
-
         </>
     );
 }

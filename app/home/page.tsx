@@ -24,8 +24,7 @@ import {
     MenubarTrigger,
 } from "@/components/ui/menubar";
 
-import { Bar, BarChart, CartesianGrid, XAxis, Tooltip, ResponsiveContainer, } from "recharts";
-import { ChartContainer } from "@/components/ui/chart";
+import { Bar, BarChart, CartesianGrid, XAxis, Tooltip } from "recharts";
 
 
 

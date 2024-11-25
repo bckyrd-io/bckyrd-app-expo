@@ -9,7 +9,7 @@ import { IconChevronLeft } from "@tabler/icons-react";
 const updatesData = [
     {
         id: "1",
-        title: "Backyard App",
+        title: "Drone",
         description: "Explore the full details of the Backyard App and how it can revolutionize your tech setup.",
         image: "/photo.jpg",
         content: [

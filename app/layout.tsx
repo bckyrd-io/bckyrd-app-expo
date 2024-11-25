@@ -15,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Backyard io : Electronics Enthusiast ⌗",
-    description: "Leverage Next Industrial Revolution, For Your Setup To Build ",
+    title: "Backyard iO ⌗ Potential Energy To Build the Future",
+    description: "Electronics Enthusiast Leverage Next Industrial Revolution, For Your Setup To Build ",
 };
 
 export default function RootLayout({

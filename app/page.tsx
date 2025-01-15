@@ -136,7 +136,7 @@ export default function Home() {
             {/* Social Media Section */}
             <section className="flex flex-col items-start mb-10 w-[90%] mx-auto lg:w-[50%]">
                 <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify">
-                    Lets Work Together
+                    The Stream Of Energy
                 </h1>
                 <p className="mb-5">We were Mosolo Now we are Lomoso, Connect with us on these platforms.</p>
                 <div className="flex space-x-4">

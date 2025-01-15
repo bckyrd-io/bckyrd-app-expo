@@ -56,13 +56,10 @@ export default function Home() {
                 <p>Electronics enthusiasts which leverages the next industrial revolutions.</p>
                 <div className="flex justify-left space-x-4 mt-5">
                     <Link href="/auth">
-                        <Button variant="default">⌗ Get Started</Button>
+                        <Button variant="default">⌗ Start Now</Button>
                     </Link>
                     <Button variant="outline" onClick={handleScrollToSection}>
-                        Learn More
-                    </Button>
-                    <Button variant="outline">
-                        <IconSun />
+                        About Us
                     </Button>
                 </div>
             </section>
@@ -77,7 +74,7 @@ export default function Home() {
                         </button>
                     </div>
                 </div>
-                <p className="pt-10 w-[90%] mx-auto lg:w-[50%]" id="learn">
+                <p className="pt-10 w-[90%] mx-auto lg:w-[50%] text-2xl" id="learn">
                     We share a passion for tech. Whether you are a budding tech creator or an established pro,{" "}
                     <Link href="#" className="text-primary">join us</Link> in building groundbreaking projects that enhance your environment setup to build the future.
                 </p>
@@ -87,7 +84,7 @@ export default function Home() {
             <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
                 <Input
                     type="text"
-                    placeholder="Search updates..."
+                    placeholder="Search for feature updates below..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="mb-4"

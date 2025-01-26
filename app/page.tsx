@@ -5,16 +5,36 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { IconSun, IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconBrandYoutubeFilled } from "@tabler/icons-react";
+import { IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconBrandYoutubeFilled, IconSun, IconMoon } from "@tabler/icons-react";
 import { Input } from "@/components/ui/input";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Badge } from "@/components/ui/badge";
 
 const updatesData = [
-    { id: "1", title: "Backyard App", description: "Explore our app tailored for electronics enthusiasts.", image: "/photo.jpg" },
-    { id: "2", title: "Energy Mod", description: "Discover our energy-efficient solutions for your setup.", image: "/photo.jpg" },
-    { id: "3", title: "New Features Release", description: "We've added new features to enhance user experience.", image: "/photo.jpg" },
-    { id: "4", title: "Community Feedback", description: "Learn about how community input shapes our updates.", image: "/photo.jpg" },
+    {
+        id: "1",
+        title: "Smart Power Strip",
+        description: "A next-gen power strip designed for creators. Monitor energy usage, control devices remotely, and optimize your setup with ease.",
+        image: "/photo.jpg"
+    },
+    {
+        id: "2",
+        title: "Energy Monitoring",
+        description: "Track how much energy your devices use in real-time. Get insights to save power and reduce costs.",
+        image: "/photo.jpg"
+    },
+    {
+        id: "3",
+        title: "Portable Power",
+        description: "Take your setup anywhere with our portable power solutions. Perfect for streamers on the go.",
+        image: "/photo.jpg"
+    },
+    {
+        id: "4",
+        title: "Community Feedback",
+        description: "Your ideas shape what we build. Join our community and help us create the ultimate energy tools for creators.",
+        image: "/photo.jpg"
+    },
     // Add more updates as needed
 ];
 
@@ -24,15 +44,22 @@ export default function Home() {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
 
+    // Load theme from localStorage on initial render
     useEffect(() => {
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme) setTheme(savedTheme);
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        setTheme(savedTheme);
     }, []);
 
+    // Apply theme to the document
     useEffect(() => {
         document.documentElement.classList.toggle("dark", theme === "dark");
         localStorage.setItem("theme", theme);
     }, [theme]);
+
+    // Toggle between dark and light themes
+    const toggleTheme = () => {
+        setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+    };
 
     const handleScrollToSection = () => {
         const element = document.getElementById("learn");
@@ -48,18 +75,27 @@ export default function Home() {
 
     return (
         <>
-            {/* Hero Section */}
             <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
-                <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify">
-                    Backyard App Unlocks Your Productivity Setup Potential
+                <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5">
+                    Unlock Your Potential with Backyard IO
                 </h1>
-                <p>Electronics enthusiasts which leverages the next industrial revolutions.</p>
-                <div className="flex justify-left space-x-4 mt-5">
-                    <Link href="/auth">
-                        <Button variant="default">⌗ Start Now</Button>
-                    </Link>
-                    <Button variant="outline" onClick={handleScrollToSection}>
-                        About Us
+                <p>We’re building the energy strip for electronics enthusiasts and streamers like you . And you Focus on what you do best—building the future.</p>
+                <div className="flex  items-center space-x-4 mt-5">
+                 
+                        <Link href="/auth">
+                            <Button variant="default">⌗ Let’s Go</Button>
+                        </Link>
+                        <Button variant="outline" onClick={handleScrollToSection}>
+                            Learn More
+                        </Button>
+                    
+                    {/* Theme Toggle Button */}
+                    <Button
+                        onClick={toggleTheme}
+                        variant="outline"
+                        className="p-2 rounded-full "
+                    >
+                        {theme === "dark" ? <IconSun size={20} /> : <IconMoon size={20} />}
                     </Button>
                 </div>
             </section>
@@ -75,8 +111,7 @@ export default function Home() {
                     </div>
                 </div>
                 <p className="pt-10 w-[90%] mx-auto lg:w-[50%] text-2xl" id="learn">
-                    We share a passion for tech. Whether you are a budding tech creator or an established pro,{" "}
-                    <Link href="#" className="text-primary">join us</Link> in building groundbreaking projects that enhance your environment setup to build the future.
+                    &rdquo; We’re just like you—electronics enthusiasts who geek out over gadgets and setups. On mission To give you the power hack you need to focus on what really matters. Let’s supercharge your setup and make your energy problem a thing of the past &rdquo;
                 </p>
             </section>
 
@@ -84,24 +119,21 @@ export default function Home() {
             <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
                 <Input
                     type="text"
-                    placeholder="Search for feature updates below..."
+                    placeholder="Search for updates..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="mb-4"
                 />
 
                 {currentUpdates.map((update) => (
-                    <Link key={update.id} href={`/update/${update.id}`}>
-                        <Card className="flex flex-col items-start mt-10">
+                    <Link key={update.id} href={`/update/${update.id}`} className=" mt-10">
+                        <Card className="flex flex-col items-start">
                             <CardHeader>
-                                <h1 className="text-2xl font-bold">{update.title}</h1>
+                                <h2 className="font-bold">{update.title}</h2>
                             </CardHeader>
-                            <div className="w-full">
-                                <Image src={update.image} alt={update.title} width={1080} height={768} className="w-full h-auto" />
-                            </div>
                             <CardContent className="mt-5">
                                 <p>{update.description}</p>
-                                <Badge variant="default" className="mt-5">ready</Badge>
+                                <Badge variant="default" className="mt-5"></Badge>
                             </CardContent>
                         </Card>
                     </Link>
@@ -133,9 +165,9 @@ export default function Home() {
             {/* Social Media Section */}
             <section className="flex flex-col items-start mb-10 w-[90%] mx-auto lg:w-[50%]">
                 <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify">
-                    The Stream Of Energy
+                    Greater Stream of Energy
                 </h1>
-                <p className="mb-5">We were Mosolo Now we are Lomoso, Connect with us on these platforms.</p>
+                <p className="mb-5">We’re all about building the future, and we’d love for you to be part of it. Hit us up on these platforms:</p>
                 <div className="flex space-x-4">
                     <Link href="https://www.youtube.com/" className="text-primary"><IconBrandYoutube /></Link>
                     <Link href="https://www.tiktok.com/" className="text-primary"><IconBrandTiktok /></Link>

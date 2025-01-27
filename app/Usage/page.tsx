@@ -49,7 +49,7 @@ const usageData = [
 const UsagePage = () => {
 
     return (
-        <div className="flex flex-col items-center h-auto w-full bg-white text-black">
+        <div className="flex flex-col items-center h-auto w-full">
 
             {/* Gear Management Section */}
             <section className="flex flex-col w-[90%] mx-auto lg:w-[50%] mb-10 mt-10">
@@ -62,7 +62,7 @@ const UsagePage = () => {
                     </Link>
 
                 </div>
-                {/* Chart component can be added here */}
+              
                 <div className="flex justify-between items-center mb-0">
                     <h2 className="text-xl font-semibold">Insights Notes</h2>
                 </div>

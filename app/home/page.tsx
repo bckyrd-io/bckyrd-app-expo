@@ -1,8 +1,8 @@
-"use client";
+"use client"; // Mark this as a Client Component
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -23,10 +23,7 @@ import {
     MenubarShortcut,
     MenubarTrigger,
 } from "@/components/ui/menubar";
-
-import { Bar, BarChart, CartesianGrid, XAxis, Tooltip } from "recharts";
-
-
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
 const gearData = [
     {
@@ -68,6 +65,8 @@ const gearData = [
 
 const HomePage = () => {
     const [currentPage, setCurrentPage] = useState(1);
+    const [isClient, setIsClient] = useState(false); // Track client-side rendering
+
     const itemsPerPage = 3;
     const totalPages = Math.ceil(gearData.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -80,8 +79,13 @@ const HomePage = () => {
         energyConsumption: gear.energyConsumption,
     }));
 
+    // Ensure the chart is only rendered on the client side
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
     return (
-        <div className="flex flex-col items-center h-auto w-full bg-white text-black">
+        <div className="flex flex-col items-center h-auto w-full">
             {/* Gear Management Section */}
             <section className="flex flex-col w-[90%] mx-auto lg:w-[50%] mb-10 mt-10">
                 <div className="flex justify-left space-x-4 mb-10">
@@ -111,24 +115,39 @@ const HomePage = () => {
                     </Menubar>
                 </div>
 
-
-
-                {/* // Chart Section */}
-                <div className="flex flex-col space-y-4 mb-10">
-
-                    <BarChart
-                        width={300}
-                        height={200}
-                        data={chartData}
-                    >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <Tooltip />
-                        <Bar dataKey="energyConsumption" fill="#00BFA6" radius={[4, 4, 0, 0]} />
-                    </BarChart>
+                {/* Chart component can be added here */}
+                <div className="flex justify-between items-center mb-5">
+                    <h2 className="text-xl font-semibold">Energy Consuption</h2>
                 </div>
 
-
+                {/* Chart Section */}
+                {isClient && ( // Render the chart only on the client side
+                    <Card className="flex flex-col space-y-4 mb-10 pt-4 pb-4">
+                        <LineChart
+                            width={500}
+                            height={300}
+                            data={chartData}
+                            margin={{
+                                top: 20,
+                                right: 0,
+                                left: 0,
+                                bottom: 20,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Line
+                                type="monotone"
+                                dataKey="energyConsumption"
+                                stroke="#00BFA6"
+                                activeDot={{ r: 8 }}
+                            />
+                        </LineChart>
+                    </Card>
+                )}
 
                 {/* Gear List Section */}
                 <div className="flex justify-between items-center mb-0">
@@ -140,9 +159,9 @@ const HomePage = () => {
                     </Button>
                 </div>
 
-                <div className="flex flex-col space-y-4 mt-10">
+                <div className="flex flex-col space-y-4 mt-5">
                     {currentGear.map((gear, index) => (
-                        <Card key={index} className="flex flex-col items-start ">
+                        <Card key={index} className="flex flex-col items-start">
                             <CardHeader>
                                 <h2 className="text-xl font-semibold">{gear.name}</h2>
                             </CardHeader>

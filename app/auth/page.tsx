@@ -10,7 +10,7 @@ const AuthPage = () => {
 
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-white">
+        <div className="flex flex-col items-center justify-center h-screen ">
             <div className="flex justify-left space-x-4 mb-10 w-full max-w-md">
                 <Link href="/">
                     <Button variant="ghost" className="text-primary">
@@ -18,12 +18,12 @@ const AuthPage = () => {
                     </Button>
                 </Link>
             </div>
-            <Card className="w-full max-w-md p-0 shadow-sm rounded-lg bg-white border border-gray-300"> {/* Set background to white and border color */}
+            <Card className="w-full max-w-md p-0 shadow-sm"> 
                 <CardHeader>
-                    <h1 className="text-2xl font-bold text-center text-black">Welcome Back!</h1> {/* Set text color to black */}
+                    <h1 className="text-2xl font-bold text-center ">Welcome Back!</h1> 
                 </CardHeader>
                 <CardContent className="text-center">
-                    <p className="mt-5 text-black">Be one of the first to leverage this platform</p> {/* Set text color to black */}
+                    <p className="mt-5 ">Be one of the first to leverage this platform</p> 
                     <Button onClick={() => signIn("google")} className="mt-5 w-full flex items-center justify-center ">
                         <IconBrandGoogle size={18} />
                         <span>Sign with Google</span>

@@ -85,7 +85,7 @@ export default function Home() {
             {/* Video Section */}
             <section className="flex flex-col w-full mb-60">
                 <div className="relative">
-                    <Image src="/Studio-yt.jpg" alt="Studio" width={1920} height={1080} className="object-cover w-full h-[50vh] lg:h-[100vh]" priority />
+                    <Image src="/Studio.jpg" alt="Studio" width={1920} height={1080} className="object-cover w-full h-[50vh] lg:h-[100vh]" priority />
                     <div className="absolute inset-0 flex items-center justify-center">
                         <button className="flex bg-black text-white p-4 rounded-full">
                             Watch Video <IconBrandYoutubeFilled className="ml-2" />

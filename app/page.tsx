@@ -66,7 +66,7 @@ export default function Home() {
                 <p>We’re building the energy strip for electronics enthusiasts and streamers like you. And you Focus on staying live—building the future.</p>
                 <div className="flex items-center space-x-4 mt-5">
                     <Link href="/auth">
-                        <Button variant="default">⌗ Let’s Go</Button>
+                        <Button variant="default">⌗ Get Started</Button>
                     </Link>
                     <Button variant="outline" onClick={handleScrollToSection}>
                         Learn More

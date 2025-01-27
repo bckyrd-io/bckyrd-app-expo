@@ -11,7 +11,7 @@ const updatesData = [
         id: "1",
         title: "Drone",
         description: "Explore the full details of the Backyard App and how it can revolutionize your tech setup.",
-        image: "/photo.jpg",
+        image: "/drone.webp",
         content: [
             "The Backyard App is designed for tech enthusiasts who want to optimize their productivity and streamline their workflows.",
             "With intuitive features and a user-friendly interface, the Backyard App allows you to manage your tasks, organize your projects, and collaborate seamlessly.",
@@ -22,7 +22,7 @@ const updatesData = [
         id: "2",
         title: "Energy Mod",
         description: "Learn about our energy-efficient modifications and how they can save you money.",
-        image: "/photo.jpg",
+        image: "/drone.webp",
         content: [
             "Energy Mod focuses on providing sustainable solutions for your tech setup.",
             "Our modifications reduce energy consumption without compromising performance.",
@@ -33,7 +33,7 @@ const updatesData = [
         id: "3",
         title: "New Features Release",
         description: "Get an in-depth look at the latest features we've introduced to enhance user experience.",
-        image: "/photo.jpg",
+        image: "/drone.webp",
         content: [
             "We are excited to unveil new features designed to make your experience smoother and more enjoyable.",
             "From enhanced customization options to improved performance metrics, this update is packed with value.",
@@ -44,7 +44,7 @@ const updatesData = [
         id: "4",
         title: "Community Feedback",
         description: "Discover how feedback from our community has shaped our latest updates.",
-        image: "/photo.jpg",
+        image: "/drone.webp",
         content: [
             "Our community is at the heart of everything we do.",
             "We value your input and have used it to create updates that truly address your needs.",
@@ -94,7 +94,7 @@ export default function UpdatePage({ params }: { params: Promise<{ id: string }>
             <Button
                 className="mt-5 mb-5 text-primary"
                 variant="outline"
-                onClick={() => router.push("/")}
+                onClick={() => router.push("/home")}
             >
                 <IconChevronLeft size={18} />
                 Back

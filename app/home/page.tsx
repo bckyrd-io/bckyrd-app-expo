@@ -27,39 +27,44 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "r
 
 const gearData = [
     {
+        id:"1",
         name: "Streaming Camera",
         description: "High-definition camera for live streaming.",
         status: "Charged",
         link: "/gear/camera",
-        energyConsumption: 10,
+        wattage: 10,
     },
     {
+        id:"2",
         name: "Microphone",
         description: "Crystal-clear audio with noise reduction.",
         status: "Ready",
         link: "/gear/microphone",
-        energyConsumption: 5,
+        wattage: 5,
     },
     {
+        id:"3",
         name: "Gaming PC",
         description: "High-performance PC for streaming and gaming.",
         status: "Running",
         link: "/gear/pc",
-        energyConsumption: 50,
+        wattage: 50,
     },
     {
+        id:"4",
         name: "Battery Backup",
         description: "Energy backup to ensure uninterrupted streaming.",
         status: "Charged",
         link: "/gear/battery",
-        energyConsumption: 20,
+        wattage: 20,
     },
     {
+        id:"5",
         name: "Power Adapter",
         description: "Adapter for multiple tech devices.",
         status: "Connected",
         link: "/gear/adapter",
-        energyConsumption: 15,
+        wattage: 15,
     },
 ];
 
@@ -76,7 +81,7 @@ const HomePage = () => {
     // Chart data
     const chartData = gearData.map((gear) => ({
         name: gear.name,
-        energyConsumption: gear.energyConsumption,
+        wattage: gear.wattage,
     }));
 
     // Ensure the chart is only rendered on the client side
@@ -141,7 +146,7 @@ const HomePage = () => {
                             <Legend />
                             <Line
                                 type="monotone"
-                                dataKey="energyConsumption"
+                                dataKey="wattage"
                                 stroke="#00BFA6"
                                 activeDot={{ r: 8 }}
                             />
@@ -165,7 +170,6 @@ const HomePage = () => {
                             <CardHeader>
                                 <h2 className="text-xl font-semibold">{gear.name}</h2>
                             </CardHeader>
-
                             <div className="w-full">
                                 <Image
                                     src="/drone.webp"
@@ -177,9 +181,11 @@ const HomePage = () => {
                             </div>
                             <CardContent className="mt-5">
                                 <p>{gear.description}</p>
-                                <Badge variant="default" className="mt-5">
-                                    {gear.status}
-                                </Badge>
+                                <Link key={gear.id} href={`/gear/${gear.id}`} className="mt-10">
+                                    <Badge variant="default" className="mt-5">
+                                        {gear.status}
+                                    </Badge>
+                                </Link>
                             </CardContent>
                         </Card>
                     ))}

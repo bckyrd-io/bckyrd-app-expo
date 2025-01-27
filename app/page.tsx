@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconBrandYoutubeFilled, IconSun, IconMoon } from "@tabler/icons-react";
+import { IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconBrandYoutubeFilled, IconSun, IconMoon, IconCategoryFilled, IconShoppingBag } from "@tabler/icons-react";
 import { Input } from "@/components/ui/input";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Badge } from "@/components/ui/badge";
@@ -88,7 +88,7 @@ export default function Home() {
                     <Image src="/Studio.jpg" alt="Studio" width={1920} height={1080} className="object-cover w-full h-[50vh] lg:h-[100vh]" priority />
                     <div className="absolute inset-0 flex items-center justify-center">
                         <button className="flex bg-black text-white p-4 rounded-full">
-                            Watch Video <IconBrandYoutubeFilled className="ml-2" />
+                            Pre Order Now<IconShoppingBag className="ml-2" />
                         </button>
                     </div>
                 </div>

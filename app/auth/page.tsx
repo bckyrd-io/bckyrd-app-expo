@@ -1,9 +1,8 @@
 "use client";
 
 import { Button } from "../../components/ui/button"; // Adjust the path as necessary
-import { signIn } from "next-auth/react"; // Assuming you're using NextAuth for authentication
 import { Card, CardHeader, CardContent } from "../../components/ui/card";
-import { IconBrandGoogle, IconChevronLeft } from "@tabler/icons-react";
+import { IconChevronLeft } from "@tabler/icons-react";
 import Link from "next/link";
 
 const AuthPage = () => {
@@ -18,16 +17,17 @@ const AuthPage = () => {
                     </Button>
                 </Link>
             </div>
-            <Card className="w-full max-w-md p-0 shadow-sm"> 
+            <Card className="w-full max-w-md p-0 shadow-sm">
                 <CardHeader>
-                    <h1 className="text-2xl font-bold text-center ">Welcome Back!</h1> 
+                    <h1 className="text-2xl font-bold text-center ">Welcome Back!</h1>
                 </CardHeader>
                 <CardContent className="text-center">
-                    <p className="mt-5 ">Be one of the first to leverage this platform</p> 
-                    <Button onClick={() => signIn("google")} className="mt-5 w-full flex items-center justify-center ">
-                        <IconBrandGoogle size={18} />
-                        <span>Sign with Google</span>
-                    </Button>
+                    <p className="mt-5 ">Be one of the first to leverage this platform</p>
+                    <Link href="/home">
+                        <Button className="mt-5 w-full flex items-center justify-center ">
+                            Sign In
+                        </Button>
+                    </Link>
                 </CardContent>
             </Card>
         </section>

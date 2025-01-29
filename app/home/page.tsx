@@ -1,4 +1,4 @@
-"use client"; // Mark this as a Client Component
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -23,195 +23,124 @@ import {
     MenubarShortcut,
     MenubarTrigger,
 } from "@/components/ui/menubar";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
-
-const gearData = [
-    {
-        id:"1",
-        name: "Streaming Camera",
-        description: "High-definition camera for live streaming.",
-        status: "Charged",
-        link: "/gear/camera",
-        wattage: 10,
-    },
-    {
-        id:"2",
-        name: "Microphone",
-        description: "Crystal-clear audio with noise reduction.",
-        status: "Ready",
-        link: "/gear/microphone",
-        wattage: 5,
-    },
-    {
-        id:"3",
-        name: "Gaming PC",
-        description: "High-performance PC for streaming and gaming.",
-        status: "Running",
-        link: "/gear/pc",
-        wattage: 50,
-    },
-    {
-        id:"4",
-        name: "Battery Backup",
-        description: "Energy backup to ensure uninterrupted streaming.",
-        status: "Charged",
-        link: "/gear/battery",
-        wattage: 20,
-    },
-    {
-        id:"5",
-        name: "Power Adapter",
-        description: "Adapter for multiple tech devices.",
-        status: "Connected",
-        link: "/gear/adapter",
-        wattage: 15,
-    },
-];
+import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Line } from "recharts";
+import { IconUser } from "@tabler/icons-react";
 
 const HomePage = () => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [isClient, setIsClient] = useState(false); // Track client-side rendering
+    type Gear = {
+        id: number;
+        name: string;
+        energyConsuption: number;
+        description: string;
+        status: string;
+    }
 
+    const [gearData, setGearData] = useState<Gear[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [isClient, setIsClient] = useState(false);
     const itemsPerPage = 3;
+
+    useEffect(() => {
+        setIsClient(true);
+        fetch("http://localhost:3000/api/gear")
+            .then((res) => res.json())
+            .then((data) => setGearData(data))
+            .catch((error) => console.error("Error fetching gear data:", error));
+    }, []);
+
     const totalPages = Math.ceil(gearData.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentGear = gearData.slice(indexOfFirstItem, indexOfLastItem);
 
-    // Chart data
     const chartData = gearData.map((gear) => ({
         name: gear.name,
-        wattage: gear.wattage,
+        wattage: gear.energyConsuption,
     }));
-
-    // Ensure the chart is only rendered on the client side
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
 
     return (
         <div className="flex flex-col items-center h-auto w-full">
-            {/* Gear Management Section */}
             <section className="flex flex-col w-[90%] mx-auto lg:w-[50%] mb-10 mt-10">
-                <div className="flex justify-left space-x-4 mb-10">
+                <div className="flex justify-left mb-10">
                     <Menubar>
                         <MenubarMenu>
-                            <MenubarTrigger className="text-primary">⌗ Menu</MenubarTrigger>
+                            <MenubarTrigger><IconUser /> Profile</MenubarTrigger>
                             <MenubarContent>
-                                <Link href="/Usage">
-                                    <MenubarItem>
-                                        Usage <MenubarShortcut>⌘T</MenubarShortcut>
-                                    </MenubarItem>
-                                </Link>
-                                <MenubarSeparator />
                                 <Link href="/Setting">
                                     <MenubarItem>
-                                        Setting <MenubarShortcut>⌘L</MenubarShortcut>
+                                        Settings <MenubarShortcut>⌘L</MenubarShortcut>
                                     </MenubarItem>
                                 </Link>
                                 <MenubarSeparator />
-                                <Link href="/auth">
+                                <Link href="/">
                                     <MenubarItem>
-                                        Logout <MenubarShortcut>⌘H</MenubarShortcut>
+                                        <Button variant={"destructive"}>Logout</Button>
                                     </MenubarItem>
                                 </Link>
                             </MenubarContent>
                         </MenubarMenu>
                     </Menubar>
                 </div>
-
-                {/* Chart component can be added here */}
+                
                 <div className="flex justify-between items-center mb-5">
-                    <h2 className="text-xl font-semibold">Energy Consuption</h2>
-                </div>
-
-                {/* Chart Section */}
-                {isClient && ( // Render the chart only on the client side
-                    <Card className="flex flex-col space-y-4 mb-10 pt-4 pb-4">
-                        <LineChart
-                            width={500}
-                            height={300}
-                            data={chartData}
-                            margin={{
-                                top: 20,
-                                right: 0,
-                                left: 0,
-                                bottom: 20,
-                            }}
-                        >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Line
-                                type="monotone"
-                                dataKey="wattage"
-                                stroke="#00BFA6"
-                                activeDot={{ r: 8 }}
-                            />
-                        </LineChart>
-                    </Card>
-                )}
-
-                {/* Gear List Section */}
-                <div className="flex justify-between items-center mb-0">
-                    <h2 className="text-xl font-semibold">Gear List</h2>
-                    <Button asChild className="flex items-center space-x-1">
-                        <Link href="/gear/gear-add">
-                            <span>Add New Gear</span>
-                        </Link>
+                    <h2 className="text-xl font-semibold">Energy Consumption</h2>
+                    <Button variant={"outline"} asChild>
+                        <Link href="/Usage">Usage</Link>
                     </Button>
                 </div>
-
+                
+                {isClient && (
+                    <Card className="mb-10 pt-4 pb-4">
+                        <ResponsiveContainer width="100%" aspect={10.5}>
+                            <LineChart height={350} width={350} data={chartData} margin={{ left: 12, right: 12 }}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Line type="monotone" dataKey="wattage" stroke="#00BFA6" activeDot={{ r: 8 }} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </Card>
+                )}
+                
+                <div className="flex justify-between items-center mb-0">
+                    <h2 className="text-xl font-semibold">Gear List</h2>
+                    <Button variant={"outline"} asChild>
+                        <Link href="/gear/gear-add">Add New Gear</Link>
+                    </Button>
+                </div>
+                
                 <div className="flex flex-col space-y-4 mt-5">
-                    {currentGear.map((gear, index) => (
-                        <Card key={index} className="flex flex-col items-start">
+                    {currentGear.map((gear) => (
+                        <Card key={gear.id} className="flex flex-col items-start">
                             <CardHeader>
                                 <h2 className="text-xl font-semibold">{gear.name}</h2>
                             </CardHeader>
                             <div className="w-full">
-                                <Image
-                                    src="/drone.webp"
-                                    alt={gear.name}
-                                    width={1080}
-                                    height={768}
-                                    className="cursor-pointer w-full h-auto"
-                                />
+                                <Image src="/drone.webp" alt={gear.name} width={1080} height={768} className="cursor-pointer w-full h-auto" />
                             </div>
                             <CardContent className="mt-5">
                                 <p>{gear.description}</p>
-                                <Link key={gear.id} href={`/gear/${gear.id}`} className="mt-10">
-                                    <Badge variant="default" className="mt-5">
-                                        {gear.status}
-                                    </Badge>
+                                <Link href={`/gear/${gear.id}`} className="mt-10">
+                                    <Badge variant="default" className="mt-5">{gear.status}</Badge>
                                 </Link>
                             </CardContent>
                         </Card>
                     ))}
                 </div>
-
-                {/* Pagination */}
+                
                 <Pagination className="mt-5 justify-start">
                     <PaginationContent>
-                        {currentPage > 1 && (
-                            <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />
-                        )}
-
+                        {currentPage > 1 && <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />}
                         {Array.from({ length: totalPages }, (_, index) => (
                             <PaginationItem key={index}>
-                                <PaginationLink
-                                    isActive={index + 1 === currentPage}
-                                    onClick={() => setCurrentPage(index + 1)}
-                                >
+                                <PaginationLink isActive={index + 1 === currentPage} onClick={() => setCurrentPage(index + 1)}>
                                     {index + 1}
                                 </PaginationLink>
                             </PaginationItem>
                         ))}
-
-                        {currentPage < totalPages && (
-                            <PaginationNext onClick={() => setCurrentPage(currentPage + 1)} />
-                        )}
+                        {currentPage < totalPages && <PaginationNext onClick={() => setCurrentPage(currentPage + 1)} />}
                     </PaginationContent>
                 </Pagination>
             </section>

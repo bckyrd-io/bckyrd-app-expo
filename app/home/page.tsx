@@ -27,12 +27,20 @@ import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveCont
 import { IconUser } from "@tabler/icons-react";
 
 const HomePage = () => {
+
+    // Define a function or object to map status to colors
+    const statusColors = {
+        Running: "bg-yellow-500",   // Green for running
+        Available: "bg-green-500",     // Blue for ready
+        stopped: "bg-danger-500",   // Gray for stopped or inactive, as an example
+    };
+
     type Gear = {
         id: number;
         name: string;
         energyConsuption: number;
         description: string;
-        status: string;
+        status: "Running" | "Available" | "stopped";
     }
 
     const [gearData, setGearData] = useState<Gear[]>([]);
@@ -61,10 +69,15 @@ const HomePage = () => {
     return (
         <div className="flex flex-col items-center h-auto w-full">
             <section className="flex flex-col w-[90%] mx-auto lg:w-[50%] mb-10 mt-10">
-                <div className="flex justify-left mb-10">
+                <div className="flex items-center space-x-2 mb-10">
                     <Menubar>
                         <MenubarMenu>
-                            <MenubarTrigger><IconUser /> Profile</MenubarTrigger>
+                            <MenubarTrigger className="flex items-center space-x-2">
+                                {/* Avatar Image from GitHub */}
+                                <img src="https://github.com/shadcn.png" alt="Profile Avatar" className="w-8 h-8 rounded-full" />
+                                {/* Profile Name */}
+                                <span className="font-semibold">My Profile</span>
+                            </MenubarTrigger>
                             <MenubarContent>
                                 <Link href="/Setting">
                                     <MenubarItem>
@@ -81,14 +94,14 @@ const HomePage = () => {
                         </MenubarMenu>
                     </Menubar>
                 </div>
-                
+
                 <div className="flex justify-between items-center mb-5">
                     <h2 className="text-xl font-semibold">Energy Consumption</h2>
                     <Button variant={"outline"} asChild>
                         <Link href="/Usage">Usage</Link>
                     </Button>
                 </div>
-                
+
                 {isClient && (
                     <Card className="mb-10 pt-4 pb-4">
                         <ResponsiveContainer width="100%" aspect={10.5}>
@@ -103,14 +116,14 @@ const HomePage = () => {
                         </ResponsiveContainer>
                     </Card>
                 )}
-                
+
                 <div className="flex justify-between items-center mb-0">
                     <h2 className="text-xl font-semibold">Gear List</h2>
                     <Button variant={"outline"} asChild>
                         <Link href="/gear/gear-add">Add New Gear</Link>
                     </Button>
                 </div>
-                
+
                 <div className="flex flex-col space-y-4 mt-5">
                     {currentGear.map((gear) => (
                         <Card key={gear.id} className="flex flex-col items-start">
@@ -123,13 +136,17 @@ const HomePage = () => {
                             <CardContent className="mt-5">
                                 <p>{gear.description}</p>
                                 <Link href={`/gear/${gear.id}`} className="mt-10">
-                                    <Badge variant="default" className="mt-5">{gear.status}</Badge>
+                                    {/* Use the dynamic class name based on gear.status */}
+                                    <Badge className={`${statusColors[gear.status]} text-white mt-5`}>
+                                        {gear.status}
+                                    </Badge>
                                 </Link>
+
                             </CardContent>
                         </Card>
                     ))}
                 </div>
-                
+
                 <Pagination className="mt-5 justify-start">
                     <PaginationContent>
                         {currentPage > 1 && <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />}

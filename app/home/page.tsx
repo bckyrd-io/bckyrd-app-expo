@@ -14,17 +14,19 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
-import {
-    Menubar,
-    MenubarContent,
-    MenubarItem,
-    MenubarMenu,
-    MenubarSeparator,
-    MenubarShortcut,
-    MenubarTrigger,
-} from "@/components/ui/menubar";
+
 import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Line } from "recharts";
-import { IconUser } from "@tabler/icons-react";
+
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { User, Settings, LogOut } from "lucide-react";
+
 
 const HomePage = () => {
 
@@ -68,31 +70,57 @@ const HomePage = () => {
 
     return (
         <div className="flex flex-col items-center h-auto w-full">
-            <section className="flex flex-col w-[90%] mx-auto lg:w-[50%] mb-10 mt-10">
-                <div className="flex items-center space-x-2 mb-10">
-                    <Menubar>
-                        <MenubarMenu>
-                            <MenubarTrigger className="flex items-center space-x-2">
-                                {/* Avatar Image from GitHub */}
-                                <img src="https://github.com/shadcn.png" alt="Profile Avatar" className="w-8 h-8 rounded-full" />
-                                {/* Profile Name */}
-                                <span className="font-semibold">My Profile</span>
-                            </MenubarTrigger>
-                            <MenubarContent>
-                                <Link href="/Setting">
-                                    <MenubarItem>
-                                        Settings <MenubarShortcut>⌘L</MenubarShortcut>
-                                    </MenubarItem>
-                                </Link>
-                                <MenubarSeparator />
-                                <Link href="/">
-                                    <MenubarItem>
-                                        <Button variant={"destructive"}>Logout</Button>
-                                    </MenubarItem>
-                                </Link>
-                            </MenubarContent>
-                        </MenubarMenu>
-                    </Menubar>
+            <section className="flex flex-col w-[90%] mx-auto lg:w-[50%] mb-10 mt-5">
+                <div className="flex items-center mb-10">
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <div className="flex items-center rounded-lg cursor-pointer transition-colors">
+                                <Image
+                                    src="/photo.jpg"
+                                    alt="Profile Avatar"
+                                    width={32}
+                                    height={32}
+                                    className="w-8 h-8 rounded-full"
+                                />
+                                <div className="flex flex-col items-start p-2">
+                                    <span className="font-semibold text-sm">John Doe</span>
+                                    <span className="text-xs text-gray-500">View Profile</span>
+                                </div>
+                            </div>
+                        </DropdownMenuTrigger>
+
+                        <DropdownMenuContent className="w-48" align="start">
+                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+
+                            <Link href="/profile">
+                                <DropdownMenuItem className="cursor-pointer">
+                                    <User className="mr-2 h-4 w-4" />
+                                    Profile
+                                </DropdownMenuItem>
+                            </Link>
+
+                            <Link href="/settings">
+                                <DropdownMenuItem className="cursor-pointer">
+                                    <Settings className="mr-2 h-4 w-4" />
+                                    Settings
+                                </DropdownMenuItem>
+                            </Link>
+
+                            <DropdownMenuSeparator />
+
+                            <DropdownMenuItem
+                                className="cursor-pointer text-red-600 focus:text-red-700"
+                                onClick={() => {
+                                    /* Add logout logic */
+                                    window.location.href = "/";
+                                }}
+                            >
+                                <LogOut className="mr-2 h-4 w-4" />
+                                Logout
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </div>
 
                 <div className="flex justify-between items-center mb-5">

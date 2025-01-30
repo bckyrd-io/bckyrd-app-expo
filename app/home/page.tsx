@@ -52,7 +52,7 @@ const HomePage = () => {
 
     useEffect(() => {
         setIsClient(true);
-        fetch("http://localhost:3000/api/gear")
+        fetch("/api/gear")
             .then((res) => res.json())
             .then((data) => setGearData(data))
             .catch((error) => console.error("Error fetching gear data:", error));

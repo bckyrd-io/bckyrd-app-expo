@@ -15,7 +15,7 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination";
 
-import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Line } from "recharts";
+import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Line, LabelList } from "recharts";
 
 import {
     DropdownMenu,
@@ -135,11 +135,20 @@ const HomePage = () => {
                         <ResponsiveContainer width="100%" aspect={10.5}>
                             <LineChart height={350} width={350} data={chartData} margin={{ left: 12, right: 12 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="name" />
-                                <YAxis />
+                                <XAxis/>
+                                <YAxis dataKey="wattage"/>
                                 <Tooltip />
                                 <Legend />
-                                <Line type="monotone" dataKey="wattage" stroke="#00BFA6" activeDot={{ r: 8 }} />
+                                <Line type="monotone" dataKey="wattage" stroke="#00BFA6" activeDot={{ r: 8 }} >
+                                    <LabelList
+                                        position="top"
+                                        offset={12}
+                                        className="fill-foreground"
+                                        fontSize={14}
+                                        dataKey="name"
+                                        formatter={(value: any) => value}
+                                    />
+                                </Line>
                             </LineChart>
                         </ResponsiveContainer>
                     </Card>

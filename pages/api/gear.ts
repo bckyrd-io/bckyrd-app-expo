@@ -6,19 +6,19 @@ import { eq } from "drizzle-orm";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === "GET") {
         try {
-            // Query gear data with the associated usage (status, energy consumption)
+            // QUERY GEAR DATA WITH USAGE , ENERGY CONSUPTION)
             const data = await db
-            .select({
-              id: gear.id,
-              title: gear.title ,
-              description: gear.description,
-              image: gear.image,
-              content: gear.content,
-              status: usage.status,
-              energyConsumption: usage.energyConsumption
-            })
-            .from(gear)
-            .leftJoin(usage, eq(usage.gearId, gear.id));
+                .select({
+                    id: gear.id,
+                    title: gear.title,
+                    description: gear.description,
+                    image: gear.image,
+                    content: gear.content,
+                    status: usage.status,
+                    energyConsumption: usage.energyConsumption
+                })
+                .from(gear)
+                .leftJoin(usage, eq(usage.gearId, gear.id));
 
             // Map the data to match the expected format for your frontend
             const gearData = data.map((item) => ({
@@ -38,4 +38,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.setHeader("Allow", ["GET"]);
         res.status(405).end(`Method ${req.method} Not Allowed`);
     }
+
+    //Post
 }

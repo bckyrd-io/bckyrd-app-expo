@@ -146,7 +146,7 @@ const HomePage = () => {
                                         className="fill-foreground"
                                         fontSize={14}
                                         dataKey="name"
-                                        formatter={(value: any) => value}
+                                        formatter={(value: string) => value}
                                     />
                                 </Line>
                             </LineChart>

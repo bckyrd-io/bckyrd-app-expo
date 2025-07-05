@@ -70,7 +70,7 @@ const HomePage = () => {
 
     return (
         <div className="flex flex-col items-center h-auto w-full">
-            <section className="flex flex-col w-[90%] mx-auto lg:w-[50%] mb-10 mt-5">
+            <section className="flex flex-col w-[90%] mx-auto mb-10 mt-5">
                 <div className="flex items-center mb-10">
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>

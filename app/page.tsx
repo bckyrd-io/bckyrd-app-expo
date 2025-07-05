@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconSun, IconMoon, IconShoppingBag } from "@tabler/icons-react";
+import { IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconBrandInstagram } from "@tabler/icons-react";
 import { Input } from "@/components/ui/input";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Badge } from "@/components/ui/badge";
@@ -40,7 +40,7 @@ const updatesData = [
 ];
 
 export default function Home() {
-    const { theme, toggleTheme } = useContext(ThemeContext); // Use the global theme context
+    const { theme: _theme, toggleTheme: _toggleTheme } = useContext(ThemeContext); // Use the global theme context
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
@@ -59,26 +59,20 @@ export default function Home() {
 
     return (
         <>
-            <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
+            <section className="flex flex-col mb-60 w-[90%] mx-auto">
                 <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5">
-                    Unlock Your Potential With Backyard IO
+                    Energy Interface For Machines Augmentation And Leverage
+                  
                 </h1>
-                <p>We’re building the energy strip for electronics enthusiasts and streamers like you. And you Focus on staying live—building the future.</p>
+                <p>Reimagining how streamers setup gear—augmented into your streaming workflow—interfaces with energy to give you more control and leverage. We&apos;re building a smart energy-strip-like device—think Stream Deck, but for energy..</p>
                 <div className="flex items-center space-x-4 mt-5">
                     <Link href="/auth">
-                        <Button variant="default">⌗ Get Started</Button>
+                        <Button variant="default">🌀 Get Started</Button>
                     </Link>
                     <Button variant="outline" onClick={handleScrollToSection}>
-                        Learn More
+                        ✨ Learn More
                     </Button>
-                    {/* Theme Toggle Button */}
-                    <Button
-                        onClick={toggleTheme}
-                        variant="outline"
-                        className="p-3"
-                    >
-                        {theme === "dark" ? <IconSun size={16} /> : <IconMoon size={16} />}
-                    </Button>
+
                 </div>
             </section>
 
@@ -86,22 +80,18 @@ export default function Home() {
             <section className="flex flex-col w-full mb-60">
                 <div className="relative">
                     <Image src="/Studio.jpg" alt="Studio" width={1920} height={1080} className="object-cover w-full h-[50vh] lg:h-[100vh]" priority />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <button className="flex bg-black text-white p-4 rounded-full">
-                            Pre Order Now<IconShoppingBag className="ml-2" />
-                        </button>
-                    </div>
+
                 </div>
-                <p className="pt-10 w-[90%] mx-auto lg:w-[50%] text-2xl" id="learn">
-                    &rdquo; We’re just like you—electronics enthusiasts who geek out over gadgets and setups. On mission To give you the power hack you need to focus on what really matters. Let’s supercharge your setup and make your energy problem a thing of the past &rdquo;
+                <p className="pt-10 w-[90%] mx-auto text-2xl" id="learn">
+                    &rdquo; We&apos;re just like you—electronics enthusiasts who geek out over gadgets and setups. On mission To give you the power hack you need to focus on what really matters. Let&apos;s supercharge your setup and make your energy problem a thing of the past &rdquo;
                 </p>
             </section>
 
             {/* Updates Section */}
-            <section className="flex flex-col mb-60 w-[90%] mx-auto lg:w-[50%]">
+            <section className="flex flex-col mb-60 w-[90%] mx-auto">
                 <Input
                     type="text"
-                    placeholder="Search for updates..."
+                    placeholder="🔍 Search for updates..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="mb-4"
@@ -145,15 +135,17 @@ export default function Home() {
             </section>
 
             {/* Social Media Section */}
-            <section className="flex flex-col items-start mb-10 w-[90%] mx-auto lg:w-[50%]">
+            <section className="flex flex-col items-start mb-10 w-[90%] mx-auto">
                 <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify">
-                    Greater Stream of Energy
+                    Leverage Stream of Energy
                 </h1>
-                <p className="mb-5">We’re all about building the future, and we’d love for you to be part of it. Hit us up on these platforms:</p>
+                <p className="mb-5">We&apos;re all about building the future, and we&apos;d love for you to be part of it. Hit us up on these platforms:</p>
                 <div className="flex space-x-4">
                     <Link href="https://www.youtube.com/" className="text-primary"><IconBrandYoutube /></Link>
                     <Link href="https://www.tiktok.com/" className="text-primary"><IconBrandTiktok /></Link>
                     <Link href="https://www.twitch.tv/" className="text-primary"><IconBrandTwitch /></Link>
+                    <Link href="https://www.kick.com/" className="text-primary"><IconBrandTwitch /></Link>
+                    <Link href="https://www.instagram.com/" className="text-primary"><IconBrandInstagram /></Link>
                 </div>
             </section>
         </>

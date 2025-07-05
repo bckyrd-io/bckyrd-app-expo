@@ -52,7 +52,7 @@ const UsagePage = () => {
         <div className="flex flex-col items-center h-auto w-full">
 
             {/* Gear Management Section */}
-            <section className="flex flex-col w-[90%] mx-auto lg:w-[50%] mb-10 mt-10">
+            <section className="flex flex-col w-[90%] mx-auto mb-10 mt-10">
                 <div className="flex justify-left space-x-4 mb-10">
 
                     <Link href="/home">

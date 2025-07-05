@@ -10,7 +10,7 @@ import { IconChevronLeft } from "@tabler/icons-react";
 const SettingPage = () => {
 
     return (
-        <section className="flex flex-col items-center justify-center h-screen w-[90%] mx-auto lg:w-[50%]">
+        <section className="flex flex-col items-center justify-center h-screen w-[90%] mx-auto">
             <div className="flex justify-left space-x-4 mb-10 w-full max-w-md">
                 <Link href="/home">
                     <Button variant="ghost" className="text-primary">

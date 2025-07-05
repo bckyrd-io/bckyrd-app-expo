@@ -15,7 +15,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Backyard iO ⌗ Potential Energy To Build the Future",
+    title: "Backyard i/o 🌀 Potential Energy To Build the Future ✨",
     description: "Electronics Enthusiast Leverage Next Industrial Revolution, For Your Setup To Build ",
 };
 

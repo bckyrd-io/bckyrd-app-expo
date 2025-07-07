@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconBrandInstagram } from "@tabler/icons-react";
+import { IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconBrandInstagram, IconBrandKick } from "@tabler/icons-react";
 import { Input } from "@/components/ui/input";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Badge } from "@/components/ui/badge";
@@ -66,7 +66,7 @@ export default function Home() {
                 </h1>
                 <p>Reimagining how streamers setup gear—augmented into your streaming workflow—interfaces with energy to give you more control and leverage. We&apos;re building a smart energy-strip-like device—think Stream Deck, but for energy..</p>
                 <div className="flex items-center space-x-4 mt-5">
-                    <Link href="/auth">
+                    <Link href="/auth" className="text-black">
                         <Button variant="default">🌀 Get Started</Button>
                     </Link>
                     <Button variant="outline" onClick={handleScrollToSection}>
@@ -144,7 +144,7 @@ export default function Home() {
                     <Link href="https://www.youtube.com/" className="text-primary"><IconBrandYoutube /></Link>
                     <Link href="https://www.tiktok.com/" className="text-primary"><IconBrandTiktok /></Link>
                     <Link href="https://www.twitch.tv/" className="text-primary"><IconBrandTwitch /></Link>
-                    <Link href="https://www.kick.com/" className="text-primary"><IconBrandTwitch /></Link>
+                    <Link href="https://www.kick.com/" className="text-primary"><IconBrandKick /></Link>
                     <Link href="https://www.instagram.com/" className="text-primary"><IconBrandInstagram /></Link>
                 </div>
             </section>

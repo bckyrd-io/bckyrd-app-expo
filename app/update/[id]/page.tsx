@@ -90,7 +90,7 @@ export default function UpdatePage({ params }: { params: Promise<{ id: string }>
     }
 
     return (
-        <section className="p-6 max-w-4xl mx-auto mb-10">
+        <section className="w-[90%] mx-auto mb-10">
             <Button
                 className="mt-5 mb-5 text-primary"
                 variant="outline"

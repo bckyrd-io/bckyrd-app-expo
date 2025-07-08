@@ -3,6 +3,7 @@
 import { useContext, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconBrandInstagram } from "@tabler/icons-react";
@@ -14,26 +15,26 @@ import { ThemeContext } from "./ThemeProvider"; // Import the ThemeContext
 const updatesData = [
     {
         id: "1",
-        title: "Smart Power Strip",
-        description: "A next-gen power strip designed for creators. Monitor energy usage, control devices remotely, and optimize your setup with ease.",
+        title: "Smart Energy Interface Hardware",
+        description: "Pre-order our flagship energy coordination device. Built for streamers, designed for the AI-augmented future. Partner with us to optimize your entire setup.",
         image: "/photo.jpg"
     },
     {
         id: "2",
-        title: "Energy Monitoring",
-        description: "Track how much energy your devices use in real-time. Get insights to save power and reduce costs.",
+        title: "Partner Gear Integration",
+        description: "Curated streaming gear that works seamlessly with our energy interface. From cameras to lighting—everything optimized for performance.",
         image: "/photo.jpg"
     },
     {
         id: "3",
-        title: "Portable Power",
-        description: "Take your setup anywhere with our portable power solutions. Perfect for streamers on the go.",
+        title: "Hardtech Development",
+        description: "Behind the scenes of building next-gen energy interfacing hardware. Follow our journey from prototype to production.",
         image: "/photo.jpg"
     },
     {
         id: "4",
-        title: "Community Feedback",
-        description: "Your ideas shape what we build. Join our community and help us create the ultimate energy tools for creators.",
+        title: "Electronics Enthusiast Community",
+        description: "Join fellow electronics enthusiasts building the future. Share setups, discuss optimization, and shape our roadmap together.",
         image: "/photo.jpg"
     },
     // Add more updates as needed
@@ -43,11 +44,31 @@ export default function Home() {
     const { theme: _theme, toggleTheme: _toggleTheme } = useContext(ThemeContext); // Use the global theme context
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
+    const [showSearch, setShowSearch] = useState(false);
     const itemsPerPage = 3;
 
     const handleScrollToSection = () => {
         const element = document.getElementById("learn");
         if (element) element.scrollIntoView({ behavior: "smooth" });
+    };
+
+    const handleSearchToggle = () => {
+        setShowSearch(!showSearch);
+        if (!showSearch) {
+            setTimeout(() => {
+                const searchInput = document.getElementById("search-input");
+                if (searchInput) searchInput.focus();
+            }, 100);
+        }
+    };
+
+    const handleShopClick = () => {
+        // Navigate to shop page
+        window.location.href = "/shop";
+    };
+
+    const handleDocsClick = () => {
+        window.open("https://github.com/bckyrd-io", "_blank");
     };
 
     const filteredUpdates = updatesData.filter((update) =>
@@ -60,49 +81,141 @@ export default function Home() {
     return (
         <>
             <section className="flex flex-col mb-60 w-[90%] mx-auto">
-                <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5">
+                <motion.h1
+                    className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5"
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                >
                     Energy Interface For Machines Augmentation And Leverage
-                </h1>
-                <p>Reimagining how streamers setup gear—augmented into your streaming workflow—interfaces with energy to give you more control and leverage. We&apos;re building a smart energy-strip-like device—think Stream Deck, but for energy...</p>
-                <div className="flex items-center space-x-4 mt-5">
+                </motion.h1>
+                <motion.p
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                    Reimagining how streamers setup gear—augmented into your streaming workflow—interfaces with energy to give you more control and leverage. We're building a smart energy-strip-like device—think Stream Deck, but for energy...
+                </motion.p>
+                <motion.div
+                    className="flex items-center space-x-4 mt-5"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                >
                     <Link href="/auth" className="text-black">
                         <Button variant="default">🌀Get Started</Button>
                     </Link>
-                    <Button variant="outline" onClick={handleScrollToSection}>🎨</Button>
-                </div>
+                    <Button variant="outline" onClick={_toggleTheme}>🎨</Button>
+                </motion.div>
             </section>
 
-            {/* Video Section */}
-            <section className="flex flex-col w-full mb-60">
-                <div className="relative">
-                    <Image src="/Studio.jpg" alt="Studio" width={1920} height={1080} className="object-cover w-full h-[50vh] lg:h-[100vh]" priority />
+            {/* Morphing Studio Section */}
+            <section className="flex flex-col mb-60">
+                <div className="relative overflow-hidden flex justify-center">
+                    {/* Studio Image Container */}
+                    <motion.div
+                        className="relative h-[100vh] overflow-hidden"
+                        initial={{
+                            width: "90%",
+                            borderRadius: "0.5rem"
+                        }}
+                        whileInView={{
+                            width: "100vw",
+                            borderRadius: "0rem"
+                        }}
+                        transition={{ duration: 1.5, ease: "easeInOut" }}
+                        viewport={{ amount: 0.5, once: false, margin: "0px 0px -50% 0px" }}
+                        style={{ transformOrigin: "center" }}
+                    >
+                        <Image
+                            src="/Studio.jpg"
+                            alt="Studio"
+                            width={1920}
+                            height={1080}
+                            className="object-cover w-full h-full"
+                            priority
+                        />
+
+                        {/* Circuit Board Overlay */}
+                        <motion.div
+                            className="absolute inset-0"
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
+                            viewport={{ amount: 0.5, once: false, margin: "0px 0px -50% 0px" }}
+                        >
+                            <div className="w-full h-full bg-black/20">
+                                <Image
+                                    src="/circuit.webp" // Replace with your circuit board image path
+                                    alt="Circuit Board Overlay"
+                                    width={1920}
+                                    height={1080}
+                                    className="object-cover w-full h-full opacity-90 mix-blend-multiply"
+                                />
+                            </div>
+                        </motion.div>
+                    </motion.div>
                 </div>
-                <p className="pt-10 w-[90%] mx-auto text-2xl" id="learn">
-                    &rdquo; We&apos;re just like you—electronics enthusiasts who geek out over gadgets and setups. On mission To give you the power hack you need to focus on what really matters. Let&apos;s supercharge your setup and make your energy problem a thing of the past &rdquo;
-                </p>
+
+                {/* Text stays at 90% width */}
+                <div className="w-[90%] mx-auto">
+                    <motion.p
+                        className="pt-10 text-2xl"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.6 }}
+                        viewport={{ amount: 0.3 }}
+                    >
+                        &rdquo; Backyard I/O represents the space of highest potential—where enthusiasts leverages next industrial revolution to build the future. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next-level energy interfacing. &rdquo;
+                    </motion.p>
+                </div>
             </section>
 
             {/* Updates Section */}
-            <section className="flex flex-col mb-60 w-[90%] mx-auto">
-                <div className="flex space-x-4">
-                    <Button variant="secondary" onClick={handleScrollToSection}>
-                        🧺Shop
-                    </Button>
-                    <Button variant="secondary" onClick={handleScrollToSection}>
-                        👨‍💻Docs
-                    </Button>
-                    <Button variant="secondary" onClick={handleScrollToSection}>
-                        🔍
-                    </Button>
-                    <Input
-                        type="text"
-                        placeholder="🔍"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-[4%] hidden"
-                    />
-                </div>
+            <motion.section
+                className="flex flex-col mb-60 w-[90%] mx-auto"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+            >
+                {!showSearch ? (
+                    <div className="flex space-x-4">
+                        <Button variant="secondary" onClick={handleSearchToggle}>
+                            <span className="text-primary">🔍Search</span>
+                        </Button>
+                        <Button variant="secondary" onClick={handleScrollToSection}>
+                            <span className="text-primary">✨Learn More</span>
+                        </Button>
+                        <Button variant="secondary" onClick={handleShopClick}>
+                            <span className="text-primary">🎁Gear Store</span>
+                        </Button>
 
+                    </div>
+                ) : (
+                    <div className="flex items-center space-x-2 w-full">
+                        <Input
+                            id="search-input"
+                            type="text"
+                            placeholder="Search our products and updates..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="flex-1"
+                            onKeyPress={(e) => {
+                                if (e.key === 'Enter') {
+                                    // Handle search submission here
+                                    console.log('Search submitted:', searchTerm);
+                                }
+                            }}
+                        />
+                        <Button
+                            variant="outline"
+                            onClick={handleSearchToggle}
+                            className="px-3"
+                        >
+                            ❌
+                        </Button>
+                    </div>
+                )}
 
                 {currentUpdates.map((update) => (
                     <Link key={update.id} href={`/update/${update.id}`} className="mt-10">
@@ -139,14 +252,14 @@ export default function Home() {
                         )}
                     </PaginationContent>
                 </Pagination>
-            </section>
+            </motion.section>
 
             {/* Social Media Section */}
-            <section className="flex flex-col items-start mb-10 w-[90%] mx-auto">
+            <section className="flex flex-col items-start mb-10 w-[90%] mx-auto" id="learn">
                 <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify">
-                    Leverage Stream Of Energy
+                    Join the Energy Revolution
                 </h1>
-                <p className="mb-5">We&apos;re all about building the future, and we&apos;d love for you to be part of it. Hit us up on these platforms:</p>
+                <p className="mb-5" >Don&apos;t just stream—dominate. Our energy interfacing technology gives you the competitive edge that top streamers demand. From automatic lighting coordination to AI-powered performance optimization, we&apos;re building the infrastructure that will define the next generation of content creation.</p>
                 <div className="flex space-x-4">
                     <Link href="https://www.youtube.com/" className="text-primary"><IconBrandYoutube /></Link>
                     <Link href="https://www.tiktok.com/" className="text-primary"><IconBrandTiktok /></Link>

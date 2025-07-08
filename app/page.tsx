@@ -3,7 +3,7 @@
 import { useContext, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconBrandInstagram } from "@tabler/icons-react";
@@ -67,7 +67,7 @@ export default function Home() {
         window.location.href = "/shop";
     };
 
-    const handleDocsClick = () => {
+    const _handleDocsClick = () => {
         window.open("https://github.com/bckyrd-io", "_blank");
     };
 
@@ -94,7 +94,7 @@ export default function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                    Reimagining how streamers setup gear—augmented into your streaming workflow—interfaces with energy to give you more control and leverage. We're building a smart energy-strip-like device—think Stream Deck, but for energy...
+                    Reimagining how streamers setup gear—augmented into your streaming workflow—interfaces with energy to give you more control and leverage. We&apos;re building a smart energy-strip-like device—think Stream Deck, but for energy...
                 </motion.p>
                 <motion.div
                     className="flex items-center space-x-4 mt-5"

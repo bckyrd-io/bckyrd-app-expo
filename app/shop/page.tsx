@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import Image from "next/image";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { IconChevronLeft } from "@tabler/icons-react";
 
 const partnerGear = [
     {
@@ -75,31 +73,28 @@ const categories = ["All", "Controllers", "Cameras", "Lighting", "Audio"];
 
 export default function Shop() {
     const [selectedCategory, setSelectedCategory] = useState("All");
-    const router = useRouter();
 
     const filteredGear = partnerGear.filter(gear => {
         return selectedCategory === "All" || gear.category === selectedCategory;
     });
 
     return (
-        <>
-
+        <div className="min-h-screen bg-background">
             {/* Hero Section */}
             <section className="flex flex-col mb-60 w-[90%] mx-auto">
                 <Button
                     className="mt-5 mb-5 w-fit text-sm text-primary"
                     variant="outline"
-                    onClick={() => router.push("/")}
+                    onClick={() => window.history.back()}
                 >
-                    <IconChevronLeft size={18} />
-                    Back
+                    ← Back
                 </Button>
                 <h1 className="text-3xl font-bold">
                     Energy Interface Compatible Gear
                 </h1>
                 <p className="mb-5">Curated streaming equipment designed to work seamlessly with our energy interface system. Every product is tested and optimized for peak performance.</p>
 
-                <div className="flex flex-wrap gap-4 mb-8">
+                <div className="flex flex-wrap gap-4 ">
                     {categories.map((category) => (
                         <Button
                             key={category}
@@ -112,50 +107,65 @@ export default function Shop() {
                 </div>
             </section>
 
-            {/* Products Grid */}
-            <section className="flex flex-col mb-60 w-[90%] mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Products List - Horizontal Card Layout */}
+            <section className="flex flex-col mb-12 w-[90%] mx-auto">
+                <div className="flex flex-col gap-10">
                     {filteredGear.map((gear) => (
-                        <Card key={gear.id} className="overflow-hidden">
-                            <div className="relative h-48 bg-muted">
-                                <Image
-                                    src={gear.image}
-                                    alt={gear.name}
-                                    fill
-                                    className="object-cover"
-                                />
-                                <Badge
-                                    variant={gear.compatibility === "Full Integration" ? "default" : "secondary"}
-                                    className="absolute top-2 right-2"
-                                >
-                                    {gear.compatibility}
-                                </Badge>
-                            </div>
-                            <CardHeader>
-                                <div className="flex justify-between items-start">
-                                    <div>
-                                        <h3 className="font-semibold text-lg">{gear.name}</h3>
-                                        <p className="text-sm text-muted-foreground">{gear.partner}</p>
+                        <Card key={gear.id} className="w-full overflow-hidden hover:shadow-lg transition-shadow ">
+                            <div className="flex min-h-80">
+                                {/* Product Image - Square */}
+                                <div className="relative w-80 h-80 bg-muted flex-shrink-0">
+                                    <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                                        <Image
+                                            src="/circuit.webp" // Replace with your circuit board image path
+                                            alt="Circuit Board Overlay"
+                                            width={1920}
+                                            height={1080}
+                                            className="object-cover w-full h-full"
+                                        />
                                     </div>
-                                    <span className="text-xl font-bold text-primary">{gear.price}</span>
                                 </div>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-sm text-muted-foreground mb-4">{gear.description}</p>
-                                <div className="flex justify-between items-center">
-                                    <Badge variant="outline">{gear.category}</Badge>
-                                    <Button
-                                        variant="outline"
-                                        onClick={() => window.open(`https://amazon.com/s?k=${encodeURIComponent(gear.name)}`, '_blank')}
-                                    >
-                                        View on Amazon
-                                    </Button>
+
+                                {/* Product Details - Vertical Layout */}
+                                <div className="flex-1 flex flex-col p-6 justify-between">
+                                    {/* Top Section - Title, Partner, Price */}
+                                    <div className="flex-1">
+                                        <h3 className="font-semibold text-xl mb-2 leading-tight">{gear.name}</h3>
+                                        <p className="text-sm text-muted-foreground mb-3">by {gear.partner}</p>
+                                        <div className="text-2xl font-bold text-primary mb-4">{gear.price}</div>
+                                        {/* Description */}
+                                        <p className="text-sm text-muted-foreground leading-relaxed mb-4">{gear.description}</p>
+                                    </div>
+
+                                    {/* Bottom Section - Badges and Buttons Stacked */}
+                                    <div className="flex flex-col gap-4">
+                                        {/* Badges Row */}
+                                        <div className="flex items-center gap-2">
+                                            <Badge
+                                                variant={gear.compatibility === "Full Integration" ? "default" : "secondary"}
+                                                className="text-xs"
+                                            >
+                                                {gear.compatibility}
+                                            </Badge>
+                                        </div>
+
+                                        {/* Buttons Row */}
+                                        <div className="flex gap-3">
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => window.open(`https://amazon.com/s?k=${encodeURIComponent(gear.name)}`, '_blank')}
+                                            >
+                                                View on Amazon
+                                            </Button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </CardContent>
+                            </div>
                         </Card>
                     ))}
                 </div>
             </section>
-        </>
+        </div>
     );
-} 
+}

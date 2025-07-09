@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconBrandInstagram } from "@tabler/icons-react";
 import { Input } from "@/components/ui/input";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
@@ -103,7 +103,7 @@ export default function Home() {
                     transition={{ duration: 0.8, delay: 0.4 }}
                 >
                     <Link href="/auth" className="text-black">
-                        <Button variant="default">🌀Get Started</Button>
+                        <Button variant="default">🌀 Get Started</Button>
                     </Link>
                     <Button variant="outline" onClick={_toggleTheme}>🎨</Button>
                 </motion.div>
@@ -150,7 +150,7 @@ export default function Home() {
                                     alt="Circuit Board Overlay"
                                     width={1920}
                                     height={1080}
-                                    className="object-cover w-full h-full opacity-90 mix-blend-multiply"
+                                    className="object-cover w-full h-full opacity-100"
                                 />
                             </div>
                         </motion.div>
@@ -166,7 +166,8 @@ export default function Home() {
                         transition={{ duration: 0.8, delay: 0.6 }}
                         viewport={{ amount: 0.3 }}
                     >
-                        &rdquo; Backyard I/O represents the space of highest potential—where enthusiasts leverages next industrial revolution to build the future. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next-level energy interfacing. &rdquo;
+                        &rdquo; Backyard I/O represents the space of highest potential—where enthusiasts leverages next industrial revolution to build the future. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next-level energy interfacing.
+                        <Link href="#learn" className="text-primary">👇Learn more</Link> &rdquo;
                     </motion.p>
                 </div>
             </section>
@@ -181,13 +182,10 @@ export default function Home() {
                 {!showSearch ? (
                     <div className="flex space-x-4">
                         <Button variant="secondary" onClick={handleSearchToggle}>
-                            <span className="text-primary">🔍Search</span>
-                        </Button>
-                        <Button variant="secondary" onClick={handleScrollToSection}>
-                            <span className="text-primary">✨Learn More</span>
+                            <span className="text-primary">🔍 Search</span>
                         </Button>
                         <Button variant="secondary" onClick={handleShopClick}>
-                            <span className="text-primary">🎁Gear Store</span>
+                            <span className="text-primary">🎁 Gear Store</span>
                         </Button>
 
                     </div>
@@ -218,15 +216,28 @@ export default function Home() {
                 )}
 
                 {currentUpdates.map((update) => (
-                    <Link key={update.id} href={`/update/${update.id}`} className="mt-10">
-                        <Card className="flex flex-col items-start">
-                            <CardHeader>
-                                <h2 className="font-bold">{update.title}</h2>
-                            </CardHeader>
-                            <CardContent className="mt-5">
-                                <p>{update.description}</p>
-                                <Badge variant="default" className="mt-5"></Badge>
-                            </CardContent>
+                    <Link key={update.id} href={`/update/${update.id}`} className="mt-12">
+                        <Card className="flex flex-row items-center overflow-hidden">
+                            {/* Image on the left */}
+                            <div className="relative w-80 h-80 bg-muted flex-shrink-0">
+                                <Image
+                                    src="/circuit.webp" // Replace with your circuit board image path
+                                    alt="Circuit Board Overlay"
+                                    width={1920}
+                                    height={1080}
+                                    className="object-cover w-full h-full"
+                                />
+                            </div>
+
+                            {/* Content on the right */}
+                            <div className="flex-1 flex flex-col p-6 ">
+                                <div className="flex-1 ">
+                                    <p className="font-bold mb-3">{update.title}</p>
+                                    <p className="mb-4">{update.description}</p>
+                                    <Badge variant="default" className=""></Badge>
+                                </div>
+                            </div>
+
                         </Card>
                     </Link>
                 ))}
@@ -252,12 +263,12 @@ export default function Home() {
                         )}
                     </PaginationContent>
                 </Pagination>
-            </motion.section>
+            </motion.section >
 
             {/* Social Media Section */}
-            <section className="flex flex-col items-start mb-10 w-[90%] mx-auto" id="learn">
-                <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5 leading-tight tracking-tight text-justify">
-                    Join the Energy Revolution
+            < section className="flex flex-col items-start mb-10 w-[90%] mx-auto" id="learn" >
+                <h1 className="text-4xl font-bold">
+                    Partner With Us To Build For You
                 </h1>
                 <p className="mb-5" >Don&apos;t just stream—dominate. Our energy interfacing technology gives you the competitive edge that top streamers demand. From automatic lighting coordination to AI-powered performance optimization, we&apos;re building the infrastructure that will define the next generation of content creation.</p>
                 <div className="flex space-x-4">
@@ -266,7 +277,7 @@ export default function Home() {
                     <Link href="https://www.twitch.tv/" className="text-primary"><IconBrandTwitch /></Link>
                     <Link href="https://www.instagram.com/" className="text-primary"><IconBrandInstagram /></Link>
                 </div>
-            </section>
+            </section >
         </>
     );
 }

@@ -47,10 +47,6 @@ export default function Home() {
     const [showSearch, setShowSearch] = useState(false);
     const itemsPerPage = 3;
 
-    const handleScrollToSection = () => {
-        const element = document.getElementById("learn");
-        if (element) element.scrollIntoView({ behavior: "smooth" });
-    };
 
     const handleSearchToggle = () => {
         setShowSearch(!showSearch);

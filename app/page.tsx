@@ -6,7 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconBrandInstagram } from "@tabler/icons-react";
+import { IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconBrandInstagram, IconBrandKick } from "@tabler/icons-react";
 import { Input } from "@/components/ui/input";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Badge } from "@/components/ui/badge";
@@ -217,24 +217,24 @@ export default function Home() {
 
                 {currentUpdates.map((update) => (
                     <Link key={update.id} href={`/update/${update.id}`} className="mt-12">
-                        <Card className="flex flex-row items-center overflow-hidden">
-                            {/* Image on the left */}
-                            <div className="relative w-80 h-80 bg-muted flex-shrink-0">
+                        <Card className="flex flex-col md:flex-row items-center overflow-hidden">
+                            {/* Image - responsive sizing */}
+                            <div className="relative w-full md:w-80 h-64 md:h-80 bg-muted flex-shrink-0">
                                 <Image
-                                    src="/circuit.webp" // Replace with your circuit board image path
-                                    alt="Circuit Board Overlay"
+                                    src={update.image}
+                                    alt={update.title}
                                     width={1920}
                                     height={1080}
                                     className="object-cover w-full h-full"
                                 />
                             </div>
 
-                            {/* Content on the right */}
-                            <div className="flex-1 flex flex-col p-6 ">
-                                <div className="flex-1 ">
-                                    <p className="font-bold mb-3">{update.title}</p>
-                                    <p className="mb-4">{update.description}</p>
-                                    <Badge variant="default" className=""></Badge>
+                            {/* Content - responsive layout */}
+                            <div className="flex-1 flex flex-col p-6">
+                                <div className="flex-1">
+                                    <p className="font-bold mb-3 text-lg md:text-xl">{update.title}</p>
+                                    <p className="mb-4 text-sm md:text-base">{update.description}</p>
+                                    <Badge variant="default" className="w-fit"></Badge>
                                 </div>
                             </div>
 
@@ -272,10 +272,11 @@ export default function Home() {
                 </h1>
                 <p className="mb-5" >Don&apos;t just stream—dominate. Our energy interfacing technology gives you the competitive edge that top streamers demand. From automatic lighting coordination to AI-powered performance optimization, we&apos;re building the infrastructure that will define the next generation of content creation.</p>
                 <div className="flex space-x-4">
-                    <Link href="https://www.youtube.com/" className="text-primary"><IconBrandYoutube /></Link>
-                    <Link href="https://www.tiktok.com/" className="text-primary"><IconBrandTiktok /></Link>
-                    <Link href="https://www.twitch.tv/" className="text-primary"><IconBrandTwitch /></Link>
-                    <Link href="https://www.instagram.com/" className="text-primary"><IconBrandInstagram /></Link>
+                    <Link href="https://www.youtube.com/bckyrd-io" className="text-primary"><IconBrandYoutube /></Link>
+                    <Link href="https://www.tiktok.com/bckyrd-io" className="text-primary"><IconBrandTiktok /></Link>
+                    <Link href="https://www.twitch.tv/backyard_io" className="text-primary"><IconBrandTwitch /></Link>
+                    <Link href="https://www.instagram.com/bckyrd.io" className="text-primary"><IconBrandInstagram /></Link>
+                    <Link href="https://www.kick.com/backyard_io" className="text-primary"><IconBrandKick /></Link>
                 </div>
             </section >
         </>

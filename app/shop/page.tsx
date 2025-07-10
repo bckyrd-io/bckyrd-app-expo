@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { IconChevronLeft } from "@tabler/icons-react";
 
 const partnerGear = [
     {
@@ -87,7 +88,8 @@ export default function Shop() {
                     variant="outline"
                     onClick={() => window.history.back()}
                 >
-                    ← Back
+                    <IconChevronLeft size={18} />
+                    Back
                 </Button>
                 <h1 className="text-3xl font-bold">
                     Energy Interface Compatible Gear
@@ -107,18 +109,18 @@ export default function Shop() {
                 </div>
             </section>
 
-            {/* Products List - Horizontal Card Layout */}
+            {/* Products List - Responsive Card Layout */}
             <section className="flex flex-col mb-12 w-[90%] mx-auto">
                 <div className="flex flex-col gap-10">
                     {filteredGear.map((gear) => (
-                        <Card key={gear.id} className="w-full overflow-hidden hover:shadow-lg transition-shadow ">
-                            <div className="flex min-h-80">
-                                {/* Product Image - Square */}
-                                <div className="relative w-80 h-80 bg-muted flex-shrink-0">
+                        <Card key={gear.id} className="w-full overflow-hidden hover:shadow-lg transition-shadow">
+                            <div className="flex flex-col md:flex-row min-h-80">
+                                {/* Product Image - Responsive */}
+                                <div className="relative w-full md:w-80 h-64 md:h-80 bg-muted flex-shrink-0">
                                     <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
                                         <Image
-                                            src="/circuit.webp" // Replace with your circuit board image path
-                                            alt="Circuit Board Overlay"
+                                            src={gear.image}
+                                            alt={gear.name}
                                             width={1920}
                                             height={1080}
                                             className="object-cover w-full h-full"
@@ -126,13 +128,13 @@ export default function Shop() {
                                     </div>
                                 </div>
 
-                                {/* Product Details - Vertical Layout */}
+                                {/* Product Details - Responsive Layout */}
                                 <div className="flex-1 flex flex-col p-6 justify-between">
                                     {/* Top Section - Title, Partner, Price */}
                                     <div className="flex-1">
-                                        <h3 className="font-semibold text-xl mb-2 leading-tight">{gear.name}</h3>
+                                        <h3 className="font-semibold text-lg md:text-xl mb-2 leading-tight">{gear.name}</h3>
                                         <p className="text-sm text-muted-foreground mb-3">by {gear.partner}</p>
-                                        <div className="text-2xl font-bold text-primary mb-4">{gear.price}</div>
+                                        <div className="text-xl md:text-2xl font-bold text-primary mb-4">{gear.price}</div>
                                         {/* Description */}
                                         <p className="text-sm text-muted-foreground leading-relaxed mb-4">{gear.description}</p>
                                     </div>
@@ -149,11 +151,12 @@ export default function Shop() {
                                             </Badge>
                                         </div>
 
-                                        {/* Buttons Row */}
-                                        <div className="flex gap-3">
+                                        {/* Buttons Row - Responsive */}
+                                        <div className="flex flex-col sm:flex-row gap-3">
                                             <Button
                                                 variant="outline"
                                                 size="sm"
+                                                className="w-full sm:w-auto"
                                                 onClick={() => window.open(`https://amazon.com/s?k=${encodeURIComponent(gear.name)}`, '_blank')}
                                             >
                                                 View on Amazon

@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '@/components/ui/card';
-import { ChevronLeft } from 'lucide-react';
+import { Card, CardHeader, CardContent, CardDescription } from '@/components/ui/card';
+import { AppHeader } from '@/components/app-header';
 
 // Define types to match the home page
 type EnergyMode = "Eco" | "Balanced" | "Performance";
@@ -71,18 +70,12 @@ const ManageGearPage = () => {
     }
 
     return (
-        <section className="flex flex-col items-center justify-center min-h-screen w-[90%] mx-auto py-8">
-            <div className="flex justify-start w-full max-w-md mb-6">
-                <Button variant="ghost" asChild>
-                    <Link href="/home" className="flex items-center text-muted-foreground">
-                        <ChevronLeft className="h-4 w-4 mr-1" />
-                        Back
-                    </Link>
-                </Button>
-            </div>
-            <Card className="w-full max-w-md shadow-sm">
+        <div className="min-h-screen flex flex-col bg-background text-foreground">
+            <AppHeader title={`Edit ${gear.name}`} showBack={true} backHref="/home" maxWidth="md" />
+            <main className="flex-grow flex items-center justify-center">
+                <div className="w-full max-w-md px-4">
+                    <Card className="w-full shadow-sm">
                 <CardHeader>
-                    <CardTitle className="text-2xl font-bold text-center">Manage {gear.name}</CardTitle>
                     <CardDescription className="text-center pt-1">Edit the details for your equipment.</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -104,10 +97,13 @@ const ManageGearPage = () => {
                             <Input id="description" value={gear.description} onChange={(e) => setGear({ ...gear, description: e.target.value })} />
                         </div>
                         <Button type="submit" className="w-full mt-6">Save Changes</Button>
+                        <Button type="submit" variant={"destructive"} className="w-full mt-6">Delete</Button>
                     </form>
                 </CardContent>
-            </Card>
-        </section>
+                    </Card>
+                </div>
+            </main>
+        </div>
     );
 };
 

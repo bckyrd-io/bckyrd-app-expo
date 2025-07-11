@@ -6,8 +6,12 @@ import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuLabel } from "@/components/ui/dropdown-menu";
 import { User } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { IconSettings, IconUser, IconLogout } from '@tabler/icons-react';
+import { AppHeader } from '@/components/app-header';
+
+
 
 // Define types for better safety and clarity
 type EnergyMode = "Eco" | "Balanced" | "Performance";
@@ -71,34 +75,49 @@ const HomePage = () => {
 
     return (
         <div className="min-h-screen bg-background text-foreground">
-            <header className="w-full">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <AppHeader 
+                title="Home" 
+                maxWidth="7xl"
+                leftContent={
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <div className="flex items-center gap-4 cursor-pointer hover:bg-accent/10 p-2 rounded-md transition-colors">
-                                <Button variant="ghost" size="icon" className="h-10 w-10">
-                                    <User className="h-5 w-5" />
-                                </Button>
-                                <div className="flex flex-col">
-                                    <h1 className="text-2xl sm:text-3xl font-bold">Profile</h1>
-                                    <p className="text-sm sm:text-base text-muted-foreground">team.</p>
-                                </div>
-                            </div>
+                            <Button variant="ghost" size="icon" className="h-10 w-10 -ml-2">
+                                <User className="h-5 w-5 text-primary" />
+                            </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="start" className="w-48">
-                            <Link href="/profile"><DropdownMenuItem>Account</DropdownMenuItem></Link>
+                        <DropdownMenuContent className="w-56" align="start" forceMount>
+                            <DropdownMenuLabel className="font-normal">
+                                <div className="flex flex-col space-y-1">
+                                    <p className="text-sm font-medium leading-none">Username</p>
+                                    <p className="text-xs leading-none text-muted-foreground">
+                                        user@example.com
+                                    </p>
+                                </div>
+                            </DropdownMenuLabel>
                             <DropdownMenuSeparator />
-                            <Link href="/setting"><DropdownMenuItem>Settings</DropdownMenuItem></Link>
+                            <Link href="/profile">
+                                <DropdownMenuItem>
+                                    <IconUser className="mr-2 h-4 w-4" />
+                                    <span>Profile</span>
+                                </DropdownMenuItem>
+                            </Link>
+                            <Link href="/setting">
+                                <DropdownMenuItem>
+                                    <IconSettings className="mr-2 h-4 w-4" />
+                                    <span>Settings</span>
+                                </DropdownMenuItem>
+                            </Link>
                             <DropdownMenuSeparator />
                             <Link href="/auth">
                                 <DropdownMenuItem className="text-red-500 focus:text-red-500 focus:bg-red-50 dark:focus:bg-red-900/50">
-                                Logout
-                            </DropdownMenuItem>
+                                    <IconLogout className="mr-2 h-4 w-4" />
+                                    <span>Log out</span>
+                                </DropdownMenuItem>
                             </Link>
                         </DropdownMenuContent>
                     </DropdownMenu>
-                </div>
-            </header>
+                }
+            />
 
             <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {/* Energy Mode Selection Cards */}
@@ -166,7 +185,7 @@ const HomePage = () => {
                                                     {gear.status === "Running" ? "Power Off" : "Power On"}
                                                 </Button>
                                                 <Button size="sm" variant="outline" asChild>
-                                                    <Link href={`/gear/${gear.id}`}>Manage</Link>
+                                                    <Link href={`/gear/${gear.id}`}>Edit</Link>
                                                 </Button>
                                             </div>
                                         </div>

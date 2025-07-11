@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { IconChevronLeft } from "@tabler/icons-react";
+import { AppHeader } from "@/components/app-header";
 
 const partnerGear = [
     {
@@ -80,23 +80,13 @@ export default function Shop() {
     });
 
     return (
-        <div className="min-h-screen bg-background">
-            {/* Hero Section */}
-            <section className="flex flex-col mb-60 w-[90%] mx-auto">
-                <Button
-                    className="mt-5 mb-5 w-fit text-sm text-primary"
-                    variant="outline"
-                    onClick={() => window.history.back()}
-                >
-                    <IconChevronLeft size={18} />
-                    Back
-                </Button>
-                <h1 className="text-3xl font-bold">
-                    Energy Interface Compatible Gear
-                </h1>
-                <p className="mb-5">Curated streaming equipment designed to work seamlessly with our energy interface system. Every product is tested and optimized for peak performance.</p>
-
-                <div className="flex flex-wrap gap-4 ">
+        <div className="min-h-screen bg-background text-foreground">
+            <AppHeader title="Partner Gear" showBack={true} backHref="/home" maxWidth="7xl" />
+            <div className="w-full max-w-7xl mx-auto px-4 py-8">
+                <div className="mb-8">
+                    <p className="text-muted-foreground">Discover energy-optimized equipment from our partners</p>
+                </div>
+                <div className="flex flex-wrap gap-4 mb-12">
                     {categories.map((category) => (
                         <Button
                             key={category}
@@ -107,68 +97,49 @@ export default function Shop() {
                         </Button>
                     ))}
                 </div>
-            </section>
-
-            {/* Products List - Responsive Card Layout */}
-            <section className="flex flex-col mb-12 w-[90%] mx-auto">
-                <div className="flex flex-col gap-10">
+                <div className="flex flex-col gap-12">
                     {filteredGear.map((gear) => (
-                        <Card key={gear.id} className="w-full overflow-hidden hover:shadow-lg transition-shadow">
-                            <div className="flex flex-col md:flex-row min-h-80">
-                                {/* Product Image - Responsive */}
-                                <div className="relative w-full md:w-80 h-64 md:h-80 bg-muted flex-shrink-0">
-                                    <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
-                                        <Image
-                                            src={gear.image}
-                                            alt={gear.name}
-                                            width={1920}
-                                            height={1080}
-                                            className="object-cover w-full h-full"
-                                        />
-                                    </div>
-                                </div>
+                        <Card key={gear.id} className="flex flex-col md:flex-row items-center overflow-hidden">
+                            {/* Image - responsive sizing */}
+                            <div className="relative w-full md:w-80 h-64 md:h-80 bg-muted flex-shrink-0">
+                                <Image
+                                    src={gear.image}
+                                    alt={gear.name}
+                                    width={1920}
+                                    height={1080}
+                                    className="object-cover w-full h-full"
+                                />
+                            </div>
+                            <div className="flex-1 flex flex-col p-8">
+                                <div className="flex-1">
 
-                                {/* Product Details - Responsive Layout */}
-                                <div className="flex-1 flex flex-col p-6 justify-between">
-                                    {/* Top Section - Title, Partner, Price */}
-                                    <div className="flex-1">
-                                        <h3 className="font-semibold text-lg md:text-xl mb-2 leading-tight">{gear.name}</h3>
-                                        <p className="text-sm text-muted-foreground mb-3">by {gear.partner}</p>
-                                        <div className="text-xl md:text-2xl font-bold text-primary mb-4">{gear.price}</div>
-                                        {/* Description */}
-                                        <p className="text-sm text-muted-foreground leading-relaxed mb-4">{gear.description}</p>
+                                    <h3 className="text-xl font-bold mb-2">{gear.name}</h3>
+                                    <p className="text-sm text-muted-foreground mb-4">by {gear.partner}</p>
+                                    <p className="text-muted-foreground text-sm mb-6">{gear.description}</p>
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <Badge
+                                            variant={gear.compatibility === "Full Integration" ? "default" : "secondary"}
+                                            className="text-xs"
+                                        >
+                                            {gear.compatibility}
+                                        </Badge>
                                     </div>
-
-                                    {/* Bottom Section - Badges and Buttons Stacked */}
-                                    <div className="flex flex-col gap-4">
-                                        {/* Badges Row */}
-                                        <div className="flex items-center gap-2">
-                                            <Badge
-                                                variant={gear.compatibility === "Full Integration" ? "default" : "secondary"}
-                                                className="text-xs"
-                                            >
-                                                {gear.compatibility}
-                                            </Badge>
-                                        </div>
-
-                                        {/* Buttons Row - Responsive */}
-                                        <div className="flex flex-col sm:flex-row gap-3">
-                                            <Button
-                                                variant="outline"
-                                                size="sm"
-                                                className="w-full sm:w-auto"
-                                                onClick={() => window.open(`https://amazon.com/s?k=${encodeURIComponent(gear.name)}`, '_blank')}
-                                            >
-                                                View on Amazon
-                                            </Button>
-                                        </div>
-                                    </div>
+                                    <p className="mb-4"><span className="text-lg font-bold ">{gear.price}</span></p>
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => window.open(`https://amazon.com/s?k=${encodeURIComponent(gear.name)}`, '_blank')}
+                                        className="whitespace-nowrap"
+                                    >
+                                        View on Amazon
+                                    </Button>
                                 </div>
                             </div>
+
                         </Card>
                     ))}
                 </div>
-            </section>
-        </div>
+            </div>
+        </div >
     );
 }

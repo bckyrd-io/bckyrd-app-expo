@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from 'react';
-import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ChevronLeft } from "lucide-react";
+import { AppHeader } from "@/components/app-header";
 
 const AddGearPage = () => {
     const router = useRouter();
@@ -24,16 +23,11 @@ const AddGearPage = () => {
     };
 
         return (
-        <section className="flex flex-col items-center justify-center min-h-screen w-[90%] mx-auto py-8">
-            <div className="flex justify-start w-full max-w-md mb-6">
-                <Button variant="ghost" asChild>
-                    <Link href="/home" className="flex items-center text-muted-foreground">
-                        <ChevronLeft className="h-4 w-4 mr-1" />
-                        Back
-                    </Link>
-                </Button>
-            </div>
-            <Card className="w-full max-w-md shadow-sm">
+        <div className="min-h-screen flex flex-col bg-background text-foreground">
+            <AppHeader title="Add New Gear" showBack={true} backHref="/gear" maxWidth="md" />
+            <main className="flex-grow flex items-center justify-center">
+                <div className="w-full max-w-md px-4">
+                    <Card className="w-full shadow-sm">
                 <CardHeader>
                     <CardTitle className="text-2xl font-bold text-center">Add New Gear</CardTitle>
                     <CardDescription className="text-center pt-1">Enter the details for your new equipment.</CardDescription>
@@ -59,8 +53,10 @@ const AddGearPage = () => {
                         <Button type="submit" className="w-full mt-6">Save Gear</Button>
                     </form>
                 </CardContent>
-            </Card>
-        </section>
+                    </Card>
+                </div>
+            </main>
+        </div>
     );
 };
 

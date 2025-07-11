@@ -86,6 +86,7 @@ export default function Home() {
                     Energy Interface For Machines Augmentation And Leverage
                 </motion.h1>
                 <motion.p
+                    className="mb-5"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
@@ -93,7 +94,7 @@ export default function Home() {
                     Reimagining how streamers setup gear—augmented into your streaming workflow—interfaces with energy to give you more control and leverage. We&apos;re building a smart energy-strip-like device—think Stream Deck, but for energy...
                 </motion.p>
                 <motion.div
-                    className="flex items-center space-x-4 mt-5"
+                    className="flex items-center space-x-4 py-4"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}

@@ -1,10 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
-
-import { IconChevronLeft } from "@tabler/icons-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { AppHeader } from "@/components/app-header";
 
 
 const usageData = [
@@ -49,41 +46,29 @@ const usageData = [
 const UsagePage = () => {
 
     return (
-        <div className="flex flex-col items-center h-auto w-full">
-
-            {/* Gear Management Section */}
-            <section className="flex flex-col w-[90%] mx-auto mb-10 mt-10">
-                <div className="flex justify-left space-x-4 mb-10">
-
-                    <Link href="/home">
-                        <Button variant="outline" className="text-primary">
-                            <IconChevronLeft size={18} /> Back
-                        </Button>
-                    </Link>
-
+        <div className="min-h-screen bg-background text-foreground">
+            <AppHeader title="Usage" showBack={true} backHref="/home" maxWidth="4xl" />
+            <div className="w-full max-w-4xl mx-auto px-4 py-8">
+                    <h2 className="text-xl font-semibold mb-6">Energy Usage</h2>
+                    <div className="space-y-4">
+                        {usageData.map((item, index) => (
+                            <Card key={index} className="w-full">
+                                <CardContent className="p-4">
+                                    <div className="flex justify-between items-start">
+                                        <div>
+                                            <h3 className="font-semibold">{item.name}</h3>
+                                            <p className="text-sm text-muted-foreground">{item.description}</p>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="text-sm font-medium">{item.energyConsumption}W</p>
+                                            <p className="text-xs text-muted-foreground">{item.status}</p>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        ))}
                 </div>
-              
-                <div className="flex justify-between items-center mb-12">
-                    <h2 className="text-xl font-semibold">Insights Notes</h2>
-                </div>
-
-                <div className="flex flex-col space-y-4 mb-12">
-                    {usageData.map((item, index) => (
-                        <Card key={index} className="flex flex-col items-start ">
-                            <CardHeader>
-                                <h2 className="text-xl font-semibold">{item.name}</h2>
-                            </CardHeader>
-                            <CardContent className="mt-5">
-                                <p>{item.description}</p>
-                            </CardContent>
-                        </Card>
-                    ))}
-                </div>
-
-
-            </section>
-
-
+            </div>
         </div>
     );
 };

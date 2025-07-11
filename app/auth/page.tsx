@@ -1,36 +1,32 @@
 "use client";
 
-import { Button } from "../../components/ui/button"; // Adjust the path as necessary
-import { Card, CardHeader, CardContent } from "../../components/ui/card";
-import { IconChevronLeft } from "@tabler/icons-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import Link from "next/link";
+import { AppHeader } from "@/components/app-header";
 
 const AuthPage = () => {
-
-
     return (
-        <section className="flex flex-col items-center justify-center h-screen w-[90%] mx-auto">
-            <div className="flex justify-left space-x-4 mb-10 w-full max-w-md">
-                <Link href="/">
-                    <Button variant="ghost" className="text-primary">
-                        <IconChevronLeft size={18} /> Back
-                    </Button>
-                </Link>
-            </div>
-            <Card className="w-full max-w-md p-0 shadow-sm">
-                <CardHeader>
-                    <h1 className="text-2xl font-bold text-center ">Welcome Back!</h1>
-                </CardHeader>
-                <CardContent className="text-center">
-                    <p className="mt-5 ">Be one of the first to leverage this platform</p>
-                    <Link href="/home">
-                        <Button className="mt-5 w-full flex items-center justify-center ">
-                            Sign In
-                        </Button>
-                    </Link>
-                </CardContent>
-            </Card>
-        </section>
+        <div className="min-h-screen flex flex-col bg-background text-foreground">
+            <AppHeader title="" showBack={true} backHref="/" maxWidth="sm" />
+            <main className="flex-grow flex items-center justify-center">
+                <div className="w-full max-w-sm px-4">
+                    <Card className="w-full">
+                    <CardHeader className="text-center">
+                        <h1 className="text-2xl font-bold">Welcome Back!</h1>
+                        <p className="text-muted-foreground">Be one of the first to leverage this platform</p>
+                    </CardHeader>
+                    <CardContent>
+                        <Link href="/home">
+                            <Button className="w-full">
+                                Sign In
+                            </Button>
+                        </Link>
+                    </CardContent>
+                    </Card>
+                </div>
+            </main>
+        </div>
     );
 };
 

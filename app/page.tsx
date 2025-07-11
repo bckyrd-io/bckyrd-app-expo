@@ -181,7 +181,7 @@ export default function Home() {
                             <span className="text-primary">🔍 Search</span>
                         </Button>
                         <Button variant="secondary" onClick={handleShopClick}>
-                            <span className="text-primary">🎁 Gear Store</span>
+                            <span className="text-primary">🎁 Shop Streamer Gear</span>
                         </Button>
 
                     </div>

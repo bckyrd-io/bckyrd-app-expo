@@ -63,11 +63,11 @@ const UsagePage = () => {
 
                 </div>
               
-                <div className="flex justify-between items-center mb-0">
+                <div className="flex justify-between items-center mb-12">
                     <h2 className="text-xl font-semibold">Insights Notes</h2>
                 </div>
 
-                <div className="flex flex-col space-y-4 mt-10">
+                <div className="flex flex-col space-y-4 mb-12">
                     {usageData.map((item, index) => (
                         <Card key={index} className="flex flex-col items-start ">
                             <CardHeader>

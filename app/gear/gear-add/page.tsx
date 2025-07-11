@@ -1,56 +1,66 @@
 "use client";
 
+import { useState } from 'react';
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { IconChevronLeft } from "@tabler/icons-react";
-
+import { ChevronLeft } from "lucide-react";
 
 const AddGearPage = () => {
+    const router = useRouter();
+    const [name, setName] = useState('');
+    const [category, setCategory] = useState('');
+    const [energyConsumption, setEnergyConsumption] = useState('');
+    const [description, setDescription] = useState('');
 
-    return (
-        <section className="flex flex-col items-center justify-center h-screen w-[90%] mx-auto">
-            <div className="flex justify-left space-x-4 mb-10 w-full max-w-md">
-                <Link href="/home">
-                    <Button variant="ghost" className="text-primary">
-                        <IconChevronLeft size={18} /> Back
-                    </Button>
-                </Link>
+    const handleSave = (e: React.FormEvent) => {
+        e.preventDefault();
+        const newGear = { name, category, energyConsumption, description };
+        console.log("New Gear Saved:", newGear);
+        // In a real app, you would send this to your API and update the global state
+        router.push('/home');
+    };
+
+        return (
+        <section className="flex flex-col items-center justify-center min-h-screen w-[90%] mx-auto py-8">
+            <div className="flex justify-start w-full max-w-md mb-6">
+                <Button variant="ghost" asChild>
+                    <Link href="/home" className="flex items-center text-muted-foreground">
+                        <ChevronLeft className="h-4 w-4 mr-1" />
+                        Back
+                    </Link>
+                </Button>
             </div>
-            <Card className="w-full max-w-md p-0 shadow-sm rounded-lg"> {/* Set background to white and border color */}
+            <Card className="w-full max-w-md shadow-sm">
                 <CardHeader>
-                    <h1 className="text-2xl font-bold text-center">Add New gear!</h1> {/* Set text color to black */}
+                    <CardTitle className="text-2xl font-bold text-center">Add New Gear</CardTitle>
+                    <CardDescription className="text-center pt-1">Enter the details for your new equipment.</CardDescription>
                 </CardHeader>
-                <CardContent className="w-full">
-                    <form action="flex w-full" >
-                        <Input
-                            type="text" // Explicitly set type as text
-                            placeholder="name..."
-                            width={"100%"}
-                            className="flex mb-5 w-full" // Adjust margin for better spacing
-                        />
-                        <Input
-                            type="text" // Explicitly set type as text
-                            placeholder="description..."
-                            width={"100%"}
-                            className="flex mb-5 w-full" // Adjust margin for better spacing
-                        />
-                        <Input
-                            type="file" // Explicitly set type as text
-                            width={"100%"}
-                            className="flex mb-5 w-full" // Adjust margin for better spacing
-                        />
+                <CardContent>
+                    <form onSubmit={handleSave} className="space-y-4">
+                        <div className="space-y-1">
+                            <p className="text-sm font-medium text-muted-foreground">Gear Name</p>
+                            <Input id="gear-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g., Brio 4K Webcam" required />
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-sm font-medium text-muted-foreground">Category</p>
+                            <Input id="category" value={category} onChange={(e) => setCategory(e.target.value)} placeholder="e.g., Camera" required />
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-sm font-medium text-muted-foreground">Energy Consumption (W)</p>
+                            <Input id="energy-consumption" type="number" value={energyConsumption} onChange={(e) => setEnergyConsumption(e.target.value)} placeholder="e.g., 8" required />
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-sm font-medium text-muted-foreground">Description</p>
+                            <Input id="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="A brief description of the gear." />
+                        </div>
+                        <Button type="submit" className="w-full mt-6">Save Gear</Button>
                     </form>
-                    <Button asChild className="flex space-x-1">
-                        <Link href="/add-gear">
-                            <span>continue</span>
-                        </Link>
-                    </Button>
                 </CardContent>
             </Card>
         </section>
-
     );
 };
 

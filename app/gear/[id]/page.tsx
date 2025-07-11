@@ -1,119 +1,114 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { IconChevronLeft } from "@tabler/icons-react";
+import { useState, useEffect } from 'react';
+import { useRouter, useParams } from 'next/navigation';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '@/components/ui/card';
+import { ChevronLeft } from 'lucide-react';
 
-const updatesData = [
-    {
-        id: "1",
-        title: "Drone",
-        description: "Explore the full details of the Backyard App and how it can revolutionize your tech setup.",
-        image: "/drone.webp",
-        content: [
-            "The Backyard App is designed for tech enthusiasts who want to optimize their productivity and streamline their workflows.",
-            "With intuitive features and a user-friendly interface, the Backyard App allows you to manage your tasks, organize your projects, and collaborate seamlessly.",
-            "Whether you're working solo or with a team, the Backyard App provides the tools you need to stay on top of your game.",
-        ],
-    },
-    {
-        id: "2",
-        title: "Energy Mod",
-        description: "Learn about our energy-efficient modifications and how they can save you money.",
-        image: "/drone.webp",
-        content: [
-            "Energy Mod focuses on providing sustainable solutions for your tech setup.",
-            "Our modifications reduce energy consumption without compromising performance.",
-            "Join the movement toward a greener, more sustainable future with Energy Mod.",
-        ],
-    },
-    {
-        id: "3",
-        title: "New Features Release",
-        description: "Get an in-depth look at the latest features we've introduced to enhance user experience.",
-        image: "/drone.webp",
-        content: [
-            "We are excited to unveil new features designed to make your experience smoother and more enjoyable.",
-            "From enhanced customization options to improved performance metrics, this update is packed with value.",
-            "Stay tuned as we continue to innovate and bring you more updates.",
-        ],
-    },
-    {
-        id: "4",
-        title: "Community Feedback",
-        description: "Discover how feedback from our community has shaped our latest updates.",
-        image: "/drone.webp",
-        content: [
-            "Our community is at the heart of everything we do.",
-            "We value your input and have used it to create updates that truly address your needs.",
-            "Thank you for being an integral part of our journey. Together, we're building something amazing.",
-        ],
-    },
+// Define types to match the home page
+type EnergyMode = "Eco" | "Balanced" | "Performance";
+
+interface Gear {
+    id: number;
+    name: string;
+    energyConsumption: number;
+    status: "Running" | "Available";
+    category: "Controller" | "Camera" | "Audio" | "Lighting";
+    image: string;
+    description: string;
+    modes: EnergyMode[];
+}
+
+// Mock Data - in a real app, this would come from a global state or API
+const mockGearData: Gear[] = [
+    { id: 1, name: "Stream Deck", energyConsumption: 5, status: "Running", category: "Controller", image: "/photo.jpg", description: "Customizable LCD keys for streaming.", modes: ["Eco", "Balanced", "Performance"] },
+    { id: 2, name: "Brio 4K Webcam", energyConsumption: 8, status: "Available", category: "Camera", image: "/photo.jpg", description: "Ultra HD 4K streaming webcam.", modes: ["Balanced", "Performance"] },
+    { id: 3, name: "Blue Yeti", energyConsumption: 2, status: "Running", category: "Audio", image: "/photo.jpg", description: "Professional USB microphone.", modes: ["Eco", "Balanced"] },
+    { id: 4, name: "LED Lights", energyConsumption: 15, status: "Running", category: "Lighting", image: "/photo.jpg", description: "Smart LED light bars for ambiance.", modes: ["Performance"] },
+    { id: 5, name: "GoXLR Mini", energyConsumption: 4, status: "Available", category: "Audio", image: "/photo.jpg", description: "Online broadcast mixer with USB.", modes: ["Balanced", "Performance"] },
 ];
 
-export default function UpdatePage({ params }: { params: Promise<{ id: string }> }) {
-    const [id, setId] = React.useState<string | null>(null);
+// Mock function to simulate fetching data
+const getGearById = async (id: number): Promise<Gear | undefined> => {
+    return mockGearData.find(gear => gear.id === id);
+};
+
+const ManageGearPage = () => {
     const router = useRouter();
+    const params = useParams();
+    const gearId = params?.id ? parseInt(params.id as string, 10) : null;
 
-    React.useEffect(() => {
-        async function fetchParams() {
-            const resolvedParams = await params;
-            setId(resolvedParams.id);
+    const [gear, setGear] = useState<Gear | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (gearId) {
+            getGearById(gearId).then(data => {
+                if (data) {
+                    setGear(data);
+                }
+                setLoading(false);
+            });
         }
-        fetchParams();
-    }, [params]);
+    }, [gearId]);
 
-    if (!id) {
-        return <p>Loading...</p>;
+    const handleUpdate = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log("Updated Gear:", gear);
+        // In a real app, you would send this to your API
+        router.push('/home');
+    };
+
+    if (loading) {
+        return <div className="flex justify-center items-center h-screen">Loading...</div>;
     }
 
-    const update = updatesData.find((u) => u.id === id);
-
-    if (!update) {
-        return (
-            <section className="p-6 max-w-4xl mx-auto mb-10">
-                <Button
-                    className="mt-5 mb-5 text-primary"
-                    variant="outline"
-                    onClick={() => router.push("/home")}
-                >
-                    <IconChevronLeft size={18} />
-                    Back
-                </Button>
-                <h1 className="text-3xl font-bold">Update Not Found</h1>
-                <p className="mt-4">The update you are looking for does not exist. Please check the URL or return to the home page.</p>
-
-            </section>
-        );
+    if (!gear) {
+        return <div className="flex justify-center items-center h-screen">Gear not found.</div>;
     }
 
     return (
-        <section className="p-6 max-w-4xl mx-auto mb-10">
-            <Button
-                className="mt-5 mb-5 text-primary"
-                variant="outline"
-                onClick={() => router.push("/home")}
-            >
-                <IconChevronLeft size={18} />
-                Back
-            </Button>
-            <h1 className="text-4xl font-bold mb-4">{update.description}</h1>
-            <div className="relative w-full h-auto mb-8">
-                <Image
-                    src={update.image}
-                    alt={update.title}
-                    width={1080} height={768} className="w-full h-auto object-cover rounded-md "
-                />
+        <section className="flex flex-col items-center justify-center min-h-screen w-[90%] mx-auto py-8">
+            <div className="flex justify-start w-full max-w-md mb-6">
+                <Button variant="ghost" asChild>
+                    <Link href="/home" className="flex items-center text-muted-foreground">
+                        <ChevronLeft className="h-4 w-4 mr-1" />
+                        Back
+                    </Link>
+                </Button>
             </div>
-            <div className="space-y-4">
-                {update.content.map((para, index) => (
-                    <p key={index}>
-                        {para}
-                    </p>
-                ))}
-            </div>
+            <Card className="w-full max-w-md shadow-sm">
+                <CardHeader>
+                    <CardTitle className="text-2xl font-bold text-center">Manage {gear.name}</CardTitle>
+                    <CardDescription className="text-center pt-1">Edit the details for your equipment.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <form onSubmit={handleUpdate} className="space-y-4">
+                        <div className="space-y-1">
+                            <p className="text-sm font-medium text-muted-foreground">Gear Name</p>
+                            <Input id="gear-name" value={gear.name} onChange={(e) => setGear({ ...gear, name: e.target.value })} required />
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-sm font-medium text-muted-foreground">Category</p>
+                            <Input id="category" value={gear.category} onChange={(e) => setGear({ ...gear, category: e.target.value as Gear['category'] })} required />
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-sm font-medium text-muted-foreground">Energy Consumption (W)</p>
+                            <Input id="energy-consumption" type="number" value={gear.energyConsumption} onChange={(e) => setGear({ ...gear, energyConsumption: parseInt(e.target.value, 10) })} required />
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-sm font--medium text-muted-foreground">Description</p>
+                            <Input id="description" value={gear.description} onChange={(e) => setGear({ ...gear, description: e.target.value })} />
+                        </div>
+                        <Button type="submit" className="w-full mt-6">Save Changes</Button>
+                    </form>
+                </CardContent>
+            </Card>
         </section>
     );
-}
+};
+
+export default ManageGearPage;

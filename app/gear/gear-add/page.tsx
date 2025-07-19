@@ -24,7 +24,7 @@ const AddGearPage = () => {
 
         return (
         <div className="min-h-screen flex flex-col bg-background text-foreground">
-            <AppHeader title="Add New Gear" showBack={true} backHref="/gear" maxWidth="md" />
+            <AppHeader title="Add New Gear" showBack={true} backHref="/home" maxWidth="md" />
             <main className="flex-grow flex items-center justify-center">
                 <div className="w-full max-w-md px-4">
                     <Card className="w-full shadow-sm">

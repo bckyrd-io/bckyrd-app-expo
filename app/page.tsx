@@ -76,14 +76,14 @@ export default function Home() {
 
     return (
         <>
-            <section className="flex flex-col mb-60 w-[90%] mx-auto">
+            <section className="flex flex-col mb-40 w-[90%] mx-auto">
                 <motion.h1
-                    className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold mt-10 mb-5"
+                    className="text-5xl sm:text-5xl md:text-6xl lg:text-8xl font-extrabold mt-10 mb-5"
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    Energy Interface For Machines Augmentation And Leverage
+                    Energy Interface For Streamers Workflow
                 </motion.h1>
                 <motion.p
                     className="mb-5"
@@ -91,7 +91,7 @@ export default function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                    Reimagining how streamers setup gear—augmented into your streaming workflow—interfaces with energy to give you more control and leverage. We&apos;re building a smart energy-strip-like device—think Stream Deck, but for energy...
+                    Reimagining how streamers setup gear—augmented in streaming workflow—interfaces with energy to give you more leverage. We&apos;re building a smart energy-strip-like device—think Stream Deck, but for energy...
                 </motion.p>
                 <motion.div
                     className="flex items-center space-x-4 py-4"
@@ -100,14 +100,14 @@ export default function Home() {
                     transition={{ duration: 0.8, delay: 0.4 }}
                 >
                     <Link href="/auth" className="text-black">
-                        <Button variant="default">🌀 Get Started</Button>
+                        <Button variant="default" className="text-black">Get Started</Button>
                     </Link>
                     <Button variant="outline" onClick={_toggleTheme}>🎨</Button>
                 </motion.div>
             </section>
 
             {/* Morphing Studio Section */}
-            <section className="flex flex-col mb-60">
+            <section className="flex flex-col mb-40">
                 <div className="relative overflow-hidden flex justify-center">
                     {/* Studio Image Container */}
                     <motion.div
@@ -163,15 +163,15 @@ export default function Home() {
                         transition={{ duration: 0.8, delay: 0.6 }}
                         viewport={{ amount: 0.3 }}
                     >
-                        &rdquo; Backyard I/O represents the space of highest potential—where enthusiasts leverages next industrial revolution to build the future. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next-level energy interfacing.
-                        <Link href="#learn" className="text-primary">👇Learn more</Link> &rdquo;
+                        &rdquo;  <Link href="#learn" className="text-primary">Backyard i/o</Link> represents interface to highest potential—which enthusiasts can leverage from next industrial revolutions in an age of augmented machines—to build the future. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next level energy interfacing.
+                        <Link href="#learn" className="text-primary">👇Lets Work</Link> &rdquo;
                     </motion.p>
                 </div>
             </section>
 
             {/* Updates Section */}
             <motion.section
-                className="flex flex-col mb-60 w-[90%] mx-auto"
+                className="flex flex-col mb-40 w-[90%] mx-auto"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
@@ -179,10 +179,10 @@ export default function Home() {
                 {!showSearch ? (
                     <div className="flex space-x-4">
                         <Button variant="secondary" onClick={handleSearchToggle}>
-                            <span className="text-primary">🔍 Search</span>
+                            <span className="text-primary">🔍 Feature Updates</span>
                         </Button>
                         <Button variant="secondary" onClick={handleShopClick}>
-                            <span className="text-primary">🎁 Shop Streamer Gear</span>
+                            <span className="text-primary">🎁 Streamers Gear</span>
                         </Button>
 
                     </div>
@@ -191,7 +191,7 @@ export default function Home() {
                         <Input
                             id="search-input"
                             type="text"
-                            placeholder="Search our products and updates..."
+                            placeholder="Search our products and feature updates..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className="flex-1"
@@ -265,9 +265,9 @@ export default function Home() {
             {/* Social Media Section */}
             < section className="flex flex-col items-start mb-10 w-[90%] mx-auto" id="learn" >
                 <h1 className="text-4xl font-bold">
-                    Partner With Us To Build For You
+                    Brand Partnership
                 </h1>
-                <p className="mb-5" >Don&apos;t just stream—dominate. Our energy interfacing technology gives you the competitive edge that top streamers demand. From automatic lighting coordination to AI-powered performance optimization, we&apos;re building the infrastructure that will define the next generation of content creation.</p>
+                <p className="mb-5" >From your desired streaming platform belowr—go ahead and leave a message. We will work together on sponsorship, collaboration ,gear intergration , something like that—Lets leave an impact on your brand </p>
                 <div className="flex space-x-4">
                     <Link href="https://www.youtube.com/bckyrd-io" className="text-primary"><IconBrandYoutube /></Link>
                     <Link href="https://www.tiktok.com/bckyrd-io" className="text-primary"><IconBrandTiktok /></Link>

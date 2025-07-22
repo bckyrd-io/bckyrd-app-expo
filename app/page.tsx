@@ -177,7 +177,7 @@ export default function Home() {
                 {/* Text stays at 90% width */}
                 <div className="w-[90%] mx-auto" id="more">
                     <motion.p
-                        className="pt-10 text-2xl"
+                        className="pt-20 text-2xl"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
@@ -186,7 +186,7 @@ export default function Home() {
                         &rdquo;  <Link href="#learn" className="text-primary">Backyard i/o</Link> represents interface to highest potential—which enthusiasts can leverage from next industrial revolutions in an age of augmented machines. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next level energy interfacing.
                         <Link href="#learn" className="text-primary"> 👇 Lets Work</Link> &rdquo;
                     </motion.p>
-                    <motion.p className="pt-10 text-2xl text-muted-foreground" initial={{ opacity: 0, y: 30 }}
+                    <motion.p className="pt-5 text-2xl text-muted-foreground" initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
                         viewport={{ amount: 0.3 }}>We build in public. Here’s our journey, one component at a time—real R&D, real hardware, real progress.</motion.p>
@@ -234,16 +234,16 @@ export default function Home() {
                 )}
 
                 {currentUpdates.map((update) => (
-                    <Link key={update.id} href={`/update/${update.id}`} className="mt-12" passHref legacyBehavior>
+                    <Link key={update.id} href={`/update/${update.id}`} passHref legacyBehavior>
                         <motion.a
                             initial={{ opacity: 0, y: 50 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.8 }}
-                            className="block mt-12"
+                            className="block mt-20"
                         >
                             <Card className="flex flex-col md:flex-row items-center overflow-hidden">
                                 {/* Image - responsive sizing */}
-                                <div className="relative w-full md:w-80 h-64 md:h-80 bg-muted flex-shrink-0">
+                                <div className="flex-1 relative w-full md:w-80 h-64 md:h-80 bg-muted flex-shrink-0">
                                     <Image
                                         src={update.image}
                                         alt={update.title}
@@ -254,9 +254,9 @@ export default function Home() {
                                 </div>
 
                                 {/* Content - responsive layout */}
-                                <div className="flex-1 flex flex-col p-6">
+                                <div className="flex-1 flex flex-col p-10">
                                     <div className="flex-1">
-                                        <p className="font-bold mb-3 text-lg md:text-xl">{update.title}</p>
+                                        <p className="font-bold mb-3">{update.title}</p>
                                         <p className="mb-4 text-sm md:text-base">{update.description}</p>
                                         <Badge variant="default" className="w-fit"></Badge>
                                     </div>
@@ -295,10 +295,10 @@ export default function Home() {
                 <p className="mb-5">
                     We’re open to hands-on partnerships, gear integrations, and R&D collaborations. If you’re a streamer, engineer, or tech brand who wants to push the boundaries of workflow and energy, let’s build the future together. Bring your project ideas—we’ll prototype, test, and iterate with you.
                 </p>
-                <p className="mb-5">
+                <p className="mb-10 text-muted-foreground">
                     Reach out via your preferred streaming or social platform below:
                 </p>
-                <div className="flex space-x-4">
+                <div className="flex space-x-10">
                     <Link href="https://www.youtube.com/bckyrd-io" className="text-primary"><IconBrandYoutube /></Link>
                     <Link href="https://www.tiktok.com/bckyrd-io" className="text-primary"><IconBrandTiktok /></Link>
                     <Link href="https://www.twitch.tv/backyard_io" className="text-primary"><IconBrandTwitch /></Link>

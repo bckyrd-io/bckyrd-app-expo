@@ -292,7 +292,7 @@ export default function Home() {
             {/* Brand Partnership Section (rewritten) */}
             <section className="flex flex-col items-start mb-10 w-[90%] mx-auto" id="learn">
                 <h1 className="text-3xl font-bold mb-2">Brand Partnerships</h1>
-                <p className="mb-5 w-[50%]">
+                <p className="mb-5 lg:w-[50%]">
                     We’re open to hands-on partnerships, gear integrations, and R&D collaborations. If you’re a streamer, engineer, or tech brand who wants to push the boundaries of workflow and energy, let’s build the future together. Bring your project ideas—we’ll prototype, test, and iterate with you.
                 </p>
                 <p className="mb-10 text-muted-foreground">

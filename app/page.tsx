@@ -14,30 +14,47 @@ import { ThemeContext } from "./ThemeProvider"; // Import the ThemeContext
 
 const updatesData = [
     {
+        id: "6",
+        title: "Modular hardware expansion",
+        description: "Developing a library of modular hardware components—each with its own PCB, firmware, and 3D-printed case. Designed for hacking, remixing, and scaling.",
+        image: "https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=800&q=80" // Array of PCBs, modular hardware
+    },
+    {
         id: "1",
-        title: "Smart Energy Interface Hardware",
-        description: "Pre-order our flagship energy coordination device. Built for streamers, designed for the AI-augmented future. Partner with us to optimize your entire setup.",
-        image: "/photo.jpg"
-    },
-    {
-        id: "2",
-        title: "Partner Gear Integration",
-        description: "Curated streaming gear that works seamlessly with our energy interface. From cameras to lighting—everything optimized for performance.",
-        image: "/photo.jpg"
-    },
-    {
-        id: "3",
-        title: "Hardtech Development",
-        description: "Behind the scenes of building next-gen energy interfacing hardware. Follow our journey from prototype to production.",
-        image: "/photo.jpg"
+        title: "ESP32 energy interface prototype",
+        description: "Our first working prototype: ESP32-based smart energy interface with power monitoring ICs, relays, and custom PCB. Real circuits, real control for real creators.",
+        image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" // ESP32, breadboard, wires
     },
     {
         id: "4",
-        title: "Electronics Enthusiast Community",
-        description: "Join fellow electronics enthusiasts building the future. Share setups, discuss optimization, and shape our roadmap together.",
-        image: "/photo.jpg"
+        title: "Studio gear integration",
+        description: "Direct integration of studio gear—cameras, RGB lighting, audio—wired into our energy interface. See the inside: relays, wiring, and real PCB traces.",
+        image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80" // Gear, RGB, camera, setup
     },
-    // Add more updates as needed
+    {
+        id: "2",
+        title: "Tech stack: ESP32, React Native, sensors",
+        description: "Our stack: ESP32 microcontrollers, React Native (Expo), Android native sensors, and a mobile-first approach. Designed for real-time control, hardware hacking, and seamless integration for creators.",
+        image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80" // Microcontroller, code, mobile
+    },
+    {
+        id: "3",
+        title: "Power management app demo",
+        description: "React Native app with live power graphs, device toggles, and direct hardware control. Built for tinkerers and streamers who want to see the data and the circuits.",
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80" // Technical UI with graphs, code, and hardware
+    },
+    {
+        id: "5",
+        title: "R&D: circuits, physics, 3D models",
+        description: "We share our process: circuit design, physics experiments, and 3D modeling. Real breadboards, oscilloscope traces, and 3D-printed enclosures.",
+        image: "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=800&q=80" // Flat lay: circuit, oscilloscope, hands-on
+    },
+    {
+        id: "7",
+        title: "Open source firmware & dev process",
+        description: "We open-sourced our firmware and dev process. See the code, the commits, and the hardware it runs on. Community-driven, transparent, and hackable.",
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80" // Code on screen, hardware visible
+    },
 ];
 
 export default function Home() {
@@ -45,7 +62,7 @@ export default function Home() {
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [showSearch, setShowSearch] = useState(false);
-    const itemsPerPage = 3;
+    const itemsPerPage = 4;
 
 
     const handleSearchToggle = () => {
@@ -102,7 +119,10 @@ export default function Home() {
                     <Link href="/auth" className="text-black">
                         <Button variant="default" className="text-black">Get Started</Button>
                     </Link>
-                    <Button variant="outline" onClick={_toggleTheme}>🎨</Button>
+                    <Link href="#more" className="">
+                        <Button variant="outline" className="text-primary">Learn More</Button>
+                    </Link>
+                   
                 </motion.div>
             </section>
 
@@ -155,7 +175,7 @@ export default function Home() {
                 </div>
 
                 {/* Text stays at 90% width */}
-                <div className="w-[90%] mx-auto">
+                <div className="w-[90%] mx-auto" id="more">
                     <motion.p
                         className="pt-10 text-2xl"
                         initial={{ opacity: 0, y: 30 }}
@@ -163,29 +183,30 @@ export default function Home() {
                         transition={{ duration: 0.8, delay: 0.6 }}
                         viewport={{ amount: 0.3 }}
                     >
-                        &rdquo;  <Link href="#learn" className="text-primary">Backyard i/o</Link> represents interface to highest potential—which enthusiasts can leverage from next industrial revolutions in an age of augmented machines—to build the future. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next level energy interfacing.
-                        <Link href="#learn" className="text-primary">👇Lets Work</Link> &rdquo;
+                        &rdquo;  <Link href="#learn" className="text-primary">Backyard i/o</Link> represents interface to highest potential—which enthusiasts can leverage from next industrial revolutions in an age of augmented machines. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next level energy interfacing.
+                        <Link href="#learn" className="text-primary"> 👇 Lets Work</Link> &rdquo;
                     </motion.p>
+                    <motion.p className="pt-10 text-2xl text-muted-foreground" initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.6 }}
+                        viewport={{ amount: 0.3 }}>We build in public. Here’s our journey, one component at a time—real R&D, real hardware, real progress.</motion.p>
                 </div>
             </section>
 
             {/* Updates Section */}
-            <motion.section
-                className="flex flex-col mb-40 w-[90%] mx-auto"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-            >
+            <section className="flex flex-col mb-40 w-[90%] mx-auto">
                 {!showSearch ? (
-                    <div className="flex space-x-4">
+                    <motion.div className="flex space-x-4" initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.8 }}>
                         <Button variant="secondary" onClick={handleSearchToggle}>
-                            <span className="text-primary">🔍 Feature Updates</span>
+                            <span className="">🔍 Feature Updates</span>
                         </Button>
                         <Button variant="secondary" onClick={handleShopClick}>
-                            <span className="text-primary">🎁 Streamers Gear</span>
+                            <span className="">✨ Streamers Gear</span>
                         </Button>
 
-                    </div>
+                    </motion.div>
                 ) : (
                     <div className="flex items-center space-x-2 w-full">
                         <Input
@@ -213,29 +234,35 @@ export default function Home() {
                 )}
 
                 {currentUpdates.map((update) => (
-                    <Link key={update.id} href={`/update/${update.id}`} className="mt-12">
-                        <Card className="flex flex-col md:flex-row items-center overflow-hidden">
-                            {/* Image - responsive sizing */}
-                            <div className="relative w-full md:w-80 h-64 md:h-80 bg-muted flex-shrink-0">
-                                <Image
-                                    src={update.image}
-                                    alt={update.title}
-                                    width={1920}
-                                    height={1080}
-                                    className="object-cover w-full h-full"
-                                />
-                            </div>
-
-                            {/* Content - responsive layout */}
-                            <div className="flex-1 flex flex-col p-6">
-                                <div className="flex-1">
-                                    <p className="font-bold mb-3 text-lg md:text-xl">{update.title}</p>
-                                    <p className="mb-4 text-sm md:text-base">{update.description}</p>
-                                    <Badge variant="default" className="w-fit"></Badge>
+                    <Link key={update.id} href={`/update/${update.id}`} className="mt-12" passHref legacyBehavior>
+                        <motion.a
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.8 }}
+                            className="block mt-12"
+                        >
+                            <Card className="flex flex-col md:flex-row items-center overflow-hidden">
+                                {/* Image - responsive sizing */}
+                                <div className="relative w-full md:w-80 h-64 md:h-80 bg-muted flex-shrink-0">
+                                    <Image
+                                        src={update.image}
+                                        alt={update.title}
+                                        width={1920}
+                                        height={1080}
+                                        className="object-cover w-full h-full"
+                                    />
                                 </div>
-                            </div>
 
-                        </Card>
+                                {/* Content - responsive layout */}
+                                <div className="flex-1 flex flex-col p-6">
+                                    <div className="flex-1">
+                                        <p className="font-bold mb-3 text-lg md:text-xl">{update.title}</p>
+                                        <p className="mb-4 text-sm md:text-base">{update.description}</p>
+                                        <Badge variant="default" className="w-fit"></Badge>
+                                    </div>
+                                </div>
+                            </Card>
+                        </motion.a>
                     </Link>
                 ))}
 
@@ -260,14 +287,17 @@ export default function Home() {
                         )}
                     </PaginationContent>
                 </Pagination>
-            </motion.section >
+            </section >
 
-            {/* Social Media Section */}
-            < section className="flex flex-col items-start mb-10 w-[90%] mx-auto" id="learn" >
-                <h1 className="text-4xl font-bold">
-                    Brand Partnership
-                </h1>
-                <p className="mb-5" >From your desired streaming platform belowr—go ahead and leave a message. We will work together on sponsorship, collaboration ,gear intergration , something like that—Lets leave an impact on your brand </p>
+            {/* Brand Partnership Section (rewritten) */}
+            <section className="flex flex-col items-start mb-10 w-[90%] mx-auto" id="learn">
+                <h1 className="text-4xl font-bold mb-2">Brand Partnerships</h1>
+                <p className="mb-5">
+                    We’re open to hands-on partnerships, gear integrations, and R&D collaborations. If you’re a streamer, engineer, or tech brand who wants to push the boundaries of workflow and energy, let’s build the future together. Bring your project ideas—we’ll prototype, test, and iterate with you.
+                </p>
+                <p className="mb-5">
+                    Reach out via your preferred streaming or social platform below:
+                </p>
                 <div className="flex space-x-4">
                     <Link href="https://www.youtube.com/bckyrd-io" className="text-primary"><IconBrandYoutube /></Link>
                     <Link href="https://www.tiktok.com/bckyrd-io" className="text-primary"><IconBrandTiktok /></Link>
@@ -275,7 +305,7 @@ export default function Home() {
                     <Link href="https://www.instagram.com/bckyrd.io" className="text-primary"><IconBrandInstagram /></Link>
                     <Link href="https://www.kick.com/backyard_io" className="text-primary"><IconBrandKick /></Link>
                 </div>
-            </section >
+            </section>
         </>
     );
 }

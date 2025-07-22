@@ -122,7 +122,7 @@ export default function Home() {
                     <Link href="#more" className="">
                         <Button variant="outline" className="text-primary">Learn More</Button>
                     </Link>
-                   
+
                 </motion.div>
             </section>
 
@@ -177,7 +177,7 @@ export default function Home() {
                 {/* Text stays at 90% width */}
                 <div className="w-[90%] mx-auto" id="more">
                     <motion.p
-                        className="pt-20 text-2xl"
+                        className="pt-20 text-3xl"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
@@ -291,7 +291,7 @@ export default function Home() {
 
             {/* Brand Partnership Section (rewritten) */}
             <section className="flex flex-col items-start mb-10 w-[90%] mx-auto" id="learn">
-                <h1 className="text-4xl font-bold mb-2">Brand Partnerships</h1>
+                <h1 className="text-3xl font-bold mb-2">Brand Partnerships</h1>
                 <p className="mb-5">
                     We’re open to hands-on partnerships, gear integrations, and R&D collaborations. If you’re a streamer, engineer, or tech brand who wants to push the boundaries of workflow and energy, let’s build the future together. Bring your project ideas—we’ll prototype, test, and iterate with you.
                 </p>

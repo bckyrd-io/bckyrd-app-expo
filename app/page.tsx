@@ -95,7 +95,7 @@ export default function Home() {
         <>
             <section className="flex flex-col mb-40 w-[90%] mx-auto">
                 <motion.h1
-                    className="text-5xl sm:text-5xl md:text-6xl lg:text-8xl font-extrabold mt-10 mb-5"
+                    className="text-5xl sm:text-5xl md:text-6xl lg:text-8xl font-extrabold mt-5 mb-5"
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
@@ -243,7 +243,7 @@ export default function Home() {
                         >
                             <Card className="flex flex-col md:flex-row items-center overflow-hidden">
                                 {/* Image - responsive sizing */}
-                                <div className="flex-1 relative w-full md:w-80 h-64 md:h-80 bg-muted flex-shrink-0">
+                                <div className="relative w-full md:w-80 h-64 md:h-80 bg-muted flex-shrink-0">
                                     <Image
                                         src={update.image}
                                         alt={update.title}

@@ -93,14 +93,14 @@ export default function Home() {
 
     return (
         <>
-            <section className="flex flex-col mb-40 w-[90%] mx-auto">
+            <section className="flex flex-col mb-60 w-[90%] mx-auto">
                 <motion.h1
-                    className="text-5xl sm:text-5xl md:text-6xl lg:text-8xl font-extrabold mt-5 mb-5"
+                    className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mt-5 mb-5"
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    Energy Interface For Streamers Workflow
+                    Energy Interface For <br /> Streamers Workflow
                 </motion.h1>
                 <motion.p
                     className="mb-5"
@@ -127,7 +127,7 @@ export default function Home() {
             </section>
 
             {/* Morphing Studio Section */}
-            <section className="flex flex-col mb-40">
+            <section className="flex flex-col mb-60">
                 <div className="relative overflow-hidden flex justify-center">
                     {/* Studio Image Container */}
                     <motion.div
@@ -186,15 +186,15 @@ export default function Home() {
                         &rdquo;  <Link href="#learn" className="text-primary">Backyard i/o</Link> represents interface to highest potential—which enthusiasts can leverage from next industrial revolutions in an age of augmented machines. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next level energy interfacing.
                         <Link href="#learn" className="text-primary"> 👇 Lets Work</Link> &rdquo;
                     </motion.p>
-                    <motion.p className="pt-5 text-2xl text-muted-foreground" initial={{ opacity: 0, y: 30 }}
+                    <motion.p className="pt-5 text-3xl text-muted-foreground" initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
-                        viewport={{ amount: 0.3 }}>We build in public. Here’s our journey, one component at a time—real R&D, real hardware, real progress.</motion.p>
+                        viewport={{ amount: 0.3 }}>Here’s our journey, component feature at a time— r&d for real progress.</motion.p>
                 </div>
             </section>
 
             {/* Updates Section */}
-            <section className="flex flex-col mb-40 w-[90%] mx-auto">
+            <section className="flex flex-col mb-60 w-[90%] mx-auto">
                 {!showSearch ? (
                     <motion.div className="flex space-x-4" initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -292,7 +292,7 @@ export default function Home() {
             {/* Brand Partnership Section (rewritten) */}
             <section className="flex flex-col items-start mb-10 w-[90%] mx-auto" id="learn">
                 <h1 className="text-3xl font-bold mb-2">Brand Partnerships</h1>
-                <p className="mb-5">
+                <p className="mb-5 w-[50%]">
                     We’re open to hands-on partnerships, gear integrations, and R&D collaborations. If you’re a streamer, engineer, or tech brand who wants to push the boundaries of workflow and energy, let’s build the future together. Bring your project ideas—we’ll prototype, test, and iterate with you.
                 </p>
                 <p className="mb-10 text-muted-foreground">

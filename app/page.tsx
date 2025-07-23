@@ -17,43 +17,43 @@ const updatesData = [
         id: "6",
         title: "Modular hardware expansion",
         description: "Developing a library of modular hardware components—each with its own PCB, firmware, and 3D-printed case. Designed for hacking, remixing, and scaling.",
-        image: "https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=800&q=80" // Array of PCBs, modular hardware
+        image: "/control.webp" // Array of PCBs, modular hardware
     },
     {
         id: "1",
         title: "ESP32 energy interface prototype",
         description: "Our first working prototype: ESP32-based smart energy interface with power monitoring ICs, relays, and custom PCB. Real circuits, real control for real creators.",
-        image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" // ESP32, breadboard, wires
+        image: "/fusion.jpg" // ESP32, breadboard, wires
     },
     {
         id: "4",
         title: "Studio gear integration",
         description: "Direct integration of studio gear—cameras, RGB lighting, audio—wired into our energy interface. See the inside: relays, wiring, and real PCB traces.",
-        image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80" // Gear, RGB, camera, setup
+        image: "/setup.jpeg" // Gear, RGB, camera, setup
     },
     {
         id: "2",
         title: "Tech stack: ESP32, React Native, sensors",
         description: "Our stack: ESP32 microcontrollers, React Native (Expo), Android native sensors, and a mobile-first approach. Designed for real-time control, hardware hacking, and seamless integration for creators.",
-        image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80" // Microcontroller, code, mobile
+        image: "/sensors.jpg" // Microcontroller, code, mobile
     },
     {
         id: "3",
-        title: "Power management app demo",
+        title: "Power stream app demo",
         description: "React Native app with live power graphs, device toggles, and direct hardware control. Built for tinkerers and streamers who want to see the data and the circuits.",
-        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80" // Technical UI with graphs, code, and hardware
+        image: "/oscilloscope.jpg" // Technical UI with graphs, code, and hardware
     },
     {
         id: "5",
         title: "R&D: circuits, physics, 3D models",
         description: "We share our process: circuit design, physics experiments, and 3D modeling. Real breadboards, oscilloscope traces, and 3D-printed enclosures.",
-        image: "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=800&q=80" // Flat lay: circuit, oscilloscope, hands-on
+        image: "/schematic.jpeg" // Flat lay: circuit, oscilloscope, hands-on
     },
     {
         id: "7",
         title: "Open source firmware & dev process",
         description: "We open-sourced our firmware and dev process. See the code, the commits, and the hardware it runs on. Community-driven, transparent, and hackable.",
-        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80" // Code on screen, hardware visible
+        image: "/firmware.png" // Code on screen, hardware visible
     },
 ];
 

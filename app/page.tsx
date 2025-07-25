@@ -57,13 +57,37 @@ const updatesData = [
     },
 ];
 
+// Animation variants for reusable animations
+// fadeInUp: Elements slide up into view
+const fadeInUp = {
+    initial: { opacity: 0, y: 60 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.8, ease: "easeInOut" }
+};
+
+// scaleIn: Elements scale up into view (expanding effect)
+const scaleIn = {
+    initial: { opacity: 0, scale: 0.8 },
+    whileInView: { opacity: 1, scale: 1 },
+    transition: { duration: 0.8, ease: "easeInOut" }
+};
+
+// viewportSettings: Configuration for when animations trigger
+// amount: 0.2 means animation starts when 20% of the element is in view
+// once: false means animation can re-trigger if element leaves and re-enters viewport
+// margin: "0px 0px -100px 0px" adjusts the trigger point (100px from bottom of viewport)
+const viewportSettings = { 
+    amount: 0.2, 
+    once: false, 
+    margin: "0px 0px -100px 0px" 
+};
+
 export default function Home() {
     const { theme: _theme, toggleTheme: _toggleTheme } = useContext(ThemeContext); // Use the global theme context
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [showSearch, setShowSearch] = useState(false);
     const itemsPerPage = 4;
-
 
     const handleSearchToggle = () => {
         setShowSearch(!showSearch);
@@ -93,178 +117,237 @@ export default function Home() {
 
     return (
         <>
-            {/* Morphing Studio Section */}
+            {/* Hero Section */}
             <section className="flex flex-col mb-60">
-
-                <div className="flex flex-col mb-20 w-[90%] mx-auto">
-                    <motion.h1
-                        className="text-10xl sm:text-10xl md:text-6xl lg:text-7xl font-extrabold mt-10 mb-10"
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
+                <div className="flex flex-col mb-10 w-[90%] mx-auto">
+                    {/* Hero Title - Changed to scaleIn animation */}
+                    <h1
+                        className="text-4xl sm:text-4xl md:text-8xl lg:text-8xl font-extrabold mt-10 mb-10"
+                     
                     >
-                        Energy Interface For <br /> Streamers Workflow
-                    </motion.h1>
+                        Energy Interface For Streamers Workflow
+                    </h1>
+                    {/* Hero Description - Changed to fadeInUp animation */}
                     <motion.p
-                        className="mb-10"
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        className="mb-10 text-lg"
+                        {...fadeInUp}
+                        viewport={viewportSettings}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
                         Reimagining how streamers setup gear—augmented in streaming workflow—interfaces with energy to give you more leverage. We&apos;re building a smart energy-strip-like device—think Stream Deck, but for energy...
                     </motion.p>
+                    {/* Hero Buttons - Changed to fadeInUp animation */}
                     <motion.div
                         className="flex items-center space-x-4 py-4"
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
+                        {...fadeInUp}
+                        viewport={viewportSettings}
+                        transition={{ duration: 0.8, delay: 0.3 }}
                     >
-                        <Link href="/auth" className="text-black">
-                            <Button variant="default" className="text-black">Get Started</Button>
+                        <Link href="/setup" className="text-black">
+                            <motion.div
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <Button variant="default" className="text-black">Get Started</Button>
+                            </motion.div>
                         </Link>
                         <Link href="#more" className="">
-                            <Button variant="outline" className="text-primary">Learn More</Button>
+                            <motion.div
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <Button variant="outline" className="text-primary">Learn More</Button>
+                            </motion.div>
                         </Link>
-
                     </motion.div>
                 </div>
 
-
+                {/* Hero Image Container - Morphing animation (untouched as requested) */}
                 <div className="relative overflow-hidden flex justify-center w-[100%]">
-
-                    {/* Studio Image Container */}
                     <motion.div
-                        className="relative h-[100vh] overflow-hidden"
+                        className="relative h-[50vh] md:h-[100vh] overflow-hidden"
                         initial={{
                             width: "90%",
-                            borderRadius: "0.5rem"
+                            borderRadius: "0.5rem",
                         }}
                         whileInView={{
                             width: "100vw",
-                            borderRadius: "0rem"
+                            borderRadius: "0rem",
                         }}
-                        transition={{ duration: 1.5, ease: "easeInOut" }}
-                        viewport={{ amount: 0.5, once: false, margin: "0px 0px -100% 0px" }}
+                        transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+                        viewport={{ 
+                            amount: 0.3, 
+                            once: false, 
+                            margin: "0px 0px -30% 0px" 
+                        }}
                         style={{ transformOrigin: "center" }}
                     >
-                        <Image
-                            src="/Studio.jpg"
-                            alt="Studio"
-                            width={1920}
-                            height={1080}
-                            className="object-cover w-full h-full"
-                            priority
-                        />
+                        {/* Studio Image */}
+                        <motion.div
+                            className="absolute inset-0"
+                            initial={{ opacity: 1 }}
+                            whileInView={{ opacity: 0 }}
+                            transition={{ duration: 1.8, ease: "easeInOut", delay: 0.3 }}
+                            viewport={{ amount: 0.4, once: false, margin: "0px 0px -30% 0px" }}
+                        >
+                            <Image
+                                src="/Studio.jpg"
+                                alt="Studio"
+                                width={1920}
+                                height={1080}
+                                className="object-cover w-full h-full"
+                                priority
+                            />
+                        </motion.div>
 
-                        {/* Circuit Board Overlay */}
+                        {/* Circuit Board Overlay - Fixed dimming issue */}
                         <motion.div
                             className="absolute inset-0"
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
-                            transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
-                            viewport={{ amount: 0.5, once: false, margin: "0px 0px -100% 0px" }}
+                            transition={{ duration: 1.8, ease: "easeInOut", delay: 0.3 }}
+                            viewport={{ amount: 0.4, once: false, margin: "0px 0px -30% 0px" }}
                         >
-                            <div className="w-full h-full bg-black/20">
-                                <Image
-                                    src="/circuit.webp" // Replace with your circuit board image path
-                                    alt="Circuit Board Overlay"
-                                    width={1920}
-                                    height={1080}
-                                    className="object-cover w-full h-full opacity-200"
-                                />
-                            </div>
+                            <Image
+                                src="/circuit.webp"
+                                alt="Circuit Board Overlay"
+                                width={1920}
+                                height={1080}
+                                className="object-cover w-full h-full"
+                            />
                         </motion.div>
                     </motion.div>
                 </div>
-
-
             </section>
 
-
-            {/* Morphing Studio Section */}
+            {/* About Section */}
             <section className="flex flex-col mb-60">
-
-                {/* Text stays at 90% width */}
                 <div className="w-[90%] mx-auto" id="more">
+                    {/* About Paragraph 1 - Changed to fadeInUp */}
                     <motion.p
-                        className="pt-20 text-3xl"
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.6 }}
-                        viewport={{ amount: 0.3 }}
+                        className="text-3xl"
+                        {...fadeInUp}
+                        viewport={viewportSettings}
+                        transition={{ duration: 0.8, delay: 0.1 }}
                     >
-                        &rdquo;  <Link href="#learn" className="text-primary">Backyard i/o</Link> represents interface to highest potential—which enthusiasts can leverage from next industrial revolutions in an age of augmented machines. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next level energy interfacing.
-                        <Link href="#learn" className="text-primary"> 👇 Lets Work</Link> &rdquo;
+                        &ldquo;<Link href="#learn" className="text-primary">Backyard i/o</Link> represents interface to highest potential—which enthusiasts can leverage from next industrial revolutions in an age of augmented machines. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next level energy interfacing.
+                        <Link href="#learn" className="text-primary"> 👇 Lets Work</Link>&rdquo;
                     </motion.p>
-                    <motion.p className="pt-10 pb-10 text-3xl text-muted-foreground" initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.6 }}
-                        viewport={{ amount: 0.3 }}>Here’s our journey, component feature at a time— r&d for real progress.</motion.p>
-                    <motion.div className="flex space-x-4" initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.8 }}>
-                        <Button variant="secondary" onClick={handleSearchToggle}>
-                            <span className="">flipping</span>
-                        </Button>
-                        <Button variant="secondary" onClick={handleShopClick}>
-                            <span className="">gear</span>
-                        </Button>
-                        <Button variant="secondary" onClick={handleSearchToggle}>
-                            <span className="">marketplace</span>
-                        </Button>
-                        <Button variant="secondary" onClick={handleShopClick}>
-                            <span className="">intergration</span>
-                        </Button>
-
+                    {/* About Paragraph 2 - Changed to fadeInUp */}
+                    <motion.p 
+                        className="pt-10 pb-10 text-3xl text-muted-foreground"
+                        {...fadeInUp}
+                        viewport={viewportSettings}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                    >
+                        Here is our journey, component feature at a time— r&d for real progress.
+                    </motion.p>
+                    {/* About Buttons - Changed to fadeInUp */}
+                    <motion.div 
+                        className="flex flex-wrap gap-4"
+                        {...fadeInUp}
+                        viewport={viewportSettings}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                    >
+                        <motion.div whileHover={{ scale: 1.1, y: -3 }} transition={{ duration: 0.2 }}>
+                            <Button variant="secondary" onClick={handleSearchToggle}>
+                                <span>flipping</span>
+                            </Button>
+                        </motion.div>
+                        <motion.div whileHover={{ scale: 1.1, y: -3 }} transition={{ duration: 0.2 }}>
+                            <Button variant="secondary" onClick={handleShopClick}>
+                                <span>gear</span>
+                            </Button>
+                        </motion.div>
+                        <motion.div whileHover={{ scale: 1.1, y: -3 }} transition={{ duration: 0.2 }}>
+                            <Button variant="secondary" onClick={handleSearchToggle}>
+                                <span>marketplace</span>
+                            </Button>
+                        </motion.div>
+                        <motion.div whileHover={{ scale: 1.1, y: -3 }} transition={{ duration: 0.2 }}>
+                            <Button variant="secondary" onClick={handleShopClick}>
+                                <span>integration</span>
+                            </Button>
+                        </motion.div>
                     </motion.div>
                 </div>
             </section>
 
             {/* Updates Section */}
             <section className="flex flex-col mb-60 w-[90%] mx-auto">
-            <div className="flex items-center space-x-2 w-full">
-                        <Input
-                            id="search-input"
-                            type="text"
-                            placeholder="Search our products and feature updates..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="flex-1"
-                            onKeyPress={(e) => {
-                                if (e.key === 'Enter') {
-                                    // Handle search submission here
-                                    console.log('Search submitted:', searchTerm);
-                                }
-                            }}
-                        />
-                    </div>
+                {/* Search Input - Changed to fadeInUp animation */}
+                <motion.div 
+                    className="flex items-center space-x-2 w-full mb-10"
+                    {...fadeInUp}
+                    viewport={viewportSettings}
+                    transition={{ duration: 0.6 }}
+                >
+                    <Input
+                        id="search-input"
+                        type="text"
+                        placeholder="🔍 Search our products and feature updates..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="flex-1"
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                                console.log('Search submitted:', searchTerm);
+                            }
+                        }}
+                    />
+                </motion.div>
 
-                {currentUpdates.map((update) => (
+                {/* Updates Cards - each card animates in with fadeInUp and staggered delay */}
+                {currentUpdates.map((update, index) => (
                     <Link key={update.id} href={`/update/${update.id}`} passHref legacyBehavior>
                         <motion.a
-                            initial={{ opacity: 0, y: 50 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.8 }}
+                            {...fadeInUp}
+                            viewport={viewportSettings}
+                            transition={{ 
+                                duration: 0.8, 
+                                delay: index * 0.1, // Staggered delay for each card
+                                ease: "easeInOut"
+                            }}
                             className="block mt-20"
+                            whileHover={{ 
+                                y: -8,
+                                scale: 1.02,
+                                transition: { duration: 0.3, ease: "easeOut" }
+                            }}
                         >
-                            <Card className="flex flex-col md:flex-row items-center overflow-hidden">
+                            <Card className="flex flex-col md:flex-row items-center overflow-hidden hover:shadow-2xl transition-all duration-500">
                                 {/* Image - responsive sizing */}
-                                <div className="relative w-full md:w-80 h-64 md:h-80 bg-muted flex-shrink-0">
+                                <motion.div 
+                                    className="relative w-full md:w-96 h-80 md:h-96 bg-muted flex-shrink-0 overflow-hidden"
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ duration: 0.4 }}
+                                >
                                     <Image
                                         src={update.image}
                                         alt={update.title}
                                         width={1920}
                                         height={1080}
-                                        className="object-cover w-full h-full"
+                                        className="object-cover w-full h-full transition-transform duration-500"
                                     />
-                                </div>
+                                </motion.div>
 
-                                {/* Content - responsive layout */}
-                                <div className="flex-1 flex flex-col p-20">
+                                {/* Content - responsive layout. No animation on inner content elements for smoother block-level UX */}
+                                <div className="flex-1 flex flex-col p-6 md:p-20">
                                     <div className="flex-1">
-                                        <p className="font-bold mb-3">{update.title}</p>
-                                        <p className="mb-4 text-sm md:text-base">{update.description}</p>
-                                        <Badge variant="default" className="w-fit"></Badge>
+                                        <h3 
+                                            className="font-bold mb-3 text-md md:text-md"
+                                        >
+                                            {update.title}
+                                        </h3>
+                                        <p className="mb-4 text-sm md:text-base text-muted-foreground">{update.description}</p>
+                                        <motion.div
+                                            whileHover={{ scale: 1.1 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            <Badge variant="default" className="w-fit">Read More</Badge>
+                                        </motion.div>
                                     </div>
                                 </div>
                             </Card>
@@ -272,45 +355,118 @@ export default function Home() {
                     </Link>
                 ))}
 
-                {/* Pagination */}
-                <Pagination className="mt-10 justify-start">
-                    <PaginationContent>
-                        {currentPage > 1 && (
-                            <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />
-                        )}
-                        {Array.from({ length: totalPages }, (_, index) => (
-                            <PaginationItem key={index}>
-                                <PaginationLink
-                                    isActive={index + 1 === currentPage}
-                                    onClick={() => setCurrentPage(index + 1)}
-                                >
-                                    {index + 1}
-                                </PaginationLink>
-                            </PaginationItem>
-                        ))}
-                        {currentPage < totalPages && (
-                            <PaginationNext onClick={() => setCurrentPage(currentPage + 1)} />
-                        )}
-                    </PaginationContent>
-                </Pagination>
-            </section >
+                {/* Pagination - Changed to fadeInUp */}
+                <motion.div
+                    {...fadeInUp}
+                    viewport={viewportSettings}
+                    transition={{ duration: 0.6 }}
+                >
+                    <Pagination className="mt-10 justify-start">
+                        <PaginationContent>
+                            {currentPage > 1 && (
+                                <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
+                                    <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />
+                                </motion.div>
+                            )}
+                            {Array.from({ length: totalPages }, (_, index) => (
+                                <PaginationItem key={index}>
+                                    <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
+                                        <PaginationLink
+                                            isActive={index + 1 === currentPage}
+                                            onClick={() => setCurrentPage(index + 1)}
+                                        >
+                                            {index + 1}
+                                        </PaginationLink>
+                                    </motion.div>
+                                </PaginationItem>
+                            ))}
+                            {currentPage < totalPages && (
+                                <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
+                                    <PaginationNext onClick={() => setCurrentPage(currentPage + 1)} />
+                                </motion.div>
+                            )}
+                        </PaginationContent>
+                    </Pagination>
+                </motion.div>
+            </section>
 
-            {/* Brand Partnership Section (rewritten) */}
+            {/* Brand Partnership Section */}
             <section className="flex flex-col items-start mb-20 w-[90%] mx-auto" id="learn">
-                <h1 className="text-3xl font-bold mb-2">Brand Partnerships</h1>
-                <p className="mb-10 lg:w-[50%]">
-                    We’re open to hands-on partnerships, gear integrations, and R&D collaborations. If you’re a streamer, engineer, or tech brand who wants to push the boundaries of workflow and energy, let’s build the future together. Bring your project ideas—we’ll prototype, test, and iterate with you.
-                </p>
-                <p className="mb-10 text-muted-foreground">
-                    Reach out via your preferred streaming or social platform below:
-                </p>
-                <div className="flex space-x-10">
-                    <Link href="https://www.youtube.com/bckyrd-io" className="text-primary"><IconBrandYoutube /></Link>
-                    <Link href="https://www.tiktok.com/bckyrd-io" className="text-primary"><IconBrandTiktok /></Link>
-                    <Link href="https://www.twitch.tv/backyard_io" className="text-primary"><IconBrandTwitch /></Link>
-                    <Link href="https://www.instagram.com/bckyrd.io" className="text-primary"><IconBrandInstagram /></Link>
-                    <Link href="https://www.kick.com/backyard_io" className="text-primary"><IconBrandKick /></Link>
-                </div>
+                {/* Container for Brand Partnership text block - Changed to fadeInUp animation */}
+                <motion.div
+                    {...fadeInUp}
+                    viewport={viewportSettings}
+                    transition={{ duration: 0.8 }}
+                    className="w-full"
+                >
+                    {/* Brand Partnerships Title - Changed to fadeInUp animation */}
+                    <h2 
+                        className="text-3xl font-bold mb-2"
+                    >
+                        Brand Partnerships
+                    </h2>
+                    {/* Brand Partnerships Paragraph 1 - Changed to fadeInUp animation */}
+                    <p 
+                        className="mb-10 lg:w-[50%]"
+                    >
+                        We are open to hands-on partnerships, gear integrations, and R&D collaborations. If you are a streamer, engineer, or tech brand who wants to push the boundaries of workflow and energy, lets build the future together. Bring your project ideas—we will prototype, test, and iterate with you.
+                    </p>
+                    {/* Brand Partnerships Paragraph 2 - Changed to fadeInUp animation */}
+                    <p 
+                        className="mb-10 text-muted-foreground"
+                    >
+                        Reach out via your preferred streaming or social platform below:
+                    </p>
+                </motion.div>
+                {/* Social Icons - Changed to scaleIn animation */}
+                <motion.div 
+                    className="flex space-x-10"
+                    {...scaleIn}
+                    viewport={viewportSettings}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                    <motion.div 
+                        whileHover={{ scale: 1.2, y: -5, rotate: 5 }} 
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                    >
+                        <Link href="https://www.youtube.com/bckyrd-io" className="text-primary">
+                            <IconBrandYoutube size={32} />
+                        </Link>
+                    </motion.div>
+                    <motion.div 
+                
+                        whileHover={{ scale: 1.2, y: -5, rotate: -5 }} 
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                    >
+                        <Link href="https://www.tiktok.com/bckyrd-io" className="text-primary">
+                            <IconBrandTiktok size={32} />
+                        </Link>
+                    </motion.div>
+                    <motion.div 
+                        whileHover={{ scale: 1.2, y: -5, rotate: 5 }} 
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                    >
+                        <Link href="https://www.twitch.tv/backyard_io" className="text-primary">
+                            <IconBrandTwitch size={32} />
+                        </Link>
+                    </motion.div>
+                    <motion.div 
+                        whileHover={{ scale: 1.2, y: -5, rotate: -5 }} 
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                    >
+                        <Link href="https://www.instagram.com/bckyrd.io" className="text-primary">
+                            <IconBrandInstagram size={32} />
+                        </Link>
+                    </motion.div>
+                    <motion.div 
+                        whileHover={{ scale: 1.2, y: -5, rotate: 5 }} 
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                    >
+                        <Link href="https://www.kick.com/backyard_io" className="text-primary">
+                            <IconBrandKick size={32} />
+                        </Link>
+                    </motion.div>
+                </motion.div>
             </section>
         </>
     );

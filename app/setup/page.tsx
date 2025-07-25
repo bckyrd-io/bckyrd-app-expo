@@ -8,17 +8,16 @@ import { AppHeader } from "@/components/app-header";
 const AuthPage = () => {
     return (
         <div className="min-h-screen flex flex-col bg-background text-foreground">
-            <AppHeader title="Welcome Back!" showBack={true} backHref="/" maxWidth="md" />
+            <AppHeader title="Setup " showBack={true} backHref="/" maxWidth="sm" />
             <main className="flex-grow flex items-center justify-center">
                 <div className="w-full max-w-sm px-4">
                     <Card className="w-full">
                     <CardHeader className="text-center">
-                    
                         <p className="text-muted-foreground">Be one of the first to leverage this platform</p>
                     </CardHeader>
                     <CardContent>
                         <Link href="/home">
-                            <Button className="w-full">
+                            <Button className="w-full text-black">
                                 Sign In
                             </Button>
                         </Link>

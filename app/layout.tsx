@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-    title: "Backyard i/o 🌀 Potential Energy To Build the Future ✨",
+    title: "Backyard i/o — interface to highest potential 🌀✨",
     description: "Electronics Enthusiast Leverage Next Industrial Revolution, For Your Setup To Build ",
 };
 

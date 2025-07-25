@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { IconChevronLeft } from "@tabler/icons-react";
+import { AppHeader } from "@/components/app-header";
 
 const updatesData = [
     {
@@ -91,14 +92,7 @@ export default function UpdatePage({ params }: { params: Promise<{ id: string }>
 
     return (
         <section className="w-[90%] mx-auto mb-10">
-            <Button
-                className="mt-5 mb-5 text-primary"
-                variant="outline"
-                onClick={() => router.push("/")}
-            >
-                <IconChevronLeft size={18} />
-                Back
-            </Button>
+            <AppHeader title="More " showBack={true} backHref="/" maxWidth="7xl" />
             <h1 className="text-4xl font-bold mb-4">{update.description}</h1>
             <div className="relative w-full h-auto mb-8">
                 <Image

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuLabel } from "@/components/ui/dropdown-menu";
-import { User } from "lucide-react";
+import { Settings, } from "lucide-react";
 import { IconSettings, IconUser, IconLogout } from '@tabler/icons-react';
 import { AppHeader } from '@/components/app-header';
 
@@ -82,7 +82,7 @@ const HomePage = () => {
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="ghost" size="icon" className="h-10 w-10 -ml-2">
-                                <User className="h-5 w-5 text-primary" />
+                                <Settings className="h-5 w-5 text-primary" />
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-56" align="start" forceMount>

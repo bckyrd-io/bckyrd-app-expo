@@ -93,42 +93,45 @@ export default function Home() {
 
     return (
         <>
-            <section className="flex flex-col mb-60 w-[90%] mx-auto">
-                <motion.h1
-                    className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mt-5 mb-5"
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                >
-                    Energy Interface For <br /> Streamers Workflow
-                </motion.h1>
-                <motion.p
-                    className="mb-5"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                    Reimagining how streamers setup gear—augmented in streaming workflow—interfaces with energy to give you more leverage. We&apos;re building a smart energy-strip-like device—think Stream Deck, but for energy...
-                </motion.p>
-                <motion.div
-                    className="flex items-center space-x-4 py-4"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                >
-                    <Link href="/auth" className="text-black">
-                        <Button variant="default" className="text-black">Get Started</Button>
-                    </Link>
-                    <Link href="#more" className="">
-                        <Button variant="outline" className="text-primary">Learn More</Button>
-                    </Link>
-
-                </motion.div>
-            </section>
-
             {/* Morphing Studio Section */}
             <section className="flex flex-col mb-60">
-                <div className="relative overflow-hidden flex justify-center">
+
+                <div className="flex flex-col mb-20 w-[90%] mx-auto">
+                    <motion.h1
+                        className="text-10xl sm:text-10xl md:text-6xl lg:text-7xl font-extrabold mt-10 mb-10"
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        Energy Interface For <br /> Streamers Workflow
+                    </motion.h1>
+                    <motion.p
+                        className="mb-10"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                    >
+                        Reimagining how streamers setup gear—augmented in streaming workflow—interfaces with energy to give you more leverage. We&apos;re building a smart energy-strip-like device—think Stream Deck, but for energy...
+                    </motion.p>
+                    <motion.div
+                        className="flex items-center space-x-4 py-4"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                    >
+                        <Link href="/auth" className="text-black">
+                            <Button variant="default" className="text-black">Get Started</Button>
+                        </Link>
+                        <Link href="#more" className="">
+                            <Button variant="outline" className="text-primary">Learn More</Button>
+                        </Link>
+
+                    </motion.div>
+                </div>
+
+
+                <div className="relative overflow-hidden flex justify-center w-[100%]">
+
                     {/* Studio Image Container */}
                     <motion.div
                         className="relative h-[100vh] overflow-hidden"
@@ -141,7 +144,7 @@ export default function Home() {
                             borderRadius: "0rem"
                         }}
                         transition={{ duration: 1.5, ease: "easeInOut" }}
-                        viewport={{ amount: 0.5, once: false, margin: "0px 0px -50% 0px" }}
+                        viewport={{ amount: 0.5, once: false, margin: "0px 0px -100% 0px" }}
                         style={{ transformOrigin: "center" }}
                     >
                         <Image
@@ -159,7 +162,7 @@ export default function Home() {
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
-                            viewport={{ amount: 0.5, once: false, margin: "0px 0px -50% 0px" }}
+                            viewport={{ amount: 0.5, once: false, margin: "0px 0px -100% 0px" }}
                         >
                             <div className="w-full h-full bg-black/20">
                                 <Image
@@ -167,12 +170,19 @@ export default function Home() {
                                     alt="Circuit Board Overlay"
                                     width={1920}
                                     height={1080}
-                                    className="object-cover w-full h-full opacity-100"
+                                    className="object-cover w-full h-full opacity-200"
                                 />
                             </div>
                         </motion.div>
                     </motion.div>
                 </div>
+
+
+            </section>
+
+
+            {/* Morphing Studio Section */}
+            <section className="flex flex-col mb-60">
 
                 {/* Text stays at 90% width */}
                 <div className="w-[90%] mx-auto" id="more">
@@ -186,29 +196,33 @@ export default function Home() {
                         &rdquo;  <Link href="#learn" className="text-primary">Backyard i/o</Link> represents interface to highest potential—which enthusiasts can leverage from next industrial revolutions in an age of augmented machines. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next level energy interfacing.
                         <Link href="#learn" className="text-primary"> 👇 Lets Work</Link> &rdquo;
                     </motion.p>
-                    <motion.p className="pt-5 text-3xl text-muted-foreground" initial={{ opacity: 0, y: 30 }}
+                    <motion.p className="pt-10 pb-10 text-3xl text-muted-foreground" initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
                         viewport={{ amount: 0.3 }}>Here’s our journey, component feature at a time— r&d for real progress.</motion.p>
+                    <motion.div className="flex space-x-4" initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.8 }}>
+                        <Button variant="secondary" onClick={handleSearchToggle}>
+                            <span className="">flipping</span>
+                        </Button>
+                        <Button variant="secondary" onClick={handleShopClick}>
+                            <span className="">gear</span>
+                        </Button>
+                        <Button variant="secondary" onClick={handleSearchToggle}>
+                            <span className="">marketplace</span>
+                        </Button>
+                        <Button variant="secondary" onClick={handleShopClick}>
+                            <span className="">intergration</span>
+                        </Button>
+
+                    </motion.div>
                 </div>
             </section>
 
             {/* Updates Section */}
             <section className="flex flex-col mb-60 w-[90%] mx-auto">
-                {!showSearch ? (
-                    <motion.div className="flex space-x-4" initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.8 }}>
-                        <Button variant="secondary" onClick={handleSearchToggle}>
-                            <span className="">🔍 Feature Updates</span>
-                        </Button>
-                        <Button variant="secondary" onClick={handleShopClick}>
-                            <span className="">✨ Streamers Gear</span>
-                        </Button>
-
-                    </motion.div>
-                ) : (
-                    <div className="flex items-center space-x-2 w-full">
+            <div className="flex items-center space-x-2 w-full">
                         <Input
                             id="search-input"
                             type="text"
@@ -223,15 +237,7 @@ export default function Home() {
                                 }
                             }}
                         />
-                        <Button
-                            variant="outline"
-                            onClick={handleSearchToggle}
-                            className="px-3"
-                        >
-                            ❌
-                        </Button>
                     </div>
-                )}
 
                 {currentUpdates.map((update) => (
                     <Link key={update.id} href={`/update/${update.id}`} passHref legacyBehavior>
@@ -254,7 +260,7 @@ export default function Home() {
                                 </div>
 
                                 {/* Content - responsive layout */}
-                                <div className="flex-1 flex flex-col p-10">
+                                <div className="flex-1 flex flex-col p-20">
                                     <div className="flex-1">
                                         <p className="font-bold mb-3">{update.title}</p>
                                         <p className="mb-4 text-sm md:text-base">{update.description}</p>
@@ -267,7 +273,7 @@ export default function Home() {
                 ))}
 
                 {/* Pagination */}
-                <Pagination className="mt-5 justify-start">
+                <Pagination className="mt-10 justify-start">
                     <PaginationContent>
                         {currentPage > 1 && (
                             <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />
@@ -290,9 +296,9 @@ export default function Home() {
             </section >
 
             {/* Brand Partnership Section (rewritten) */}
-            <section className="flex flex-col items-start mb-10 w-[90%] mx-auto" id="learn">
+            <section className="flex flex-col items-start mb-20 w-[90%] mx-auto" id="learn">
                 <h1 className="text-3xl font-bold mb-2">Brand Partnerships</h1>
-                <p className="mb-5 lg:w-[50%]">
+                <p className="mb-10 lg:w-[50%]">
                     We’re open to hands-on partnerships, gear integrations, and R&D collaborations. If you’re a streamer, engineer, or tech brand who wants to push the boundaries of workflow and energy, let’s build the future together. Bring your project ideas—we’ll prototype, test, and iterate with you.
                 </p>
                 <p className="mb-10 text-muted-foreground">

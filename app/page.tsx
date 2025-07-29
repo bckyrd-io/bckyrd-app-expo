@@ -11,132 +11,131 @@ import { Input } from "@/components/ui/input";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Badge } from "@/components/ui/badge";
 import { ThemeContext } from "./ThemeProvider"; // Import the ThemeContext
+import { AppHeader } from "@/components/app-header";
 
+// Data for the 'Updates' section, representing milestones or product features.
+// Titles and descriptions are styled to resemble YouTube video titles and shorts descriptions.
 const updatesData = [
     {
         id: "6",
         title: "Modular hardware expansion",
         description: "Developing a library of modular hardware components—each with its own PCB, firmware, and 3D-printed case. Designed for hacking, remixing, and scaling.",
-        image: "/control.webp" // Array of PCBs, modular hardware
+        image: "/control.webp",
+        category: "DIY Builds" // Category for filtering
     },
     {
         id: "1",
         title: "ESP32 energy interface prototype",
         description: "Our first working prototype: ESP32-based smart energy interface with power monitoring ICs, relays, and custom PCB. Real circuits, real control for real creators.",
-        image: "/fusion.jpg" // ESP32, breadboard, wires
+        image: "/fusion.jpg",
+        category: "r&d" // Category for filtering
     },
     {
         id: "4",
         title: "Studio gear integration",
         description: "Direct integration of studio gear—cameras, RGB lighting, audio—wired into our energy interface. See the inside: relays, wiring, and real PCB traces.",
-        image: "/setup.jpeg" // Gear, RGB, camera, setup
+        image: "/setup.jpeg",
+        category: "updates" // Category for filtering
     },
     {
         id: "2",
         title: "Tech stack: ESP32, React Native, sensors",
         description: "Our stack: ESP32 microcontrollers, React Native (Expo), Android native sensors, and a mobile-first approach. Designed for real-time control, hardware hacking, and seamless integration for creators.",
-        image: "/sensors.jpg" // Microcontroller, code, mobile
+        image: "/sensors.jpg",
+        category: "App Updates" // Category for filtering
+
     },
     {
         id: "3",
         title: "Power stream app demo",
         description: "React Native app with live power graphs, device toggles, and direct hardware control. Built for tinkerers and streamers who want to see the data and the circuits.",
-        image: "/oscilloscope.jpg" // Technical UI with graphs, code, and hardware
+        image: "/oscilloscope.jpg",
+        category: "App Updates" // Category for filtering
     },
     {
         id: "5",
-        title: "R&D: circuits, physics, 3D models",
+        title: "circuit design & 3D modeling",
         description: "We share our process: circuit design, physics experiments, and 3D modeling. Real breadboards, oscilloscope traces, and 3D-printed enclosures.",
-        image: "/schematic.jpeg" // Flat lay: circuit, oscilloscope, hands-on
+        image: "/schematic.jpeg",
+        category: "r&d" // Category for filtering
     },
     {
         id: "7",
         title: "Open source firmware & dev process",
         description: "We open-sourced our firmware and dev process. See the code, the commits, and the hardware it runs on. Community-driven, transparent, and hackable.",
-        image: "/firmware.png" // Code on screen, hardware visible
+        image: "/firmware.png",
+        category: "Community" // Category for filtering
     },
 ];
 
 // Animation variants for reusable animations
-// fadeInUp: Elements slide up into view
 const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     whileInView: { opacity: 1, y: 0 },
     transition: { duration: 0.8, ease: "easeInOut" }
 };
 
-// scaleIn: Elements scale up into view (expanding effect)
 const scaleIn = {
     initial: { opacity: 0, scale: 0.8 },
     whileInView: { opacity: 1, scale: 1 },
     transition: { duration: 0.8, ease: "easeInOut" }
 };
 
-// viewportSettings: Configuration for when animations trigger
-// amount: 0.2 means animation starts when 20% of the element is in view
-// once: false means animation can re-trigger if element leaves and re-enters viewport
-// margin: "0px 0px -100px 0px" adjusts the trigger point (100px from bottom of viewport)
-const viewportSettings = { 
-    amount: 0.2, 
-    once: false, 
-    margin: "0px 0px -100px 0px" 
+const viewportSettings = {
+    amount: 0.2,
+    once: false,
+    margin: "0px 0px -100px 0px"
 };
 
 export default function Home() {
-    const { theme: _theme, toggleTheme: _toggleTheme } = useContext(ThemeContext); // Use the global theme context
+    const { theme: _theme, toggleTheme: _toggleTheme } = useContext(ThemeContext);
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const [showSearch, setShowSearch] = useState(false);
-    const itemsPerPage = 4;
-
-    const handleSearchToggle = () => {
-        setShowSearch(!showSearch);
-        if (!showSearch) {
-            setTimeout(() => {
-                const searchInput = document.getElementById("search-input");
-                if (searchInput) searchInput.focus();
-            }, 100);
-        }
-    };
+    const [activeFilter, setActiveFilter] = useState("All"); // New state for active filter
+    const itemsPerPage = 4; // Number of update cards to display per page.
 
     const handleShopClick = () => {
-        // Navigate to shop page
         window.location.href = "/shop";
     };
 
-    const _handleDocsClick = () => {
-        window.open("https://github.com/bckyrd-io", "_blank");
-    };
+    // Filters the updates based on the current search term and active category filter.
+    const filteredUpdates = updatesData.filter((update) => {
+        const matchesSearch = update.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            update.description.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const filteredUpdates = updatesData.filter((update) =>
-        update.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+        const matchesCategory = activeFilter === "All" ||
+            (Array.isArray(update.category) && update.category.includes(activeFilter)) ||
+            (typeof update.category === 'string' && update.category === activeFilter);
+        return matchesSearch && matchesCategory;
+    });
 
     const totalPages = Math.ceil(filteredUpdates.length / itemsPerPage);
     const currentUpdates = filteredUpdates.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
+    const filterCategories = ["All", "DIY Builds", "App Updates", "R&D", "Flipping", "Remote Dev", "Community", "Future Products", "Vision"];
+
     return (
         <>
-            {/* Hero Section */}
+            {/* Hero Section: Introduces the core mission and initial product focus */}
             <section className="flex flex-col mb-60">
+                {/* <AppHeader title="Backyard i/o " showBack={false} backHref="/" maxWidth="7xl" /> */}
                 <div className="flex flex-col mb-10 w-[90%] mx-auto">
-                    {/* Hero Title - Changed to scaleIn animation */}
+                    {/* Hero Title: Broadened to reflect the immediate value proposition */}
                     <h1
-                        className="text-4xl sm:text-4xl md:text-8xl lg:text-8xl font-extrabold mt-10 mb-10"
-                     
+                        className="text-4xl sm:text-4xl md:text-8xl lg:text-8xl font-extrabold mb-10"
                     >
-                        Energy Interface For Streamers Workflow
+                        Energy Interface For Streamers Machines
                     </h1>
-                    {/* Hero Description - Changed to fadeInUp animation */}
+                    {/* Hero Description: Focuses on the immediate strategic mission */}
                     <motion.p
                         className="mb-10 text-lg"
                         {...fadeInUp}
                         viewport={viewportSettings}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        Reimagining how streamers setup gear—augmented in streaming workflow—interfaces with energy to give you more leverage. We&apos;re building a smart energy-strip-like device—think Stream Deck, but for energy...
+                        Reimagining how streamers setup gear—augmented in streaming workflow—interfaces with energy to give you more leverage. We're building a smart energy-strip-like device—think Stream Deck, but for energy...
                     </motion.p>
-                    {/* Hero Buttons - Changed to fadeInUp animation */}
+                    {/* Call to Action Buttons */}
                     <motion.div
                         className="flex items-center space-x-4 py-4"
                         {...fadeInUp}
@@ -164,7 +163,7 @@ export default function Home() {
                     </motion.div>
                 </div>
 
-                {/* Hero Image Container - Morphing animation (untouched as requested) */}
+                {/* Hero Image Container: Features a morphing animation for visual interest */}
                 <div className="relative overflow-hidden flex justify-center w-[100%]">
                     <motion.div
                         className="relative h-[50vh] md:h-[100vh] overflow-hidden"
@@ -177,14 +176,14 @@ export default function Home() {
                             borderRadius: "0rem",
                         }}
                         transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
-                        viewport={{ 
-                            amount: 0.3, 
-                            once: false, 
-                            margin: "0px 0px -30% 0px" 
+                        viewport={{
+                            amount: 0.3,
+                            once: false,
+                            margin: "0px 0px -30% 0px"
                         }}
                         style={{ transformOrigin: "center" }}
                     >
-                        {/* Studio Image */}
+                        {/* Studio Image: Fades out to reveal the circuit board */}
                         <motion.div
                             className="absolute inset-0"
                             initial={{ opacity: 1 }}
@@ -202,7 +201,7 @@ export default function Home() {
                             />
                         </motion.div>
 
-                        {/* Circuit Board Overlay - Fixed dimming issue */}
+                        {/* Circuit Board Overlay: Fades in to represent the underlying technology */}
                         <motion.div
                             className="absolute inset-0"
                             initial={{ opacity: 0 }}
@@ -222,10 +221,10 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* About Section */}
+            {/* About Section: Details the company's mission and journey */}
             <section className="flex flex-col mb-60">
                 <div className="w-[90%] mx-auto" id="more">
-                    {/* About Paragraph 1 - Changed to fadeInUp */}
+                    {/* Mission Statement - now contains the broader vision with external links */}
                     <motion.p
                         className="text-3xl"
                         {...fadeInUp}
@@ -235,8 +234,9 @@ export default function Home() {
                         &ldquo;<Link href="#learn" className="text-primary">Backyard i/o</Link> represents interface to highest potential—which enthusiasts can leverage from next industrial revolutions in an age of augmented machines. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next level energy interfacing.
                         <Link href="#learn" className="text-primary"> 👇 Lets Work</Link>&rdquo;
                     </motion.p>
-                    {/* About Paragraph 2 - Changed to fadeInUp */}
-                    <motion.p 
+                    {/* Journey Overview */}
+
+                    <motion.p
                         className="pt-10 pb-10 text-3xl text-muted-foreground"
                         {...fadeInUp}
                         viewport={viewportSettings}
@@ -244,42 +244,37 @@ export default function Home() {
                     >
                         Here is our journey, component feature at a time— r&d for real progress.
                     </motion.p>
-                    {/* About Buttons - Changed to fadeInUp */}
-                    <motion.div 
-                        className="flex flex-wrap gap-4"
-                        {...fadeInUp}
-                        viewport={viewportSettings}
-                        transition={{ duration: 0.8, delay: 0.3 }}
-                    >
-                        <motion.div whileHover={{ scale: 1.1, y: -3 }} transition={{ duration: 0.2 }}>
-                            <Button variant="secondary" onClick={handleSearchToggle}>
-                                <span>flipping</span>
-                            </Button>
-                        </motion.div>
-                        <motion.div whileHover={{ scale: 1.1, y: -3 }} transition={{ duration: 0.2 }}>
-                            <Button variant="secondary" onClick={handleShopClick}>
-                                <span>gear</span>
-                            </Button>
-                        </motion.div>
-                        <motion.div whileHover={{ scale: 1.1, y: -3 }} transition={{ duration: 0.2 }}>
-                            <Button variant="secondary" onClick={handleSearchToggle}>
-                                <span>marketplace</span>
-                            </Button>
-                        </motion.div>
-                        <motion.div whileHover={{ scale: 1.1, y: -3 }} transition={{ duration: 0.2 }}>
-                            <Button variant="secondary" onClick={handleShopClick}>
-                                <span>integration</span>
-                            </Button>
-                        </motion.div>
-                    </motion.div>
+
+
                 </div>
             </section>
+            <section className="flex flex-col mb-60 w-[90%] mx-auto" id="quick_actions">
 
-            {/* Updates Section */}
-            <section className="flex flex-col mb-60 w-[90%] mx-auto">
-                {/* Search Input - Changed to fadeInUp animation */}
-                <motion.div 
-                    className="flex items-center space-x-2 w-full mb-10"
+                {/* Related Action Buttons (now filter buttons for updates) */}
+                <motion.div
+                    className="flex flex-wrap gap-4"
+                    {...fadeInUp}
+                    viewport={viewportSettings}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                >
+                    {filterCategories.map((category) => (
+                        <motion.div key={category} whileHover={{ scale: 1.1, y: -3 }} transition={{ duration: 0.2 }}>
+                            <Button
+                                variant={activeFilter === category ? "default" : "secondary"}
+                                onClick={() => {
+                                    setActiveFilter(category);
+                                    setCurrentPage(1); // Reset to first page on filter change
+                                }}
+                            >
+                                <span>{category}</span>
+                            </Button>
+                        </motion.div>
+                    ))}
+                </motion.div>
+
+                {/* Search Input for filtering updates */}
+                <motion.div
+                    className="flex items-center space-x-2 w-full mt-10"
                     {...fadeInUp}
                     viewport={viewportSettings}
                     transition={{ duration: 0.6 }}
@@ -287,7 +282,7 @@ export default function Home() {
                     <Input
                         id="search-input"
                         type="text"
-                        placeholder="🔍 Search our products and feature updates..."
+                        placeholder="🔍 Search our roadmap and updates..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="flex-1"
@@ -299,27 +294,33 @@ export default function Home() {
                     />
                 </motion.div>
 
-                {/* Updates Cards - each card animates in with fadeInUp and staggered delay */}
+
+            </section>
+
+            {/* Updates Section: Displays recent developments and features */}
+            <section className="flex flex-col mb-60 w-[90%] mx-auto">
+
+                {/* Updates Cards: Each card represents a product or feature update */}
                 {currentUpdates.map((update, index) => (
                     <Link key={update.id} href={`/update/${update.id}`} passHref legacyBehavior>
                         <motion.a
                             {...fadeInUp}
                             viewport={viewportSettings}
-                            transition={{ 
-                                duration: 0.8, 
-                                delay: index * 0.1, // Staggered delay for each card
+                            transition={{
+                                duration: 0.8,
+                                delay: index * 0.1, // Staggered animation for visual appeal
                                 ease: "easeInOut"
                             }}
-                            className="block mt-20"
-                            whileHover={{ 
-                                y: -8,
+                            className="block mt-10 mb-10"
+                            whileHover={{
+                                y: -8, // Lift effect on hover
                                 scale: 1.02,
                                 transition: { duration: 0.3, ease: "easeOut" }
                             }}
                         >
                             <Card className="flex flex-col md:flex-row items-center overflow-hidden hover:shadow-2xl transition-all duration-500">
-                                {/* Image - responsive sizing */}
-                                <motion.div 
+                                {/* Image for the update card */}
+                                <motion.div
                                     className="relative w-full md:w-96 h-80 md:h-96 bg-muted flex-shrink-0 overflow-hidden"
                                     whileHover={{ scale: 1.05 }}
                                     transition={{ duration: 0.4 }}
@@ -333,10 +334,10 @@ export default function Home() {
                                     />
                                 </motion.div>
 
-                                {/* Content - responsive layout. No animation on inner content elements for smoother block-level UX */}
+                                {/* Content of the update card */}
                                 <div className="flex-1 flex flex-col p-6 md:p-20">
                                     <div className="flex-1">
-                                        <h3 
+                                        <h3
                                             className="font-bold mb-3 text-md md:text-md"
                                         >
                                             {update.title}
@@ -346,7 +347,7 @@ export default function Home() {
                                             whileHover={{ scale: 1.1 }}
                                             transition={{ duration: 0.2 }}
                                         >
-                                            <Badge variant="default" className="w-fit">Read More</Badge>
+                                            <Badge variant="default" className="w-fit">{update.category}</Badge>
                                         </motion.div>
                                     </div>
                                 </div>
@@ -355,7 +356,7 @@ export default function Home() {
                     </Link>
                 ))}
 
-                {/* Pagination - Changed to fadeInUp */}
+                {/* Pagination controls for the updates section */}
                 <motion.div
                     {...fadeInUp}
                     viewport={viewportSettings}
@@ -363,11 +364,13 @@ export default function Home() {
                 >
                     <Pagination className="mt-10 justify-start">
                         <PaginationContent>
+                            {/* Previous page button */}
                             {currentPage > 1 && (
                                 <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
                                     <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />
                                 </motion.div>
                             )}
+                            {/* Page number links */}
                             {Array.from({ length: totalPages }, (_, index) => (
                                 <PaginationItem key={index}>
                                     <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
@@ -380,6 +383,7 @@ export default function Home() {
                                     </motion.div>
                                 </PaginationItem>
                             ))}
+                            {/* Next page button */}
                             {currentPage < totalPages && (
                                 <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
                                     <PaginationNext onClick={() => setCurrentPage(currentPage + 1)} />
@@ -390,82 +394,78 @@ export default function Home() {
                 </motion.div>
             </section>
 
-            {/* Brand Partnership Section */}
-            <section className="flex flex-col items-start mb-20 w-[90%] mx-auto" id="learn">
-                {/* Container for Brand Partnership text block - Changed to fadeInUp animation */}
+            {/* Brand Partnership Section: Information on collaboration opportunities */}
+            <section className="flex flex-col items-start mb-10 w-[90%] mx-auto" id="learn">
+                {/* Container for Brand Partnership text block */}
                 <motion.div
                     {...fadeInUp}
                     viewport={viewportSettings}
                     transition={{ duration: 0.8 }}
                     className="w-full"
                 >
-                    {/* Brand Partnerships Title - Changed to fadeInUp animation */}
-                    <h2 
+                    {/* Brand Partnerships Title */}
+                    <h2
                         className="text-3xl font-bold mb-2"
                     >
                         Brand Partnerships
                     </h2>
-                    {/* Brand Partnerships Paragraph 1 - Changed to fadeInUp animation */}
-                    <p 
+                    {/* Partnership Description */}
+                    <p
                         className="mb-10 lg:w-[50%]"
                     >
-                        We are open to hands-on partnerships, gear integrations, and R&D collaborations. If you are a streamer, engineer, or tech brand who wants to push the boundaries of workflow and energy, lets build the future together. Bring your project ideas—we will prototype, test, and iterate with you.
+                        We're actively building with others — If you're a creator, engineer, or brand with tools streamers rely on, let's collaborate. We stream real dev work, test affiliate hardware, and improve your systems while developing our own.
                     </p>
-                    {/* Brand Partnerships Paragraph 2 - Changed to fadeInUp animation */}
-                    <p 
+                    {/* Call to Action for reaching out */}
+                    <p
                         className="mb-10 text-muted-foreground"
                     >
-                        Reach out via your preferred streaming or social platform below:
+                        Reach out directly on your preferred streaming or social platform below:
                     </p>
-                </motion.div>
-                {/* Social Icons - Changed to scaleIn animation */}
-                <motion.div 
-                    className="flex space-x-10"
-                    {...scaleIn}
-                    viewport={viewportSettings}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                    <motion.div 
-                        whileHover={{ scale: 1.2, y: -5, rotate: 5 }} 
-                        transition={{ duration: 0.3, ease: "easeOut" }}
+                    {/* Social Media Icons */}
+                    <div
+                        className="flex space-x-10 "
                     >
-                        <Link href="https://www.youtube.com/bckyrd-io" className="text-primary">
-                            <IconBrandYoutube size={32} />
-                        </Link>
-                    </motion.div>
-                    <motion.div 
-                
-                        whileHover={{ scale: 1.2, y: -5, rotate: -5 }} 
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                    >
-                        <Link href="https://www.tiktok.com/bckyrd-io" className="text-primary">
-                            <IconBrandTiktok size={32} />
-                        </Link>
-                    </motion.div>
-                    <motion.div 
-                        whileHover={{ scale: 1.2, y: -5, rotate: 5 }} 
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                    >
-                        <Link href="https://www.twitch.tv/backyard_io" className="text-primary">
-                            <IconBrandTwitch size={32} />
-                        </Link>
-                    </motion.div>
-                    <motion.div 
-                        whileHover={{ scale: 1.2, y: -5, rotate: -5 }} 
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                    >
-                        <Link href="https://www.instagram.com/bckyrd.io" className="text-primary">
-                            <IconBrandInstagram size={32} />
-                        </Link>
-                    </motion.div>
-                    <motion.div 
-                        whileHover={{ scale: 1.2, y: -5, rotate: 5 }} 
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                    >
-                        <Link href="https://www.kick.com/backyard_io" className="text-primary">
-                            <IconBrandKick size={32} />
-                        </Link>
-                    </motion.div>
+                        <motion.div
+                            whileHover={{ scale: 1.2, y: -5, rotate: 5 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                        >
+                            <Link href="https://www.youtube.com/bckyrd-io" className="text-primary" target="_blank" rel="noopener noreferrer">
+                                <IconBrandYoutube size={32} />
+                            </Link>
+                        </motion.div>
+                        <motion.div
+                            whileHover={{ scale: 1.2, y: -5, rotate: -5 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                        >
+                            <Link href="https://www.tiktok.com/bckyrd-io" className="text-primary" target="_blank" rel="noopener noreferrer">
+                                <IconBrandTiktok size={32} />
+                            </Link>
+                        </motion.div>
+                        <motion.div
+                            whileHover={{ scale: 1.2, y: -5, rotate: 5 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                        >
+                            <Link href="https://www.twitch.tv/backyard_io" className="text-primary" target="_blank" rel="noopener noreferrer">
+                                <IconBrandTwitch size={32} />
+                            </Link>
+                        </motion.div>
+                        <motion.div
+                            whileHover={{ scale: 1.2, y: -5, rotate: -5 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                        >
+                            <Link href="https://www.instagram.com/bckyrd.io" className="text-primary" target="_blank" rel="noopener noreferrer">
+                                <IconBrandInstagram size={32} />
+                            </Link>
+                        </motion.div>
+                        <motion.div
+                            whileHover={{ scale: 1.2, y: -5, rotate: 5 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                        >
+                            <Link href="https://www.kick.com/backyard_io" className="text-primary" target="_blank" rel="noopener noreferrer">
+                                <IconBrandKick size={32} />
+                            </Link>
+                        </motion.div>
+                    </div>
                 </motion.div>
             </section>
         </>

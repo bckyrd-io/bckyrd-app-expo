@@ -120,7 +120,7 @@ export default function Home() {
                     <h1
                         className="text-4xl sm:text-4xl md:text-8xl lg:text-8xl font-extrabold mb-10"
                     >
-                        Energy Interface For Streamers&apos; Machines
+                        Energy Interface For Streamers Workflow
                     </h1>
                     {/* Hero Description: Focuses on the immediate strategic mission */}
                     <motion.p

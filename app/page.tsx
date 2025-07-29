@@ -21,28 +21,28 @@ const updatesData = [
         title: "Modular hardware expansion",
         description: "Developing a library of modular hardware components—each with its own PCB, firmware, and 3D-printed case. Designed for hacking, remixing, and scaling.",
         image: "/control.webp",
-        category: "DIY Builds" // Category for filtering
+        category: "R&D" // Category for filtering
     },
     {
         id: "1",
         title: "ESP32 energy interface prototype",
         description: "Our first working prototype: ESP32-based smart energy interface with power monitoring ICs, relays, and custom PCB. Real circuits, real control for real creators.",
         image: "/fusion.jpg",
-        category: "r&d" // Category for filtering
+        category: "R&D" // Category for filtering
     },
     {
         id: "4",
         title: "Studio gear integration",
         description: "Direct integration of studio gear—cameras, RGB lighting, audio—wired into our energy interface. See the inside: relays, wiring, and real PCB traces.",
         image: "/setup.jpeg",
-        category: "updates" // Category for filtering
+        category: "Shop" // Category for filtering
     },
     {
         id: "2",
         title: "Tech stack: ESP32, React Native, sensors",
         description: "Our stack: ESP32 microcontrollers, React Native (Expo), Android native sensors, and a mobile-first approach. Designed for real-time control, hardware hacking, and seamless integration for creators.",
         image: "/sensors.jpg",
-        category: "App Updates" // Category for filtering
+        category: "Remote Dev" // Category for filtering
 
     },
     {
@@ -50,21 +50,21 @@ const updatesData = [
         title: "Power stream app demo",
         description: "React Native app with live power graphs, device toggles, and direct hardware control. Built for tinkerers and streamers who want to see the data and the circuits.",
         image: "/oscilloscope.jpg",
-        category: "App Updates" // Category for filtering
+        category: "Download" // Category for filtering
     },
     {
         id: "5",
         title: "circuit design & 3D modeling",
         description: "We share our process: circuit design, physics experiments, and 3D modeling. Real breadboards, oscilloscope traces, and 3D-printed enclosures.",
         image: "/schematic.jpeg",
-        category: "r&d" // Category for filtering
+        category: "R&D" // Category for filtering
     },
     {
         id: "7",
         title: "Open source firmware & dev process",
         description: "We open-sourced our firmware and dev process. See the code, the commits, and the hardware it runs on. Community-driven, transparent, and hackable.",
         image: "/firmware.png",
-        category: "Community" // Category for filtering
+        category: "Remote Dev" // Category for filtering
     },
 ];
 
@@ -75,11 +75,7 @@ const fadeInUp = {
     transition: { duration: 0.8, ease: "easeInOut" }
 };
 
-// const scaleIn = { // scaleIn is not used, so it's commented out or can be removed
-//     initial: { opacity: 0, scale: 0.8 },
-//     whileInView: { opacity: 1, scale: 1 },
-//     transition: { duration: 0.8, ease: "easeInOut" }
-// };
+
 
 const viewportSettings = {
     amount: 0.2,
@@ -112,7 +108,7 @@ export default function Home() {
     const totalPages = Math.ceil(filteredUpdates.length / itemsPerPage);
     const currentUpdates = filteredUpdates.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-    const filterCategories = ["All", "DIY Builds", "App Updates", "R&D", "Flipping", "Remote Dev", "Community", "Future Products", "Vision"];
+    const filterCategories = ["All", "R&D", "Download", "Shop", "Remote Dev"];
 
     return (
         <>
@@ -260,7 +256,7 @@ export default function Home() {
                     {filterCategories.map((category) => (
                         <motion.div key={category} whileHover={{ scale: 1.1, y: -3 }} transition={{ duration: 0.2 }}>
                             <Button
-                                variant={activeFilter === category ? "default" : "secondary"}
+                                variant={activeFilter === category ? "secondary" : "outline"}
                                 onClick={() => {
                                     setActiveFilter(category);
                                     setCurrentPage(1); // Reset to first page on filter change
@@ -343,12 +339,7 @@ export default function Home() {
                                             {update.title}
                                         </h3>
                                         <p className="mb-4 text-sm md:text-base text-muted-foreground">{update.description}</p>
-                                        <motion.div
-                                            whileHover={{ scale: 1.1 }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            <Badge variant="default" className="w-fit">{update.category}</Badge>
-                                        </motion.div>
+                                        <Badge variant="default" className="w-fit">{update.category}</Badge>
                                     </div>
                                 </div>
                             </Card>

@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Badge } from "@/components/ui/badge";
 import { ThemeContext } from "./ThemeProvider"; // Import the ThemeContext
-import { AppHeader } from "@/components/app-header";
+// import { AppHeader } from "@/components/app-header"; // AppHeader is not used, so it's commented out or can be removed
 
 // Data for the 'Updates' section, representing milestones or product features.
 // Titles and descriptions are styled to resemble YouTube video titles and shorts descriptions.
@@ -75,11 +75,11 @@ const fadeInUp = {
     transition: { duration: 0.8, ease: "easeInOut" }
 };
 
-const scaleIn = {
-    initial: { opacity: 0, scale: 0.8 },
-    whileInView: { opacity: 1, scale: 1 },
-    transition: { duration: 0.8, ease: "easeInOut" }
-};
+// const scaleIn = { // scaleIn is not used, so it's commented out or can be removed
+//     initial: { opacity: 0, scale: 0.8 },
+//     whileInView: { opacity: 1, scale: 1 },
+//     transition: { duration: 0.8, ease: "easeInOut" }
+// };
 
 const viewportSettings = {
     amount: 0.2,
@@ -94,9 +94,9 @@ export default function Home() {
     const [activeFilter, setActiveFilter] = useState("All"); // New state for active filter
     const itemsPerPage = 4; // Number of update cards to display per page.
 
-    const handleShopClick = () => {
-        window.location.href = "/shop";
-    };
+    // const handleShopClick = () => { // handleShopClick is not used, so it's commented out or can be removed
+    //     window.location.href = "/shop";
+    // };
 
     // Filters the updates based on the current search term and active category filter.
     const filteredUpdates = updatesData.filter((update) => {
@@ -124,7 +124,7 @@ export default function Home() {
                     <h1
                         className="text-4xl sm:text-4xl md:text-8xl lg:text-8xl font-extrabold mb-10"
                     >
-                        Energy Interface For Streamers Machines
+                        Energy Interface For Streamers&apos; Machines
                     </h1>
                     {/* Hero Description: Focuses on the immediate strategic mission */}
                     <motion.p
@@ -133,7 +133,7 @@ export default function Home() {
                         viewport={viewportSettings}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        Reimagining how streamers setup gear—augmented in streaming workflow—interfaces with energy to give you more leverage. We're building a smart energy-strip-like device—think Stream Deck, but for energy...
+                        Reimagining how streamers set up gear—augmented in streaming workflow—interfaces with energy to give you more leverage. We&apos;re building a smart energy-strip-like device—think Stream Deck, but for energy...
                     </motion.p>
                     {/* Call to Action Buttons */}
                     <motion.div
@@ -231,8 +231,8 @@ export default function Home() {
                         viewport={viewportSettings}
                         transition={{ duration: 0.8, delay: 0.1 }}
                     >
-                        &ldquo;<Link href="#learn" className="text-primary">Backyard i/o</Link> represents interface to highest potential—which enthusiasts can leverage from next industrial revolutions in an age of augmented machines. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next level energy interfacing.
-                        <Link href="#learn" className="text-primary"> 👇 Lets Work</Link>&rdquo;
+                        “<Link href="#learn" className="text-primary">Backyard i/o</Link> represents interface to highest potential—which enthusiasts can leverage from next industrial revolutions in an age of augmented machines. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next level energy interfacing.
+                        <Link href="#learn" className="text-primary"> 👇 Lets Work</Link>”
                     </motion.p>
                     {/* Journey Overview */}
 
@@ -413,7 +413,7 @@ export default function Home() {
                     <p
                         className="mb-10 lg:w-[50%]"
                     >
-                        We're actively building with others — If you're a creator, engineer, or brand with tools streamers rely on, let's collaborate. We stream real dev work, test affiliate hardware, and improve your systems while developing our own.
+                        We&apos;re actively building with others — If you&apos;re a creator, engineer, or brand with tools streamers rely on, let&apos;s collaborate. We stream real dev work, test affiliate hardware, and improve your systems while developing our own.
                     </p>
                     {/* Call to Action for reaching out */}
                     <p

@@ -113,12 +113,12 @@ export default function Home() {
     return (
         <>
             {/* Hero Section: Introduces the core mission and initial product focus */}
-            <section className="flex flex-col mb-60">
+            <section className="flex flex-col mb-40">
                 {/* <AppHeader title="Backyard i/o " showBack={false} backHref="/" maxWidth="7xl" /> */}
-                <div className="flex flex-col mb-10 w-[90%] mx-auto">
+                <div className="flex flex-col mb-10 w-[50%] mx-auto">
                     {/* Hero Title: Broadened to reflect the immediate value proposition */}
                     <h1
-                        className="text-4xl sm:text-4xl md:text-8xl lg:text-8xl font-extrabold mb-10"
+                        className="text-4xl sm:text-4xl md:text-4xl lg:text-6xl font-extrabold mb-10"
                     >
                         Energy Interface For Streamers Workflow
                     </h1>
@@ -164,7 +164,7 @@ export default function Home() {
                     <motion.div
                         className="relative h-[50vh] md:h-[100vh] overflow-hidden"
                         initial={{
-                            width: "90%",
+                            width: "50%",
                             borderRadius: "0.5rem",
                         }}
                         whileInView={{
@@ -218,8 +218,8 @@ export default function Home() {
             </section>
 
             {/* About Section: Details the company's mission and journey */}
-            <section className="flex flex-col mb-60">
-                <div className="w-[90%] mx-auto" id="more">
+            <section className="flex flex-col mb-40">
+                <div className="w-[50%] mx-auto" id="more">
                     {/* Mission Statement - now contains the broader vision with external links */}
                     <motion.p
                         className="text-3xl"
@@ -244,7 +244,7 @@ export default function Home() {
 
                 </div>
             </section>
-            <section className="flex flex-col mb-60 w-[90%] mx-auto" id="quick_actions">
+            <section className="flex flex-col mb-40 w-[50%] mx-auto" id="quick_actions">
 
                 {/* Related Action Buttons (now filter buttons for updates) */}
                 <motion.div
@@ -294,7 +294,7 @@ export default function Home() {
             </section>
 
             {/* Updates Section: Displays recent developments and features */}
-            <section className="flex flex-col mb-60 w-[90%] mx-auto">
+            <section className="flex flex-col mb-40 w-[50%] mx-auto">
 
                 {/* Updates Cards: Each card represents a product or feature update */}
                 {currentUpdates.map((update, index) => (
@@ -331,7 +331,7 @@ export default function Home() {
                                 </motion.div>
 
                                 {/* Content of the update card */}
-                                <div className="flex-1 flex flex-col p-6 md:p-20">
+                                <div className="flex-1 flex flex-col p-6 md:p-5 md:py-0">
                                     <div className="flex-1">
                                         <h3
                                             className="font-bold mb-3 text-md md:text-md"
@@ -386,7 +386,7 @@ export default function Home() {
             </section>
 
             {/* Brand Partnership Section: Information on collaboration opportunities */}
-            <section className="flex flex-col items-start mb-10 w-[90%] mx-auto" id="learn">
+            <section className="flex flex-col items-start mb-10 w-[50%] mx-auto" id="learn">
                 {/* Container for Brand Partnership text block */}
                 <motion.div
                     {...fadeInUp}

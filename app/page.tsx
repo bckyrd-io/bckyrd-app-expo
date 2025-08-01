@@ -1,6 +1,6 @@
 "use client"; // Mark this as a Client Component
 
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -89,6 +89,15 @@ export default function Home() {
     const [currentPage, setCurrentPage] = useState(1);
     const [activeFilter, setActiveFilter] = useState("All"); // New state for active filter
     const itemsPerPage = 4; // Number of update cards to display per page.
+    const [initialWidth, setInitialWidth] = useState("50%"); // New state for initial width
+
+    // Use useEffect to set the initial width based on the window size on the client side
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const isMobile = window.innerWidth < 768; // Tailwind's 'md' breakpoint is 768px
+            setInitialWidth(isMobile ? "90%" : "50%");
+        }
+    }, []);
 
     // const handleShopClick = () => { // handleShopClick is not used, so it's commented out or can be removed
     //     window.location.href = "/shop";
@@ -112,10 +121,11 @@ export default function Home() {
 
     return (
         <>
+
             {/* Hero Section: Introduces the core mission and initial product focus */}
             <section className="flex flex-col mb-40">
-                {/* <AppHeader title="Backyard i/o " showBack={false} backHref="/" maxWidth="7xl" /> */}
-                <div className="flex flex-col mb-10 w-[50%] mx-auto">
+                {/* AppHeader is commented out in original file */}
+                <div className="flex flex-col mb-10 w-[90%] mx-auto md:w-[50%]">
                     {/* Hero Title: Broadened to reflect the immediate value proposition */}
                     <h1
                         className="text-4xl sm:text-4xl md:text-4xl lg:text-6xl font-extrabold mb-10"
@@ -164,7 +174,7 @@ export default function Home() {
                     <motion.div
                         className="relative h-[50vh] md:h-[100vh] overflow-hidden"
                         initial={{
-                            width: "50%",
+                            width: initialWidth, // Use the dynamically set initial width
                             borderRadius: "0.5rem",
                         }}
                         whileInView={{
@@ -179,7 +189,7 @@ export default function Home() {
                         }}
                         style={{ transformOrigin: "center" }}
                     >
-                        {/* Studio Image: Fades out to reveal the circuit board */}
+                        {/* Studio Image: Fades out to reveal the YouTube video */}
                         <motion.div
                             className="absolute inset-0"
                             initial={{ opacity: 1 }}
@@ -197,7 +207,7 @@ export default function Home() {
                             />
                         </motion.div>
 
-                        {/* Circuit Board Overlay: Fades in to represent the underlying technology */}
+                        {/* YouTube Video Overlay: Fades in to show the video content */}
                         <motion.div
                             className="absolute inset-0"
                             initial={{ opacity: 0 }}
@@ -205,12 +215,13 @@ export default function Home() {
                             transition={{ duration: 1.8, ease: "easeInOut", delay: 0.3 }}
                             viewport={{ amount: 0.4, once: false, margin: "0px 0px -30% 0px" }}
                         >
-                            <Image
-                                src="/circuit.webp"
-                                alt="Circuit Board Overlay"
-                                width={1920}
-                                height={1080}
-                                className="object-cover w-full h-full"
+                            <iframe
+                                src="https://www.youtube.com/embed/OzPuztbWoIY?autoplay=1&mute=1&loop=1&playlist=OzPuztbWoIY&controls=0&showinfo=0&rel=0&modestbranding=1"
+                                title="YouTube video"
+                                className="w-full h-full"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
                             />
                         </motion.div>
                     </motion.div>
@@ -219,7 +230,7 @@ export default function Home() {
 
             {/* About Section: Details the company's mission and journey */}
             <section className="flex flex-col mb-40">
-                <div className="w-[50%] mx-auto" id="more">
+                <div className="w-[90%] mx-auto md:w-[50%]" id="more">
                     {/* Mission Statement - now contains the broader vision with external links */}
                     <motion.p
                         className="text-3xl"
@@ -244,7 +255,7 @@ export default function Home() {
 
                 </div>
             </section>
-            <section className="flex flex-col mb-40 w-[50%] mx-auto" id="quick_actions">
+            <section className="flex flex-col mb-40 w-[90%] mx-auto md:w-[50%]" id="quick_actions">
 
                 {/* Related Action Buttons (now filter buttons for updates) */}
                 <motion.div
@@ -294,7 +305,7 @@ export default function Home() {
             </section>
 
             {/* Updates Section: Displays recent developments and features */}
-            <section className="flex flex-col mb-40 w-[50%] mx-auto">
+            <section className="flex flex-col mb-40 w-[90%] mx-auto md:w-[50%]">
 
                 {/* Updates Cards: Each card represents a product or feature update */}
                 {currentUpdates.map((update, index) => (
@@ -331,7 +342,7 @@ export default function Home() {
                                 </motion.div>
 
                                 {/* Content of the update card */}
-                                <div className="flex-1 flex flex-col p-6 md:p-5 md:py-0">
+                                <div className="flex-1 flex flex-col p-4 md:p-6">
                                     <div className="flex-1">
                                         <h3
                                             className="font-bold mb-3 text-md md:text-md"
@@ -386,7 +397,7 @@ export default function Home() {
             </section>
 
             {/* Brand Partnership Section: Information on collaboration opportunities */}
-            <section className="flex flex-col items-start mb-10 w-[50%] mx-auto" id="learn">
+            <section className="flex flex-col items-start mb-10 w-[90%] mx-auto md:w-[50%]" id="learn">
                 {/* Container for Brand Partnership text block */}
                 <motion.div
                     {...fadeInUp}

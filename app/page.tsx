@@ -132,7 +132,7 @@ export default function Home() {
             {/* Hero Section: Introduces the core mission and initial product focus */}
             <section className="flex flex-col mb-40">
                 {/* AppHeader is commented out in original file */}
-                <div className="flex flex-col mb-20 w-[90%] mx-auto md:w-[50%]">
+                <div className="flex flex-col mt-10 mb-20 w-[90%] mx-auto md:w-[50%]">
                     {/* Hero Title: Broadened to reflect the immediate value proposition */}
                     <h1
                         className="text-6xl font-extrabold mb-10"

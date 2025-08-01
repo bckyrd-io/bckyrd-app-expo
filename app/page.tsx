@@ -1,5 +1,4 @@
-"use client"; // Mark this as a Client Component
-
+'use client';
 import { useContext, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -76,7 +75,6 @@ const fadeInUp = {
 };
 
 
-
 const viewportSettings = {
     amount: 0.2,
     once: false,
@@ -84,10 +82,14 @@ const viewportSettings = {
 };
 
 export default function Home() {
+    // Download App always opens Play Store
+    const handleDownloadClick = () => {
+        window.open('https://play.google.com/store/apps/', '_blank');
+    };
     const { theme: _theme, toggleTheme: _toggleTheme } = useContext(ThemeContext);
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const [activeFilter, setActiveFilter] = useState("All"); // New state for active filter
+    const [activeCategory, setActiveCategory] = useState<string | null>(null); // For filtering updates by category
     const itemsPerPage = 4; // Number of update cards to display per page.
     const [initialWidth, setInitialWidth] = useState("50%"); // New state for initial width
 
@@ -99,25 +101,30 @@ export default function Home() {
         }
     }, []);
 
-    // const handleShopClick = () => { // handleShopClick is not used, so it's commented out or can be removed
-    //     window.location.href = "/shop";
-    // };
 
-    // Filters the updates based on the current search term and active category filter.
+
+
+    // Filters the updates based on the current search term and active category.
     const filteredUpdates = updatesData.filter((update) => {
         const matchesSearch = update.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             update.description.toLowerCase().includes(searchTerm.toLowerCase());
-
-        const matchesCategory = activeFilter === "All" ||
-            (Array.isArray(update.category) && update.category.includes(activeFilter)) ||
-            (typeof update.category === 'string' && update.category === activeFilter);
+        const matchesCategory = !activeCategory || update.category === activeCategory;
         return matchesSearch && matchesCategory;
     });
 
     const totalPages = Math.ceil(filteredUpdates.length / itemsPerPage);
     const currentUpdates = filteredUpdates.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-    const filterCategories = ["All", "R&D", "Download", "Shop", "Remote Dev"];
+    // Handler for quick access category filter (e.g., Shop Gear)
+    const handleQuickAccessCategory = (category: string) => {
+        setActiveCategory(category);
+        setCurrentPage(1);
+        // Scroll to updates section
+        const updatesSection = document.getElementById("updates-section");
+        if (updatesSection) {
+            updatesSection.scrollIntoView({ behavior: "smooth" });
+        }
+    };
 
     return (
         <>
@@ -128,18 +135,18 @@ export default function Home() {
                 <div className="flex flex-col mb-10 w-[90%] mx-auto md:w-[50%]">
                     {/* Hero Title: Broadened to reflect the immediate value proposition */}
                     <h1
-                        className="text-4xl sm:text-4xl md:text-4xl lg:text-6xl font-extrabold mb-10"
+                        className="text-6xl font-extrabold mb-10"
                     >
                         Energy Interface For Streamers Workflow
                     </h1>
                     {/* Hero Description: Focuses on the immediate strategic mission */}
                     <motion.p
-                        className="mb-10 text-lg"
+                        className="mb-10 text-lg text-left"
                         {...fadeInUp}
                         viewport={viewportSettings}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        Reimagining how streamers set up gear—augmented in streaming workflow—interfaces with energy to give you more leverage. We&apos;re building a smart energy-strip-like device—think Stream Deck, but for energy...
+                        Think Stream Deck— but for energy...
                     </motion.p>
                     {/* Call to Action Buttons */}
                     <motion.div
@@ -163,7 +170,7 @@ export default function Home() {
                                 whileTap={{ scale: 0.95 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                <Button variant="outline" className="text-primary">Learn More</Button>
+                                <Button variant="outline" className="text-primary">About us</Button>
                             </motion.div>
                         </Link>
                     </motion.div>
@@ -239,46 +246,66 @@ export default function Home() {
                         transition={{ duration: 0.8, delay: 0.1 }}
                     >
                         “<Link href="#learn" className="text-primary">Backyard i/o</Link> represents interface to highest potential—which enthusiasts can leverage from next industrial revolutions in an age of augmented machines. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next level energy interfacing.
-                        <Link href="#learn" className="text-primary"> 👇 Lets Work</Link>”
-                    </motion.p>
-                    {/* Journey Overview */}
-
-                    <motion.p
-                        className="pt-10 pb-10 text-3xl text-muted-foreground"
-                        {...fadeInUp}
-                        viewport={viewportSettings}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                    >
-                        Here is our journey, component feature at a time— r&d for real progress.
+                        <Link href="#learn" className="text-primary"> 👇 Let&apos;s Work</Link>”
                     </motion.p>
 
 
                 </div>
             </section>
-            <section className="flex flex-col mb-40 w-[90%] mx-auto md:w-[50%]" id="quick_actions">
 
-                {/* Related Action Buttons (now filter buttons for updates) */}
-                <motion.div
-                    className="flex flex-wrap gap-4"
+            <section className="flex flex-col mb-40 w-[90%] mx-auto md:w-[50%]" id="quick-access">
+                <motion.div {...fadeInUp} viewport={viewportSettings} transition={{ duration: 0.8, delay: 0.1 }}>
+                    <p className="text-muted-foreground mb-10">
+                        Get started with our energy interface app, explore our R&D roadmap, or shop for compatible gear.
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+
+                        {/* Download App (opens correct store based on device) */}
+                        <button type="button" onClick={handleDownloadClick} className="focus:outline-none">
+                            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
+                                <motion.div className="mb-3 text-primary" whileHover={{ scale: 1.1 }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
+                                </motion.div>
+                                <span className="text-md font-semibold text-center">Download App</span>
+                            </motion.div>
+                        </button>
+
+                        {/* Our Roadmap */}
+                        <Link href="#updates-section">
+                            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
+                                <motion.div className="mb-3 text-primary" whileHover={{ scale: 1.1 }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-git-branch"><line x1="6" x2="6" y1="3" y2="15" /><circle cx="18" cy="6" r="3" /><path d="M18 9a9 9 0 0 1-9 9" /><path d="M6 21v-3" /><circle cx="6" cy="18" r="3" /></svg>
+                                </motion.div>
+                                <span className="text-md font-semibold text-center">Our Roadmap</span>
+                            </motion.div>
+                        </Link>
+
+                        {/* Shop Gear (filters updates by Shop category) */}
+                        <button type="button" onClick={() => handleQuickAccessCategory('Shop')} className="focus:outline-none">
+                            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
+                                <motion.div className="mb-3 text-primary" whileHover={{ scale: 1.1 }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" /><path d="M3 6h18" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>
+                                </motion.div>
+                                <span className="text-md font-semibold text-center">Shop Gear</span>
+                            </motion.div>
+                        </button>
+
+                    </div>
+                </motion.div>
+            </section>
+
+            {/* Updates Section: Displays recent developments and features */}
+            <section className="flex flex-col mb-40 w-[90%] mx-auto md:w-[50%]" id="updates-section">
+
+
+                <motion.p
+                    className="pt-10 pb-10 text-3xl text-muted-foreground"
                     {...fadeInUp}
                     viewport={viewportSettings}
-                    transition={{ duration: 0.8, delay: 0.3 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                    {filterCategories.map((category) => (
-                        <motion.div key={category} whileHover={{ scale: 1.1, y: -3 }} transition={{ duration: 0.2 }}>
-                            <Button
-                                variant={activeFilter === category ? "secondary" : "outline"}
-                                onClick={() => {
-                                    setActiveFilter(category);
-                                    setCurrentPage(1); // Reset to first page on filter change
-                                }}
-                            >
-                                <span>{category}</span>
-                            </Button>
-                        </motion.div>
-                    ))}
-                </motion.div>
-
+                    Here is our journey, component feature at a time— r&d for real progress.
+                </motion.p>
                 {/* Search Input for filtering updates */}
                 <motion.div
                     className="flex items-center space-x-2 w-full mt-10"
@@ -300,12 +327,6 @@ export default function Home() {
                         }}
                     />
                 </motion.div>
-
-
-            </section>
-
-            {/* Updates Section: Displays recent developments and features */}
-            <section className="flex flex-col mb-40 w-[90%] mx-auto md:w-[50%]">
 
                 {/* Updates Cards: Each card represents a product or feature update */}
                 {currentUpdates.map((update, index) => (

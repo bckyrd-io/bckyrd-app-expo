@@ -170,7 +170,7 @@ export default function Home() {
                                 whileTap={{ scale: 0.95 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                <Button variant="outline" className="text-primary">About us</Button>
+                                <Button variant="outline" className="text-primary">About</Button>
                             </motion.div>
                         </Link>
                     </motion.div>

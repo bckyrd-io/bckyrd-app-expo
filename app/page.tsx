@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { IconBrandTwitch, IconBrandYoutube, IconBrandTiktok, IconBrandInstagram, IconBrandKick } from "@tabler/icons-react";
-import { Input } from "@/components/ui/input";
+import { Download, GitBranch, ShoppingBag, Laptop } from 'lucide-react';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Badge } from "@/components/ui/badge";
 import { ThemeContext } from "./ThemeProvider"; // Import the ThemeContext
@@ -87,7 +87,6 @@ export default function Home() {
         window.open('https://play.google.com/store/apps/', '_blank');
     };
     const { theme: _theme, toggleTheme: _toggleTheme } = useContext(ThemeContext);
-    const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [activeCategory, setActiveCategory] = useState<string | null>(null); // For filtering updates by category
     const itemsPerPage = 4; // Number of update cards to display per page.
@@ -106,10 +105,9 @@ export default function Home() {
 
     // Filters the updates based on the current search term and active category.
     const filteredUpdates = updatesData.filter((update) => {
-        const matchesSearch = update.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            update.description.toLowerCase().includes(searchTerm.toLowerCase());
+
         const matchesCategory = !activeCategory || update.category === activeCategory;
-        return matchesSearch && matchesCategory;
+        return matchesCategory;
     });
 
     const totalPages = Math.ceil(filteredUpdates.length / itemsPerPage);
@@ -245,9 +243,10 @@ export default function Home() {
                         viewport={viewportSettings}
                         transition={{ duration: 0.8, delay: 0.1 }}
                     >
-                        “<Link href="#learn" className="text-primary">Backyard i/o</Link> represents interface to highest potential—which enthusiasts can leverage from next industrial revolutions in an age of augmented machines. We&apos;re working on hardtech infrastructure that starts with streamers but scales to next level energy interfacing.
-                        <Link href="#learn" className="text-primary"> 👇 Let&apos;s Work</Link>”
+                        <Link href="#learn" className="text-primary">Backyard i/O</Link> <br />
+                        represents interface to highest potential—which enthusiasts can leverage from next industrial revolutions in an age of augmented machines.
                     </motion.p>
+
 
 
                 </div>
@@ -259,34 +258,40 @@ export default function Home() {
                         Get started with our energy interface app, explore our R&D roadmap, or shop for compatible gear.
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-
                         {/* Download App (opens correct store based on device) */}
                         <button type="button" onClick={handleDownloadClick} className="focus:outline-none">
                             <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
                                 <motion.div className="mb-3 text-primary" whileHover={{ scale: 1.1 }}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
+                                    <Download size={40} />
                                 </motion.div>
                                 <span className="text-md font-semibold text-center">Download App</span>
                             </motion.div>
                         </button>
-
                         {/* Our Roadmap */}
                         <Link href="#updates-section">
                             <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
                                 <motion.div className="mb-3 text-primary" whileHover={{ scale: 1.1 }}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-git-branch"><line x1="6" x2="6" y1="3" y2="15" /><circle cx="18" cy="6" r="3" /><path d="M18 9a9 9 0 0 1-9 9" /><path d="M6 21v-3" /><circle cx="6" cy="18" r="3" /></svg>
+                                    <GitBranch size={40} />
                                 </motion.div>
-                                <span className="text-md font-semibold text-center">Our Roadmap</span>
+                                <span className="text-md font-semibold text-center">Our Features</span>
                             </motion.div>
                         </Link>
-
                         {/* Shop Gear (filters updates by Shop category) */}
                         <button type="button" onClick={() => handleQuickAccessCategory('Shop')} className="focus:outline-none">
                             <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
                                 <motion.div className="mb-3 text-primary" whileHover={{ scale: 1.1 }}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" /><path d="M3 6h18" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>
+                                    <ShoppingBag size={40} />
                                 </motion.div>
                                 <span className="text-md font-semibold text-center">Shop Gear</span>
+                            </motion.div>
+                        </button>
+                        {/* Shop Gear (filters updates by Shop category) */}
+                        <button type="button" onClick={() => handleQuickAccessCategory('Work')} className="focus:outline-none">
+                            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
+                                <motion.div className="mb-3 text-primary" whileHover={{ scale: 1.1 }}>
+                                    <Laptop size={40} />
+                                </motion.div>
+                                <span className="text-md font-semibold text-center">Lets Work</span>
                             </motion.div>
                         </button>
 
@@ -296,38 +301,6 @@ export default function Home() {
 
             {/* Updates Section: Displays recent developments and features */}
             <section className="flex flex-col mb-40 w-[90%] mx-auto md:w-[50%]" id="updates-section">
-
-
-                <motion.p
-                    className="pt-10 pb-10 text-3xl text-muted-foreground"
-                    {...fadeInUp}
-                    viewport={viewportSettings}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                    Here is our journey, component feature at a time— r&d for real progress.
-                </motion.p>
-                {/* Search Input for filtering updates */}
-                <motion.div
-                    className="flex items-center space-x-2 w-full mt-10"
-                    {...fadeInUp}
-                    viewport={viewportSettings}
-                    transition={{ duration: 0.6 }}
-                >
-                    <Input
-                        id="search-input"
-                        type="text"
-                        placeholder="🔍 Search our roadmap and updates..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="flex-1"
-                        onKeyPress={(e) => {
-                            if (e.key === 'Enter') {
-                                console.log('Search submitted:', searchTerm);
-                            }
-                        }}
-                    />
-                </motion.div>
-
                 {/* Updates Cards: Each card represents a product or feature update */}
                 {currentUpdates.map((update, index) => (
                     <Link key={update.id} href={`/update/${update.id}`} passHref legacyBehavior>
@@ -365,12 +338,11 @@ export default function Home() {
                                 {/* Content of the update card */}
                                 <div className="flex-1 flex flex-col p-4 md:p-6">
                                     <div className="flex-1">
-                                        <h3
-                                            className="font-bold mb-3 text-md md:text-md"
+                                        <h4
+                                            className="font-bold mb-3 text"
                                         >
                                             {update.title}
-                                        </h3>
-                                        <p className="mb-4 text-sm md:text-base text-muted-foreground">{update.description}</p>
+                                        </h4>
                                         <Badge variant="default" className="w-fit">{update.category}</Badge>
                                     </div>
                                 </div>

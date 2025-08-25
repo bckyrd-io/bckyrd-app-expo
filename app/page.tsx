@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useLayoutEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -90,15 +90,27 @@ export default function Home() {
     const [currentPage, setCurrentPage] = useState(1);
     const [activeCategory, setActiveCategory] = useState<string | null>(null); // For filtering updates by category
     const itemsPerPage = 4; // Number of update cards to display per page.
-    const [initialWidth, setInitialWidth] = useState("50%"); // New state for initial width
-
-    // Use useEffect to set the initial width based on the window size on the client side
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            const isMobile = window.innerWidth < 768; // Tailwind's 'md' breakpoint is 768px
-            setInitialWidth(isMobile ? "90%" : "50%");
-        }
-    }, []);
+    
+    // Always start with mobile width for SSR consistency
+    const [initialWidth, setInitialWidth] = useState('90%');
+    
+    // Use useEffect instead of useLayoutEffect for SSR compatibility
+    useLayoutEffect(() => {
+        // Update width based on actual client viewport
+        const updateWidth = () => {
+            const width = window.innerWidth >= 768 ? '50%' : '90%';
+            if (width !== initialWidth) {
+                setInitialWidth(width);
+            }
+        };
+        
+        // Initial check
+        updateWidth();
+        
+        // Handle resize events
+        window.addEventListener('resize', updateWidth);
+        return () => window.removeEventListener('resize', updateWidth);
+    }, [initialWidth]);
 
 
 
@@ -177,9 +189,8 @@ export default function Home() {
                 {/* Hero Image Container: Features a morphing animation for visual interest */}
                 <div className="relative overflow-hidden flex justify-center w-[100%]">
                     <motion.div
-                        className="relative h-[50vh] md:h-[100vh] overflow-hidden"
+                        className="relative h-[50vh] md:h-[100vh] overflow-hidden w-[90%] md:w-[50%]"
                         initial={{
-                            width: initialWidth, // Use the dynamically set initial width
                             borderRadius: "0.5rem",
                         }}
                         whileInView={{
@@ -203,8 +214,8 @@ export default function Home() {
                             viewport={{ amount: 0.4, once: false, margin: "0px 0px -30% 0px" }}
                         >
                             <Image
-                                src="/android.gif"
-                                alt="Studio"
+                                src="/android.jpg"
+                                alt="Android"
                                 width={1920}
                                 height={1080}
                                 className="object-cover w-full h-full bg-black"

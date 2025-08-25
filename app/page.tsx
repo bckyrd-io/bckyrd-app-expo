@@ -203,11 +203,11 @@ export default function Home() {
                             viewport={{ amount: 0.4, once: false, margin: "0px 0px -30% 0px" }}
                         >
                             <Image
-                                src="/Studio.jpg"
+                                src="/android.gif"
                                 alt="Studio"
                                 width={1920}
                                 height={1080}
-                                className="object-cover w-full h-full"
+                                className="object-cover w-full h-full bg-black"
                                 priority
                             />
                         </motion.div>
@@ -222,9 +222,9 @@ export default function Home() {
                         >
                             <iframe
                                 src="https://www.youtube.com/embed/OzPuztbWoIY?autoplay=1&mute=1&loop=1&playlist=OzPuztbWoIY&controls=0&showinfo=0&rel=0&modestbranding=1"
-                                title="YouTube video"
+                                title="Watch video"
                                 className="w-full h-full"
-                                frameBorder="0"
+                                frameBorder="1"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
                             />
@@ -343,7 +343,7 @@ export default function Home() {
                                         >
                                             {update.title}
                                         </h4>
-                                        <Badge variant="default" className="w-fit">{update.category}</Badge>
+                                        <Badge variant="default" className="w-fit text-secondary">{update.category}</Badge>
                                     </div>
                                 </div>
                             </Card>

@@ -142,16 +142,16 @@ export default function Home() {
             {/* Hero Section: Introduces the core mission and initial product focus */}
             <section className="flex flex-col mb-40">
                 {/* AppHeader is commented out in original file */}
-                <div className="flex flex-col mt-10 mb-20 w-[90%] mx-auto md:w-[50%]">
+                <div className="flex flex-col mt-10 mb-20 w-[90%] mx-auto ">
                     {/* Hero Title: Broadened to reflect the immediate value proposition */}
                     <h1
-                        className="text-6xl font-extrabold mb-10"
+                        className="text-5xl xl:text-7xl font-extrabold mb-10"
                     >
                         Energy Interface For Streamers Workflow
                     </h1>
                     {/* Hero Description: Focuses on the immediate strategic mission */}
                     <motion.p
-                        className="mb-10 text-lg text-left"
+                        className="mb-10 text text-left"
                         {...fadeInUp}
                         viewport={viewportSettings}
                         transition={{ duration: 0.8, delay: 0.2 }}
@@ -189,7 +189,7 @@ export default function Home() {
                 {/* Hero Image Container: Features a morphing animation for visual interest */}
                 <div className="relative overflow-hidden flex justify-center w-[100%]">
                     <motion.div
-                        className="relative h-[50vh] md:h-[100vh] overflow-hidden w-[90%] md:w-[50%]"
+                        className="relative h-[50vh] md:h-[100vh] overflow-hidden w-[90%] "
                         initial={{
                             borderRadius: "0.5rem",
                         }}
@@ -246,10 +246,10 @@ export default function Home() {
 
             {/* About Section: Details the company's mission and journey */}
             <section className="flex flex-col mb-40">
-                <div className="w-[90%] mx-auto md:w-[50%]" id="more">
+                <div className="w-[90%] mx-auto" id="more">
                     {/* Mission Statement - now contains the broader vision with external links */}
                     <motion.p
-                        className="text-3xl"
+                        className="text-4xl"
                         {...fadeInUp}
                         viewport={viewportSettings}
                         transition={{ duration: 0.8, delay: 0.1 }}
@@ -263,15 +263,15 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="flex flex-col mb-40 w-[90%] mx-auto md:w-[50%]" id="quick-access">
+            <section className="flex flex-col mb-40 w-[90%] mx-auto " id="quick-access">
                 <motion.div {...fadeInUp} viewport={viewportSettings} transition={{ duration: 0.8, delay: 0.1 }}>
                     <p className="text-muted-foreground mb-10">
                         Get started with our energy interface app, explore our R&D roadmap, or shop for compatible gear.
                     </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
                         {/* Download App (opens correct store based on device) */}
                         <button type="button" onClick={handleDownloadClick} className="focus:outline-none">
-                            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
+                            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-muted bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
                                 <motion.div className="mb-3 text-primary" whileHover={{ scale: 1.1 }}>
                                     <Download size={40} />
                                 </motion.div>
@@ -280,7 +280,7 @@ export default function Home() {
                         </button>
                         {/* Our Roadmap */}
                         <Link href="#updates-section">
-                            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
+                            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-muted bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
                                 <motion.div className="mb-3 text-primary" whileHover={{ scale: 1.1 }}>
                                     <GitBranch size={40} />
                                 </motion.div>
@@ -289,7 +289,7 @@ export default function Home() {
                         </Link>
                         {/* Shop Gear (filters updates by Shop category) */}
                         <button type="button" onClick={() => handleQuickAccessCategory('Shop')} className="focus:outline-none">
-                            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
+                            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-muted bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
                                 <motion.div className="mb-3 text-primary" whileHover={{ scale: 1.1 }}>
                                     <ShoppingBag size={40} />
                                 </motion.div>
@@ -298,7 +298,7 @@ export default function Home() {
                         </button>
                         {/* Shop Gear (filters updates by Shop category) */}
                         <button type="button" onClick={() => handleQuickAccessCategory('Work')} className="focus:outline-none">
-                            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
+                            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }} className="flex flex-col items-center p-6 rounded-lg border border-gray-200 dark:border-muted bg-secondary hover:shadow-xl transition-all duration-300 cursor-pointer">
                                 <motion.div className="mb-3 text-primary" whileHover={{ scale: 1.1 }}>
                                     <Laptop size={40} />
                                 </motion.div>
@@ -311,7 +311,7 @@ export default function Home() {
             </section>
 
             {/* Updates Section: Displays recent developments and features */}
-            <section className="flex flex-col mb-40 w-[90%] mx-auto md:w-[50%]" id="updates-section">
+            <section className="flex flex-col mb-40 w-[90%] mx-auto " id="updates-section">
                 {/* Updates Cards: Each card represents a product or feature update */}
                 {currentUpdates.map((update, index) => (
                     <Link key={update.id} href={`/update/${update.id}`} passHref legacyBehavior>
@@ -330,10 +330,10 @@ export default function Home() {
                                 transition: { duration: 0.3, ease: "easeOut" }
                             }}
                         >
-                            <Card className="flex flex-col md:flex-row items-center overflow-hidden hover:shadow-2xl transition-all duration-500">
+                            <Card className="flex flex-col md:flex-row items-center bg-background overflow-hidden hover:shadow-2xl transition-all duration-500">
                                 {/* Image for the update card */}
                                 <motion.div
-                                    className="relative w-full md:w-96 h-80 md:h-96 bg-muted flex-shrink-0 overflow-hidden"
+                                    className="relative w-full md:w-96 h-80 md:h-96 flex-shrink-0 overflow-hidden"
                                     whileHover={{ scale: 1.05 }}
                                     transition={{ duration: 0.4 }}
                                 >
@@ -401,7 +401,7 @@ export default function Home() {
             </section>
 
             {/* Brand Partnership Section: Information on collaboration opportunities */}
-            <section className="flex flex-col items-start mb-10 w-[90%] mx-auto md:w-[50%]" id="learn">
+            <section className="flex flex-col items-start mb-10 w-[90%] mx-auto " id="learn">
                 {/* Container for Brand Partnership text block */}
                 <motion.div
                     {...fadeInUp}
@@ -411,7 +411,7 @@ export default function Home() {
                 >
                     {/* Brand Partnerships Title */}
                     <h2
-                        className="text-3xl font-bold mb-2"
+                        className="text-4xl font-bold mb-2"
                     >
                         Brand Partnerships
                     </h2>

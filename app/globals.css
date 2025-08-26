@@ -33,7 +33,7 @@
   }
 
   .dark {
-    --background: 0 0% 3.9%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
@@ -42,7 +42,8 @@
     --primary: 150 100% 50%; /* Dark mode can have the same or a different value */
     --primary-foreground: 0 0% 100%;
     /* Add other variables for dark mode */
-    --secondary: 0 0% 14.9%;
+    /* --secondary: 0 0% 14.9%; */
+    --secondary:0 0% 3.9%;;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
